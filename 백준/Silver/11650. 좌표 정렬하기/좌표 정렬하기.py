@@ -8,4 +8,4 @@ for n in range(N):
 p.sort()
 
 for q in p:
-    print(' '.join(map(str, q)))
+    print(*q)
