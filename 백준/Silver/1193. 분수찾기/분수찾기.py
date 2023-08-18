@@ -1,7 +1,7 @@
 def s(i):
     return (i*(i+1))//2
 n=int(input())
-i=1
+i=int((2*n)**0.5)
 while True:
     if s(i-1)< n <= s(i):
         d = n - s(i-1) - 1
