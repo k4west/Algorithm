@@ -1,14 +1,10 @@
 import sys
 input = sys.stdin.readline
 
-def setting():
-    n = int(input())
-    li = [0] * n
-    li = list(map(int,input().split()))
-    return n, li
-
-N, cards = setting()
-M, ints = setting()
+N = int(input())
+cards = list(map(int,input().split()))
+M = int(input())
+ints = list(map(int,input().split()))
 
 answer = {}
 for c in sorted(cards):
