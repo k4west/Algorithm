@@ -1,8 +1,7 @@
-import sys
-width, height = map(int, sys.stdin.readline().split())
+width, height = map(int, input().split())
 w, h = [0], [0]
-for _ in range(int(sys.stdin.readline())):
-    c, n = map(int, sys.stdin.readline().split())
+for _ in range(int(input())):
+    c, n = map(int, input().split())
     if c: 
         w.append(n)
     else:
