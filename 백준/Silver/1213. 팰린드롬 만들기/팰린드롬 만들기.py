@@ -1,5 +1,4 @@
-import sys
-s = sys.stdin.readline().rstrip()
+s = input()
 d = {a:s.count(a) for a in set(s)}
 c = 0
 for k, v in d.items():
