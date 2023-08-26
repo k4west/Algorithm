@@ -1,2 +1,1 @@
-n,m = map(int, input().split())
-print(n-m)
+print(eval("-".join(input().split())))
