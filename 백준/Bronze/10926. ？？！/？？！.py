@@ -1,1 +1,1 @@
-print(input()+"??!")
+print("".join([input(),"??!"]))
