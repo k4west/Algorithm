@@ -1,5 +1,3 @@
 A, B, C = map(int, input().split())
-print((A+B)%C)
-print((A+B)%C)
-print((A*B)%C)
-print((A*B)%C)
+n, m = (A+B)%C, (A*B)%C
+print(f"{n}\n{n}\n{m}\n{m}")
