@@ -1,5 +1,1 @@
-while 1:
-    try:
-        print(input())
-    except:
-        break
+print(open(0).read())
