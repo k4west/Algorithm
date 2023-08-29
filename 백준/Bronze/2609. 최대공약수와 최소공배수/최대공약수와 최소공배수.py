@@ -1,5 +1,10 @@
+def gcd(a,b):
+    while b!=0:
+        r = a%b
+        a, b = b, r
+    return a
+
 import sys
-from math import gcd, lcm
-a,b = map(int, sys.stdin.readline().strip().split())
+a,b = map(int, sys.stdin.readline().split())
 print(gcd(a,b))
-print(lcm(a,b))
+print(a*b//gcd(a,b))
