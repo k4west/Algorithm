@@ -1,2 +1,3 @@
 import sys
-print(len(sys.stdin.readline().split()))
+s=sys.stdin.readline().strip()
+print(s.count(" ")+1 if s else 0)
