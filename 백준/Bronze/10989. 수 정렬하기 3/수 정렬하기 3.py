@@ -1,12 +1,14 @@
 import sys
 N = int(sys.stdin.readline())
-s = [0]*10001
-for _ in range(N):
-    n = int(sys.stdin.readline())
-    s[n] += 1
+s = {}
+for i in range(N):
+    n = sys.stdin.readline().rstrip()
+    if n in s:
+        s[n] += 1
+    else: 
+        s[n] = 1
 for n in range(1, 10001):
-    if s[n]:
+    n = str(n)
+    if n in s:
         for _ in range(s[n]):
-            sys.stdout.write(str(n)+"\n")
-    elif not sum(s[n:]):
-        break
+            sys.stdout.write(n+"\n")
