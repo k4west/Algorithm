@@ -1,2 +1,2 @@
 def solution(num1, num2):
-    return 1 if int(num1==num2) else -1
+    return [-1,1][num1==num2]
