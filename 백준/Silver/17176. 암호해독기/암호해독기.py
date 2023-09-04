@@ -3,16 +3,16 @@ sys.stdin.readline()
 C = map(int, sys.stdin.readline().split())
 P = sys.stdin.readline().strip()
 
-EC = {}
+EC = [0] * 53
 for c in C:
-    c += [32,64,70][int(c>0)+int(c>26)]
-    c = chr(c)
-    EC[c] = EC.get(c, 0) + 1
+    EC[c] += 1
 
 k = 1
 for p in P:
-    if p not in EC or EC[p] == 0:
-        k = 0 
-        break
+    p = ord(p)
+    p -= [32,64,70][int(p>64)+int(p>96)]
     EC[p] -= 1
+    if EC[p] < 0:
+        k = 0
+        break
 print(['n','y'][k])
