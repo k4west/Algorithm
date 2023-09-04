@@ -5,8 +5,6 @@ def f():
     P = sys.stdin.readline().strip()
 
     EC = [0] * 53
-    EP = [0] * 53
-
     for c in C:
         EC[c] += 1
 
@@ -19,10 +17,10 @@ def f():
         else: t = 64
         p = ord(p)
         p -= t
-        EP[p] += 1
+        EC[p] -= 1
         
     for i in range(53):
-        if EC[i] != EP[i]:
+        if EC[i] < 0:
             return 'n'
     return 'y'
 print(f())
