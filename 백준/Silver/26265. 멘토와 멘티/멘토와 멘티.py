@@ -1,7 +1,7 @@
 import sys
 
 def f(N):
-    li = [tuple(sys.stdin.readline().rstrip().split()) for _ in range(N)]
+    li = [tuple(sys.stdin.readline().split()) for _ in range(N)]
     li.sort(key=lambda x:x[1], reverse=True)
     li.sort(key=lambda x:x[0])
     return li
