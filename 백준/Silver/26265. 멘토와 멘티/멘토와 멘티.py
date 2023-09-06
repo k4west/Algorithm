@@ -8,4 +8,4 @@ li.sort(key=lambda x:x[1], reverse=True)
 li.sort(key=lambda x:x[0])
 
 for m in li:
-    print(*m)
+    print(" ".join(m))
