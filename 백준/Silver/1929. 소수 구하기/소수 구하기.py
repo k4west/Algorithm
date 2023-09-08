@@ -1,13 +1,12 @@
 import sys
 
-def isprime(n):
-    for i in range(2,int(n**0.5)+1):
-        if n%i == 0:
-            return False
-    print(n)
+def f(N):
+    li = [0,0,1]+[0 if i%2==0 else 1 for i in range(3,N+1)]
+    for n in range(3, N+1, 2):
+        if li[n]:
+            li[n+n::n] = [0]*(N//n-1)
+    return li
 
 M, N = map(int, sys.stdin.readline().split())
-for n in range([M+1-M%2,2][M==2], N+1):
-    if n == 1:
-        continue
-    isprime(n)
+li = f(N)
+print("\n".join([str(n) for n, t in zip(range(M,N+1),li[M:]) if t]))
