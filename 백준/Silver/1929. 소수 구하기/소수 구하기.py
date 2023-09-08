@@ -1,10 +1,10 @@
 import sys
 
 def f(N):
-    li = [0,0,1]+[i%2 for i in range(3,N+1)]
+    li = [False,False,True]+[i%2 for i in range(3,N+1)]
     for n in range(3, N+1, 2):
         if li[n]:
-            li[n+n::n] = [0]*(N//n-1)
+            li[n*n::n] = [False]*(N//n-n+1)
     return li
 
 M, N = map(int, sys.stdin.readline().split())
