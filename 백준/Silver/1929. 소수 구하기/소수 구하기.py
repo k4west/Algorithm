@@ -1,7 +1,7 @@
 import sys
 
 def f(N):
-    li = [0,0,1]+[0 if i%2==0 else 1 for i in range(3,N+1)]
+    li = [0,0,1]+[i%2 for i in range(3,N+1)]
     for n in range(3, N+1, 2):
         if li[n]:
             li[n+n::n] = [0]*(N//n-1)
