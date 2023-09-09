@@ -2,12 +2,17 @@ import sys
 
 def f(string):
     li = []
-    d = {")":"(", "]":"["}
     for s in string:
         if s == "(" or s == "[":
             li.append(s)
-        elif s in d: 
-            if li and li[-1] == d[s]:
+        elif s == ")": 
+            if li and li[-1] == "(":
+                li.pop()
+            else:
+                li.append(s)
+                break
+        elif s == "]": 
+            if li and li[-1] == "[":
                 li.pop()
             else:
                 li.append(s)
