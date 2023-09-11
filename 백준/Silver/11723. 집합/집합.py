@@ -18,7 +18,7 @@ def f():
     elif op == "all":
         S = set(range(1,21))
     elif op == "empty":
-        S = set()
+        S.clear()
         
 S = set()
 T = int(sys.stdin.readline())
