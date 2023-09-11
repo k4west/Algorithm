@@ -2,17 +2,18 @@ import sys
 def f():
     global S
     op, *val = sys.stdin.readline().rstrip().split()
-    if val:
-        x = int(val[0])
     if op == "add":
-        S.add(x)
+        S.add(int(val[0]))
     elif op == "remove":
-        S -= {x}
+        S.discard(int(val[0]))
     elif op == "check":
-        print(int(x in S))
+        if int(val[0]) in S:
+            print(1)
+        else: print(0)
     elif op == "toggle":
+        x = int(val[0])
         if x in S:
-            S -= {x}
+            S.remove(x)
         else:
             S.add(x)
     elif op == "all":
