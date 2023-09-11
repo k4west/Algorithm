@@ -1,5 +1,6 @@
 import sys
-def f(S):
+def f():
+    global S
     op, *val = sys.stdin.readline().rstrip().split()
     if op == "add":
         S.add(int(val[0]))
@@ -19,9 +20,8 @@ def f(S):
         S.update(range(1,21))
     elif op == "empty":
         S.clear()
-    return S
         
 S = set()
 T = int(sys.stdin.readline())
 for _ in range(T):
-    S = f(S)
+    f()
