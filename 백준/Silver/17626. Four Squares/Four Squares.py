@@ -1,15 +1,12 @@
+from sys import stdin
 def f(N):
-    dp = [224] * (N + 1)
-    dp[0] = 0 
-
-    for i in range(1, N + 1):
-        j = 1
-        while j * j <= i:
-            dp[i] = min(dp[i], dp[i - j * j] + 1)
-            j += 1
-
-    return dp[N]
-
-N = int(input())
-result = f(N)
-print(result)
+    if int(N**0.5) == N**0.5:
+        return 1
+    s = {i**2 for i in range(1, int(N**0.5)+1)}
+    for i in s:
+        if N-i in s:
+            return 2
+    while N%4==0:
+        N//=4
+    return 4 if N%8==7 else 3
+print(f(int(stdin.readline())))
