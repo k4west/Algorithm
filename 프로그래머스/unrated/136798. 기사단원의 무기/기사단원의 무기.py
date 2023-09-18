@@ -1,13 +1,9 @@
 def n_d(n):
-    k = 1
-    for i in range(2, int(n**.5)+1):
-        c = 1
-        while n%i==0:
-            c+=1
-            n//=i
-        k *= c
-    if n != 1: k *= 2
-    return k
+    a = set()
+    for i in range(1, int(n**.5)+1):
+        if n%i==0:
+            a.update((i, n//i))
+    return len(a)
 
 def solution(number, limit, power):
     s = 0
