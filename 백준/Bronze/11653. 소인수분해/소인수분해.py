@@ -1,10 +1,8 @@
 N = int(input())
-m = N
 t = []
-for n in range(2, N+1):
+for n in range(2, int(N**.5)+2):
     c = 0
-    while not m%n:
-        c += 1
-        m //= n
-    t.extend([n]*c)
-print(*t, sep='\n')
+    while not N%n:
+        print(n)
+        N //= n
+if N!=1: print(N)
