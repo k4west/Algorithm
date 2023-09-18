@@ -11,9 +11,9 @@ def f(N, A):
         f(M, [i[M:] for i in A[M:]])
     return
 
-a = open(0)
-N = int(next(a))
-A = [list(map(int, i.split())) for i in a]
+import sys
+N = int(sys.stdin.readline())
+A = [list(map(int, sys.stdin.readline().split())) for _ in range(N)]
 wb = [0, 0]
 f(N, A)
 print(*wb, sep='\n')
