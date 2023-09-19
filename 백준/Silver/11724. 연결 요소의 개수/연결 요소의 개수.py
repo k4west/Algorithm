@@ -1,28 +1,22 @@
 import sys
-def f(N, G, V):
-    c = 0
-    for n in range(1,N+1):
-        if not V[n]:
-            c += 1
-            V[n] = True
-            li = [n]
-            while li:
-                s = li.pop(0)
-                for t in G[s]:
-                    if not V[t]:
-                        V[t] = True
-                        li.append(t)
-    print(c)
-
-def g(N, M):
-    G = [[] for _ in range(N+1)]
-    V = [False] * (N+1)
-    for _ in range(M):
-        i, j = map(int, sys.stdin.readline().split())
-        G[i].append(j)
-        G[j].append(i)
-    f(N, G, V)
-
-if __name__ == "__main__":
-    N, M = map(int, sys.stdin.readline().split())
-    g(N, M)
+N, M = map(int, sys.stdin.readline().split())
+c, t = N, 1
+li = [0 for _ in range(N+1)]
+for _ in range(M):
+    if c == 1: break
+    i, j = map(int, sys.stdin.readline().split())
+    if li[i] * li[j] == 0:
+        if li[i] == li[j]:
+            li[i] = li[j] = t
+            t += 1
+        else:
+            li[i] = li[j] = li[i]+li[j]
+    elif li[i] != li[j]:
+        s = min(li[i], li[j])
+        l = max(li[i], li[j])
+        for k in range(1, N+1):
+            if li[k] == l:
+                li[k] = s
+    else: c += 1
+    c -= 1
+print(c)
