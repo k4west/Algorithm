@@ -1,14 +1,13 @@
 import sys
-from collections import deque
 
 def f(i, v, A):
-    q = deque([i])
+    li = [i]
     v[i] = True
-    while q:
-        j = q.popleft()
+    while li:
+        j = li.pop(0)
         for k in A[j]:
             if not v[k]:
-                q.append(k)
+                li.append(k)
                 v[k] = True
 
 N, M = map(int, sys.stdin.readline().split())
