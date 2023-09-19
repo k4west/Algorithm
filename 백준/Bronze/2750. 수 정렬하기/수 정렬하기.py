@@ -1,3 +1,3 @@
 a=open(0)
 next(a)
-print(*sorted([int(i) for i in a]), sep="\n")
+print(*sorted(map(int, a)), sep="\n")
