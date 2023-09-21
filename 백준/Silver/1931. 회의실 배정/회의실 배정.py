@@ -1,9 +1,8 @@
 import sys
 def f():
     N = int(sys.stdin.readline())
-    li = sorted([tuple(map(int, sys.stdin.readline().split())) for _ in range(N)], key=lambda x: (x[1], x[0]))
     c, e = 0, 0
-    for a, b in li:
+    for a, b in sorted([tuple(map(int, sys.stdin.readline().split())) for _ in range(N)], key=lambda x: (x[1], x[0])):
         if e <= a:
             e = b
             c += 1
