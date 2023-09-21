@@ -1,10 +1,3 @@
-import sys
-def f():
-    N = int(sys.stdin.readline())
-    c, e = 0, 0
-    for a, b in sorted([tuple(map(int, sys.stdin.readline().split())) for _ in range(N)], key=lambda x: (x[1], x[0])):
-        if e <= a:
-            e = b
-            c += 1
-    print(c)
-if __name__ == "__main__": f()
+*li, = map(int, open(0).read().split())
+e = 0
+print(sum((e:=b) and 1 for b, a in sorted(zip(li[2::2], li[1::2])) if e <= a))
