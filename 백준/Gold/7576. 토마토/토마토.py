@@ -27,11 +27,10 @@ def f():
                 A[i][j+1] = True
                 temp.append((i,j+1))
         T = temp
-    for i in range(N):
-        for j in range(M):
-            if not A[i][j]:
-                print(-1)
-                return
+    for a in A:
+        if 0 in a:
+            print(-1)
+            return
     print(c)
 if  __name__ == "__main__":
     f()
