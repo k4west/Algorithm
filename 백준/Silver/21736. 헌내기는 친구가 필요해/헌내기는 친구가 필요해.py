@@ -28,7 +28,9 @@ def m():
         li = list(sys.stdin.readline().rstrip())
         A.append(li)
         if 'I' in li:
-            s = (i, li.index('I'))
+            for j, a in enumerate(li):
+                if a =='I':
+                    s = (i, j)
     n = f(s, A, N, M)
     print(n if n else 'TT')
 if __name__=="__main__":
