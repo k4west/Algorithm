@@ -1,13 +1,9 @@
 import heapq
-def f(a):
-    next(a)
-    li, t = [], []
-    for n in a:
-        if n=="0\n":
-            if li: t.append(str(heapq.heappop(li)))
-            else: t.append("0")
-        else:
-            heapq.heappush(li, int(n))
-    print(*t, sep="\n")
-a = open(0)
-f(a)
+from sys import stdin
+li = []
+for _ in range(int(stdin.readline())):
+    n = int(stdin.readline())
+    if n: heapq.heappush(li, n)
+    else:
+        if li: print(heapq.heappop(li))
+        else: print(0)
