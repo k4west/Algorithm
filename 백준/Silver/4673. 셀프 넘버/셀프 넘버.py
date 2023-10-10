@@ -1,12 +1,17 @@
+nums = [False for _ in range(10001)]
 def gen(n):
     s = n
     while n:
         s += n%10
         n //= 10
-    return {s}
+    return s
 
-nums = set(range(1, 10001))
 for i in range(1, 10001):
-    nums -= gen(i)
+    g = gen(i)
+    if g < 10001: nums[g] = True
 
-print("\n".join(map(str, sorted(nums))))
+li = []
+for i in range(1, 10001):
+    if not nums[i]: li.append(i)
+
+print("\n".join(map(str, li)))
