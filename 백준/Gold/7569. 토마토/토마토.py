@@ -6,7 +6,6 @@ def main():
     tomato = [[] for _ in range(H)]
     ripen = deque()
     new_ripen = deque()
-    d = ((1, 0, 0), (0, 1, 0), (0, 0, 1), (-1, 0, 0), (0, -1, 0), (0, 0, -1))
     days = 0
 
     for i in range(H):
@@ -25,13 +24,26 @@ def main():
             days += 1
 
         h, n, m = ripen.popleft()
-        for dm, dn, dh in d:
-            nh, nn, nm = h + dh, n + dn, m + dm
-            if 0 <= nh < H and 0 <= nn < N and 0 <= nm < M:
-                if not tomato[nh][nn][nm]:
-                    new_ripen.append((nh, nn, nm))
-                    tomato[nh][nn][nm] = 1
-    
+        h1, h2, n1, n2, m1, m2 = h + 1, h - 1, n + 1, n - 1, m + 1, m - 1
+        if h1 < H and not tomato[h1][n][m]:
+            new_ripen.append((h1, n, m))
+            tomato[h1][n][m] = 1
+        if 0 <= h2 and not tomato[h2][n][m]:
+            new_ripen.append((h2, n, m))
+            tomato[h2][n][m] = 1
+        if n1 < N and not tomato[h][n1][m]:
+            new_ripen.append((h, n1, m))
+            tomato[h][n1][m] = 1
+        if 0 <= n2 and not tomato[h][n2][m]:
+            new_ripen.append((h, n2, m))
+            tomato[h][n2][m] = 1
+        if m1 < M and not tomato[h][n][m1]:
+            new_ripen.append((h, n, m1))
+            tomato[h][n][m1] = 1
+        if 0 <= m2 and not tomato[h][n][m2]:
+            new_ripen.append((h, n, m2))
+            tomato[h][n][m2] = 1
+
     for i in range(H):
         for col in range(N):
             if 0 in tomato[i][col]:
