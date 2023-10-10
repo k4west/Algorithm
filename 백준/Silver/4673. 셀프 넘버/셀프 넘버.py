@@ -1,8 +1,10 @@
 def gen(n):
-    return {n+(eval("+".join(str(n))))}
+    return n+(eval("+".join(str(n))))
 
-nums = set(range(1, 10001))
+nums, gens = set(range(1, 10001)), set()
+i = 1
 for i in range(1, 10001):
-    nums -= gen(i)
+    gens.add(gen(i))
 
+nums -= gens
 print("\n".join(map(str, sorted(nums))))
