@@ -22,7 +22,7 @@ def bfs(dic):
                 visited[i][j] = True
                 q = [(i, j)]
                 while q:
-                    y, x = q.pop(0)
+                    y, x = q.pop()
                     for dy, dx in d:
                         ny, nx = y + dy, x + dx
                         if 0 <= ny < N and 0 <= nx < N and not visited[ny][nx] and graph[ny][nx] not in dic[color]:
