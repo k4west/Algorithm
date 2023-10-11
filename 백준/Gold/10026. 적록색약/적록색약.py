@@ -1,6 +1,4 @@
 import sys
-from collections import deque
-sys.setrecursionlimit(10**6)
 
 N = int(sys.stdin.readline())
 graph = []
@@ -9,41 +7,27 @@ for _ in range(N):
     graph.append(list(s))
 
 c1, c2 = 0, 0
-visited1 = [[False] * N for _ in range(N)]
-visited2 = [[False] * N for _ in range(N)]
+three_dic = {"R": ("G", "B"), "G": ("R", "B"), "B": ("R", "G")}
+two_dic = {"R": ("B"), "G": ("B"), "B": ("R", "G")}
 d = ((-1, 0), (1, 0), (0, -1), (0, 1)) # 상, 하, 좌, 우
 
-def three(y0, x0):
-    color = graph[y0][x0]
-    visited1[y0][x0] = True
-    q = deque([(y0, x0)])
-    while q:
-        y, x = q.popleft()
-        for dy, dx in d:
-            ny, nx = y + dy, x + dx
-            if 0 <= ny < N and 0 <= nx < N and not visited1[ny][nx] and graph[ny][nx] == color:
-                q.append((ny, nx))
-                visited1[ny][nx] = True
+def bfs(dic):
+    visited = [[False] * N for _ in range(N)]
+    c = 0
+    for i in range(N):
+        for j in range(N):
+            if not visited[i][j]:
+                c += 1
+                color = graph[i][j]
+                visited[i][j] = True
+                q = [(i, j)]
+                while q:
+                    y, x = q.pop(0)
+                    for dy, dx in d:
+                        ny, nx = y + dy, x + dx
+                        if 0 <= ny < N and 0 <= nx < N and not visited[ny][nx] and graph[ny][nx] not in dic[color]:
+                            q.append((ny, nx))
+                            visited[ny][nx] = True
+    return c
 
-def two(y0, x0):
-    color = graph[y0][x0]
-    visited2[y0][x0] = True
-    q = deque([(y0, x0)])
-    while q:
-        y, x = q.popleft()
-        for dy, dx in d:
-            ny, nx = y + dy, x + dx
-            if 0 <= ny < N and 0 <= nx < N and not visited2[ny][nx] and (graph[ny][nx] == 'B' == color or graph[ny][nx] != 'B' and color != 'B'):
-                q.append((ny, nx))
-                visited2[ny][nx] = True
-
-for i in range(N):
-    for j in range(N):
-        if not visited1[i][j]:
-            c1 += 1
-            three(i, j)
-        if not visited2[i][j]:
-            c2 += 1
-            two(i, j)
-
-print(c1, c2)
+print(bfs(three_dic), bfs(two_dic))
