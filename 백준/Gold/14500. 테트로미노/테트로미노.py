@@ -7,11 +7,14 @@ def main():
     d = ((-1, 0), (1, 0), (0, -1), (0, 1))
     visited = [[False] * M for _ in range(N)]
     T = [list(map(int, input().split())) for _ in range(N)]
+    m = max((max(li) for li in T))
     
     def dfs(y, x, cnt, s):
         global ans
         if cnt == 4:
             ans = max(ans, s)
+            return
+        if ans > s + m*(4-cnt):
             return
         for dy, dx in d:
             ny, nx = y + dy, x + dx
