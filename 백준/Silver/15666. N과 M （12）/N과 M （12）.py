@@ -3,5 +3,5 @@ from itertools import combinations_with_replacement
 input = stdin.readline
 
 N, M = map(int, input().split())
-s = sorted(input().rstrip().split(), key=int)
-print("\n".join(map(" ".join, {cm:None for cm in combinations_with_replacement(s, M)})))
+s = sorted(set(input().rstrip().split()), key=int)
+print("\n".join(map(" ".join, combinations_with_replacement(map(str, s), M))))
