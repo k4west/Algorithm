@@ -3,11 +3,11 @@ input = stdin.readline
 
 N = int(input())
 A = list(map(int, input().split()))
-li = [1]*N
+p = [A[0]]
 
-for i in range(N):
-    a = A[i]
-    for j in range(i+1, N):
-        if A[j] > a:
-            li[j] = max(li[j], li[i]+1)
-print(max(li))
+for a in A[1:]:
+    if a > p[-1]: p.append(a)
+    else:
+        for i, b in enumerate(p):
+            if a <= b: p[i] = a; break
+print(len(p))
