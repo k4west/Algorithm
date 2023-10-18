@@ -1,5 +1,3 @@
 import sys
-import re
-s = sys.stdin.readline().rstrip()
-s = re.sub('1+', '1', re.sub('0+', '0', s))
-print(len(s)//2)
+s = sys.stdin.readline()
+print(max(s.count('01'), s.count('10')))
