@@ -3,7 +3,7 @@ T = range(int(sys.stdin.readline()))
 li = []
 for _ in T:
     flag, e = 0, False
-    fns = sys.stdin.readline().rstrip()
+    fns = sys.stdin.readline().replace("RR","").rstrip()
     n = int(sys.stdin.readline())
     arr = sys.stdin.readline().rstrip()[1:-1].split(',')
     if arr == [""]: arr = []
@@ -19,4 +19,4 @@ for _ in T:
     if not e:
         if not flag: flag = -1
         li.append("["+",".join(arr[::-flag])+"]")
-print(*li, sep="\n")
+print("\n".join(li))
