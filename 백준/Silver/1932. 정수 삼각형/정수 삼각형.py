@@ -1,14 +1,15 @@
 from sys import stdin
 n = int(stdin.readline())
-graph = []
-for _ in range(n):
-    graph.append(list(map(int, stdin.readline().split())))
+graph = [int(stdin.readline())]
 
 for i in range(n-1):
-    graph[i+1][0] += graph[i][0]
-    graph[i+1][i+1] += graph[i][i]
+    new = list(map(int, stdin.readline().split()))
+    new[0] += graph[0]
+    new[i+1] += graph[i]
     
     for j in range(1, i+1):
-        graph[i+1][j] += max(graph[i][j-1], graph[i][j])
+        new[j] += max(graph[j-1], graph[j])
+    
+    graph = new
 
-print(max(graph[n-1]))
+print(max(graph))
