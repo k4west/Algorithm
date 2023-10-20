@@ -1,9 +1,9 @@
 import sys
-N, M = map(int, sys.stdin.readline().split())
-t = map(int, sys.stdin.readline().split())
-li = [0]
-for n in t:
-    li.append(n+li[-1])
+input = sys.stdin.readline
+N, M = map(int, input().split())
+t = [0] + list(map(int, input().split()))
+for i in range(1, N+1):
+    t[i] += t[i-1]
 for _ in range(M):
-    s, e = map(int, sys.stdin.readline().split())
-    print(li[e]-li[s-1])
+    s, e = map(int, input().split())
+    print(t[e]-t[s-1])
