@@ -1,14 +1,15 @@
 from sys import stdin
 from heapq import heappush, heappop
 input = stdin.readline
+INF = float('INF')
 
 def main():
-    INF = float('INF')
     N = int(input())
+    M = int(input())
+
     graph = [[] for _ in range(N+1)]
     costs = [INF]*(N+1)
 
-    M = int(input())
     for _ in range(M):
         s, e, c = map(int, input().split())
         graph[s].append((e, c))
@@ -20,6 +21,7 @@ def main():
         while q:
             s_cost, node = heappop(q)
             if costs[node] < s_cost: continue
+            if node == e: break
             for dst, d_cost in graph[node]:
                 d_cost += costs[node]
                 if d_cost < costs[dst]:
