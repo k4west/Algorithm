@@ -6,14 +6,15 @@ INF = float('INF')
 def main():
     N = int(input())
     M = int(input())
-
     graph = [{} for _ in range(N+1)]
     costs = [INF]*(N+1)
-
     for _ in range(M):
         s, e, c = map(int, input().split())
-        graph[s][e] = min(graph[s].get(e, INF), c)
-
+        if e in graph[s]:
+            graph[s][e] = min(graph[s][e], c)
+        else:
+            graph[s][e] = c
+            
     def dijkstra(s, e):
         q = []
         heappush(q, (0, s))
@@ -27,9 +28,8 @@ def main():
                 if d_cost < costs[dst]:
                     costs[dst] = d_cost
                     heappush(q, (d_cost, dst))
-
         print(costs[e])
-
+        
     s, e = map(int, input().split())
     dijkstra(s, e)
 
