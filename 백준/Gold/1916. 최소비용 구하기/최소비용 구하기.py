@@ -7,12 +7,12 @@ def main():
     N = int(input())
     M = int(input())
 
-    graph = [[] for _ in range(N+1)]
+    graph = [{} for _ in range(N+1)]
     costs = [INF]*(N+1)
 
     for _ in range(M):
         s, e, c = map(int, input().split())
-        graph[s].append((e, c))
+        graph[s][e] = min(graph[s].get(e, INF), c)
 
     def dijkstra(s, e):
         q = []
@@ -22,7 +22,7 @@ def main():
             s_cost, node = heappop(q)
             if costs[node] < s_cost: continue
             if node == e: break
-            for dst, d_cost in graph[node]:
+            for dst, d_cost in graph[node].items():
                 d_cost += s_cost
                 if d_cost < costs[dst]:
                     costs[dst] = d_cost
