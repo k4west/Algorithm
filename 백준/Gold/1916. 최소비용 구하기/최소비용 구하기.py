@@ -3,7 +3,7 @@ from heapq import heappush, heappop
 input = stdin.readline
 
 def main():
-    INF = float('INF') # 10**5
+    INF = float('INF')
     N = int(input())
     graph = [[] for _ in range(N+1)]
     costs = [INF]*(N+1)
