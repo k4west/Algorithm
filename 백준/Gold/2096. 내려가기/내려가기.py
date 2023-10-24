@@ -3,13 +3,13 @@ input = stdin.readline
 
 def main():
     N = range(int(input()))
-    M = (0, 0, 0)
-    m = (0, 0, 0)
+    M1, M2, M3 = 0, 0, 0
+    m1, m2, m3 = 0, 0, 0
     for _ in N:
         a, b, c = map(int, input().split())
-        M = a + max(M[0], M[1]), b + max(M), c + max(M[1], M[2])
-        m = a + min(m[0], m[1]), b + min(m), c + min(m[1], m[2])
-    print(max(M), min(m))
+        M1, M2, M3 = a + max(M1, M2), b + max(M1, M2, M3), c + max(M2, M3)
+        m1, m2, m3 = a + min(m1, m2), b + min(m1, m2, m3), c + min(m2, m3)
+    print(max(M1, M2, M3), min(m1, m2, m3))
 
 if __name__ == "__main__":
     main()
