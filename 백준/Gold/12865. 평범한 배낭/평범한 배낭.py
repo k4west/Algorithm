@@ -4,8 +4,11 @@ input = sys.stdin.readline
 def main():
     N, K = map(int, input().split())
     d = {0:0}
-    for i in range(1, N+1):
-        W, V = map(int, input().split())
+    li = []
+    for _ in range(1, N+1):
+        li.append(list(map(int, input().split())))
+    li.sort()
+    for W, V in li:
         t = {}
         for v, w in d.items():
             if d.get(V+v, K+1) > W+w:
