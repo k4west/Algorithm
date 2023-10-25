@@ -3,14 +3,16 @@ input = sys.stdin.readline
 
 def main():
     N, K = map(int, input().split())
-    dp = [0]*(K+1)
+    d = {0:0}
     for i in range(1, N+1):
-        tmp = dp.copy()
         W, V = map(int, input().split())
-        for j in range(W, K+1):
-            dp[j] = max(tmp[j], tmp[j-W]+V)
+        t = {}
+        for v, w in d.items():
+            if d.get(V+v, K+1) > W+w:
+                t[V+v] = W+w
+        d.update(t)
 
-    print(dp[K])
+    print(max(d.keys()))
     
 if __name__ == "__main__":
     main()
