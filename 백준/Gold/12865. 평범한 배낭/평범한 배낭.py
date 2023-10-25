@@ -6,7 +6,7 @@ def main():
     d = {0:0}
     li = []
     for _ in range(1, N+1):
-        li.append(list(map(int, input().split())))
+        li.append(tuple(map(int, input().split())))
     li.sort()
     for W, V in li:
         t = {}
