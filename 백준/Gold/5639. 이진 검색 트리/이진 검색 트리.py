@@ -18,9 +18,9 @@ def f(s, e):
         return
     for i in range(s+1, e+1):
         if li[s] < li[i]:
-            f(s+1, i-1)
-            f(i, e)
             break
+    f(s+1, i-1)
+    f(i, e)
     print(li[s])
 
 f(0, len(li)-1)
