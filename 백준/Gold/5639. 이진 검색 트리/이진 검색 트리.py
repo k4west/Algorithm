@@ -1,5 +1,5 @@
 import sys
-sys.setrecursionlimit(10000*2)
+sys.setrecursionlimit(19999)
 
 li, ans = [], []
 while True:
