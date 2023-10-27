@@ -1,25 +1,15 @@
-# K --> N
 from sys import stdin
 input = stdin.readline
 
+def dfs(N, K):
+    if N >= K:  return N-K
+    if not N: return 1 + dfs(1, K)
+    if not K%2: return min(K-N, dfs(N, K//2))
+    return 1 + min(dfs(N, K-1), dfs(N, K+1))
+
 def main():
     N, K = map(int, input().split())
-    if N >= K: 
-        return N-K
-    q = [(K, 0)]
-    v = set()
-
-    while True:
-        s, t = q.pop(0)
-        if s == N:
-            return t
-        if not s%2 and (d:=s//2) not in v and s > N:
-            v.add(d)
-            q.append((d, t))
-        for i in (s+1, s-1):
-            if i not in v and i < K+2:
-                v.add(i)
-                q.append((i, t+1))
+    print(dfs(N,K))
 
 if __name__ == "__main__":
-    print(main())
+    main()
