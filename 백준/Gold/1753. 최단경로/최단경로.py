@@ -16,18 +16,19 @@ def main():
         i, j, k = map(int, input().split())
         graph[i].append((j, k))
 
-    q = []
-    heappush(q, (0, s))
-    while q:
-        dist, node = heappop(q)
-        if dist > distance[node]:
-            continue
-        for next, d in graph[node]:
-            n_dist = dist + d
-            if n_dist < distance[next]:
-                distance[next] = n_dist
-                heappush(q, (n_dist, next))
-
+    def f(s):
+        q = [(0, s)]
+        while q:
+            dist, node = heappop(q)
+            if dist > distance[node]:
+                continue
+            for next, d in graph[node]:
+                n_dist = dist + d
+                if n_dist < distance[next]:
+                    distance[next] = n_dist
+                    heappush(q, (n_dist, next))
+    
+    f(s)
     for d in distance[1:]:
         if d != INF: print(f'{d}\n')
         else: print('INF\n')
