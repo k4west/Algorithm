@@ -1,5 +1,5 @@
-from sys import stdin
-input = stdin.readline
+import sys
+input = sys.stdin.readline
 
 N, M = map(int, input().split())
 town = [input().rstrip().split() for _ in range(N)]
