@@ -17,10 +17,7 @@ def main():
     for r1 in range(N):
         for c1 in range(N):
             if town[r1][c1] == '1':
-                tmp = []
-                for r2, c2 in chicken:
-                    tmp.append(abs(r2-r1)+abs(c2-c1))
-                houses.append(tmp)
+                houses.append([abs(r2-r1)+abs(c2-c1) for r2, c2 in chicken])
 
     visited = [False] * nc
     def distance():
@@ -48,6 +45,7 @@ def main():
 
     dfs(0, 0)
     print(ans)
+
 
 if __name__ == "__main__":
     main()
