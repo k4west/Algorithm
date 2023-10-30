@@ -1,26 +1,48 @@
 from sys import stdin
-from itertools import combinations
 input = stdin.readline
 
 N, M = map(int, input().split())
-house, chicken, select = [], [], []
+town = [input().rstrip().split() for _ in range(N)]
+houses, chicken = [], []
 ans, nc = 10000, 0
+
 for i in range(N):
-    for j, hc in enumerate(input().rstrip().split()):
-        if hc == '1': 
-            house.append((i, j))
-        if hc == '2':
+    for j in range(N):
+        if town[i][j] == '2':
             chicken.append((i, j))
             nc += 1
 
-for select in combinations(chicken, M):
-    s_dist = 0
-    for r1, c1 in house:
-        dist = 100
-        for r2, c2 in select:
-            tmp = abs(r2-r1) + abs(c2-c1)
-            if tmp < dist: dist = tmp
-        s_dist += dist
-    if s_dist < ans: ans = s_dist
+for r1 in range(N):
+    for c1 in range(N):
+        if town[r1][c1] == '1':
+            tmp = []
+            for r2, c2 in chicken:
+                tmp.append(abs(r2-r1)+abs(c2-c1))
+            houses.append(tmp)
 
+visited = [False] * nc
+def distance():
+    indices = [i for i in range(nc) if visited[i]]
+    s_dist = 0
+    for house in houses:
+        dist = 100
+        for idx in indices:
+            if house[idx] < dist:
+                dist = house[idx]
+        s_dist += dist        
+    return s_dist
+
+def dfs(n, idx):
+    global ans
+    if n == M:
+        s_dist = distance()
+        if s_dist < ans: ans = s_dist
+    
+    for i in range(idx, nc):
+        if not visited[i]:
+            visited[i] = True
+            dfs(n+1, i)
+            visited[i] = False
+
+dfs(0, 0)
 print(ans)
