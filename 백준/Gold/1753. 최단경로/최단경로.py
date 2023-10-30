@@ -22,16 +22,14 @@ def main():
             dist, node = heappop(q)
             if dist > distance[node]:
                 continue
-            for next, d in graph[node]:
+            for n, d in graph[node]:
                 n_dist = dist + d
-                if n_dist < distance[next]:
-                    distance[next] = n_dist
-                    heappush(q, (n_dist, next))
+                if n_dist < distance[n]:
+                    distance[n] = n_dist
+                    heappush(q, (n_dist, n))
     
     f(s)
-    for d in distance[1:]:
-        if d != INF: print(f'{d}\n')
-        else: print('INF\n')
+    print("\n".join(map(str, [d if d != INF else 'INF' for d in distance[1:]])))
 
 if __name__ == "__main__":
     main()
