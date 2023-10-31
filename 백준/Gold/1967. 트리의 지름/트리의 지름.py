@@ -7,22 +7,22 @@ for _ in range(n-1):
     graph[p].append((c, w))
     graph[c].append((p, w))
 
-def dfs(n):
-    distance, s = 0, 1
-    v = set()
-    stack = [(n, 0)]
+def dfs(n, e, flag):
+    distance = [-1] * (n+1)
+    stack = [(e, 0)]
+    N, M = 0, 0
     while stack:
-        n, d = stack.pop()
-        v.add(n)
-        for node, weight in graph[n]:
-            if node in v:
-                continue
-            n_d = d + weight
-            if n_d >= distance:
-                distance = n_d
-                s = node
-            v.add(node)
-            stack.append((node, n_d))
-    return (s, distance)
+        e, d = stack.pop()
+        distance[e] = d
+        for node, weight in graph[e]:
+            if distance[node] == -1:
+                stack.append((node, d + weight))
+    if flag:
+        x = 0
+        for i in range(1, n+1):
+            if distance[x] < distance[i]:
+                x = i
+        return x
+    return max(distance)
 
-print(dfs(dfs(1)[0])[1])
+print(dfs(n, dfs(n, 1, True), False))
