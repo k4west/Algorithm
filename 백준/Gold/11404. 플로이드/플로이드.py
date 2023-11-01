@@ -3,6 +3,7 @@ import sys
 def main():
     INF = float('inf')
     input = sys.stdin.readline
+    print = sys.stdout.write
     N = int(input())
     M = int(input())
     graph = [[INF]*(N+1) for _ in range(N+1)]
