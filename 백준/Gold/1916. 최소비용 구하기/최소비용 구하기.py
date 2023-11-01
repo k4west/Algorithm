@@ -13,7 +13,7 @@ def dijkstra(graph, s, e, N):
         if costs[node] < s_cost: continue
         if node == e: break
         for dst, d_cost in graph[node].items():
-            d_cost += s_cost
+            d_cost += costs[node]
             if d_cost < costs[dst]:
                 costs[dst] = d_cost
                 heappush(q, (d_cost, dst))
