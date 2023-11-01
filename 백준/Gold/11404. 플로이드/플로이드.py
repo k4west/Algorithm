@@ -22,7 +22,7 @@ def main():
                 if graph[i][node] + graph[node][j] < graph[i][j]:
                     graph[i][j] = graph[i][node] + graph[node][j]
 
-    print("\n".join([" ".join(map(str, row[1:])) for row in graph[1:]]).replace('inf', '0'))
+    print("\n".join([" ".join(map(str, row[1:])).replace('inf', '0') for row in graph[1:]]))
 
 if __name__ == '__main__':
     main()
