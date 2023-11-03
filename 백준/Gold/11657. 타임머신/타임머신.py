@@ -27,9 +27,12 @@ def main():
                     break
 
     if flag:
-        print("\n".join(map(str, (cost if cost != INF else "-1" for cost in dist[2:]))))
+        for cost in dist[2:]:
+            if cost == INF:
+                print("-1")
+            else: print(cost)
     else:
-        print('-1')
+        print(-1)
 
 if __name__ == "__main__":
     main()
