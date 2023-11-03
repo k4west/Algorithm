@@ -27,8 +27,8 @@ def main():
                     break
 
     if flag:
-        for cost in dist[2:]:
-            if cost == INF:
+        for cost in map(str, dist[2:]):
+            if cost == 'inf':
                 print("-1")
             else: print(cost)
     else:
