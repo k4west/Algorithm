@@ -1,13 +1,13 @@
 import sys
 input = sys.stdin.readline
-INF = 25000000
 
 TC = int(input())
-ans = [""]*(TC)
+ans = ["NO"]*(TC)
 for i in range(TC):
     N, M, W = map(int, input().split())
     graph = [[] for _ in range(N+1)]
-    dist = [INF]*(N+1)
+    dist0 = [0]*(N+1)
+    dist1 = [0]*(N+1)
 
     # 도로(방향x)
     for _ in range(M):
@@ -20,21 +20,21 @@ for i in range(TC):
         S, E, T = map(int, input().split())
         graph[S].append((E, -T))
     
-    dist[1] = 0
-    for _ in range(N-1):
-        for s in range(1, N+1):
-            for e, t in graph[s]:
-                if dist[s] + t < dist[e]:
-                    dist[e] = dist[s] + t
-    
-    for s in range(1, N+1):
-        for e, t in graph[s]:
-            if dist[s] + t < dist[e]:
-                ans[i] += "YES"
-                break
-        if ans[i]:
+    li = list(range(1, N+1))
+    v = set()
+    while li:
+        tmp = []
+        if (tu:= tuple(li)) in v:
+            ans[i] = "YES"
             break
-    else:
-        ans[i] += "NO"
+        v.add(tu)
+        for s in li:
+            for e, t in graph[s]:
+                if (nt:= dist0[s] + t) < dist1[e]:
+                    dist1[e] = nt
+                    tmp.append(e)
+        for s in tmp:
+            dist0[s] = dist1[s]
+        li = tmp
 
 print("\n".join(ans))
