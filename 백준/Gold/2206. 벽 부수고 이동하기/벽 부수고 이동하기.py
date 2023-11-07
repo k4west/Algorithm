@@ -5,16 +5,15 @@ def main():
     d = ((1, 0), (-1, 0), (0, 1), (0, -1))
     ans = '-1'
     graph = [list(map(int, input())) for _ in range(N)]
-    v = [[[0, 0] for _ in range(M)] for _ in range(N)]
 
     q = deque()
-    q.append((0, 0, 0))
-    v[0][0][0] = 1
+    q.append((0, 0, False, 1))
+    graph[0][0] = 2
 
     while q:
-        n, m, w = q.popleft()
+        n, m, w, c = q.popleft()
         if n == N-1 and m == M-1:
-            ans = v[n][m][w]
+            ans = c
             break
         for dx, dy in d:
             nn = n + dy
@@ -22,13 +21,22 @@ def main():
             if not (0 <= nn < N and 0 <= nm < M):
                 continue
             # 벽을 부수고 이동
-            if graph[nn][nm] and not w:
-                v[nn][nm][1] = v[n][m][0] + 1
-                q.append((nn, nm, 1))
-            # 벽을 부술 수 있는 기회에 따른 방문하지 않은 길로 이동
-            elif not graph[nn][nm] and not v[nn][nm][w]:
-                v[nn][nm][w] = v[n][m][w] + 1
-                q.append((nn, nm, w))
+            if graph[nn][nm] == 1 and not w:
+                graph[nn][nm] = 2
+                q.append((nn, nm, True, c+1))
+            # 처음 가는 길로 이동
+            elif not graph[nn][nm]:
+                if not w:
+                    q.append((nn, nm, w, c+1))
+                    graph[nn][nm] = 2
+                else:
+                    q.append((nn, nm, w, c+1))
+                    graph[nn][nm] = 3
+            # 벽 부수기 전, (이전에 벽을 부수고 지나간) 길로 이동 
+            elif graph[nn][nm] == 3 and not w:
+                q.append((nn, nm, w, c+1))
+                graph[nn][nm] = 2
+
     print(ans)
 
 if __name__ == "__main__":
