@@ -9,7 +9,7 @@ def main():
         for b, c in zip(li[::2], li[1::2]):
             graph[a].append((b, c))
 
-    def dfs(s, V):
+    def dfs(s, V, flag=False):
         dist = 0
         v = [False]*(V+1)
         stack = [(s, 0)]
@@ -21,9 +21,11 @@ def main():
             for n1, d1 in graph[n0]:
                 if not v[n1]:
                     stack.append((n1, d0 + d1))
-        return s, dist
+        if flag:
+            return dist
+        return s
 
-    print(dfs(dfs(1, V)[0], V)[1])
+    print(dfs(dfs(1, V), V, True))
 
 if __name__ == "__main__":
     main()
