@@ -12,7 +12,6 @@ def main():
     def dfs(n, e, flag):
         distance = [-1] * (n+1)
         stack = [(e, 0)]
-        N, M = 0, 0
         while stack:
             e, d = stack.pop()
             distance[e] = d
