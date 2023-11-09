@@ -1,16 +1,13 @@
-def f(n, p):
-    if n == 1:
-        return [[1, 1], [1, 0]]
-    M = f(n//2, p)
-    a, b, c, d = M[0][0], M[0][1], M[1][0], M[1][1]
-    M[0][0] = (pow(a, 2, p) + b*c%p) % p
-    M[0][1] = b*((a+d)%p)%p
-    M[1][0] = c*((a+d)%p)%p
-    M[1][1] = (pow(d, 2, p) + b*c%p) % p
-    if n%2: 
-        return [[(M[0][0] + M[0][1]) % p, M[0][0]], [(M[1][0] + M[1][1]) % p, M[1][0]]]
-    else:
-        return M
-
+d = {1:1, 2:1, 3:2, 4:3}
 n = int(input())
-print(f(n, 1_000_000_007)[0][1])
+
+def f(n):
+    if d.get(n):
+        return d[n]
+    if n % 2:
+        d[n] = (pow(f(n//2+1), 2) + pow(f(n//2), 2)) % 1_000_000_007
+    else:
+        d[n] = (pow(f(n//2+1), 2) - pow(f(n//2-1), 2)) % 1_000_000_007
+    return d[n]
+
+print(f(n))
