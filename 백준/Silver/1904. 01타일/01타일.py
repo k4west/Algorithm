@@ -1,10 +1,17 @@
-def f(n,p):
-    a, b = 1,1
-    for _ in range(n//2-1):
-        a, b = b, (a+b)%p
-    if n % 2:
-        return (pow(b,2)+pow(a,2)) % p
+def f(n, p):
+    if n == 1:
+        return [[1, 1], [1, 0]]
+    M = f(n//2, p)
+    a, b, c, d = M[0][0], M[0][1], M[1][0], M[1][1]
+    M[0][0] = (pow(a, 2, p) + b*c%p) % p
+    M[0][1] = b*((a+d)%p)%p
+    M[1][0] = c*((a+d)%p)%p
+    M[1][1] = (pow(d, 2, p) + b*c%p) % p
+    if n%2: 
+        return [[(M[0][0] + M[0][1]) % p, M[0][0]], [(M[1][0] + M[1][1]) % p, M[1][0]]]
     else:
-        return (pow(b,2)-pow(b-a,2)) % p
-n = int(input()) + 1
-print(f(n, 15746))
+        return M
+
+p = 15746
+n = int(input())
+print(f(n+1, p)[0][1])
