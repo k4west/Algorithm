@@ -1,31 +1,31 @@
 import sys
 input = sys.stdin.readline
 
-N = int(input())
-graph = [['0']]
-count = 0
-for _ in range(N):
-    graph.append(['0']+input().rstrip().split()+['1'])
-graph.append(['1']*(N+2))
+def main():
+    N = int(input())
+    graph = [['0']]
+    dp = [[[0]*(N+1) for _ in range(N+1)] for _ in range(3)]
 
-if graph[N][N] == '1' or (graph[N-1][N] == '1' and graph[N][N-1] == '1'):
-    print(0)
-    exit()
+    for _ in range(N):
+        graph.append(['0']+input().rstrip().split()+['1'])
+    graph.append(['1']*(N+2))
+    if graph[N][N] == '1' or (graph[N-1][N] == '1' and graph[N][N-1] == '1'):
+        print(0)
+        exit()
 
-q = [(1, 2, 'r')]
-while q:
-    i, j, s = q.pop()
-    if i == j == N:
-        count += 1
-        continue
-    A = graph[i][j+1] == '0'
-    B = graph[i+1][j] == '0'
-    C = graph[i+1][j+1] == '0'
-    if A and s != 'c':
-        q.append((i, j+1, 'r'))
-    if B and s != 'r':
-        q.append((i+1, j, 'c'))
-    if A and B and C:
-        q.append((i+1, j+1, 'd'))
+    dp[0][1][2] = 1
+    for c in range(3, N+1):
+        if graph[1][c] == '0':
+            dp[0][1][c] = dp[0][1][c-1]
 
-print(count)
+    for i in range(2, N+1):
+        for j in range(3, N+1):
+            if graph[i][j] == '0':
+                if graph[i-1][j] == graph[i][j-1] == '0':
+                    dp[1][i][j] = dp[0][i-1][j-1] + dp[1][i-1][j-1] + dp[2][i-1][j-1]
+                dp[0][i][j] = dp[0][i][j-1] + dp[1][i][j-1]
+                dp[2][i][j] = dp[2][i-1][j] + dp[1][i-1][j]
+    print(dp[0][N][N]+dp[1][N][N]+dp[2][N][N])
+
+if __name__ == "__main__":
+    main()
