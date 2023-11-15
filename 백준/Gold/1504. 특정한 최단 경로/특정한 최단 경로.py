@@ -25,8 +25,9 @@ def main():
                     dist[e] = d
                     heappush(q, (d, e))
         return [dist[i] for i in li]
-
-    ans = min([x+y for x, y in zip(f(1, [v1, v2]), f(N, [v2, v1]))]) + f(v1, [v2])[0]
+    
+    d1, d2 = f(v1, [1, N, v2]), f(v2, [N, 1])
+    ans = min([x+y for x, y in zip(d1, d2)]) + d1[2]
     print(ans if ans != INF else '-1')
 
 if __name__ == "__main__":
