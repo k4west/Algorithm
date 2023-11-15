@@ -5,12 +5,12 @@ input = sys.stdin.readline
 def main():
     INF = float('inf')
     N, E = map(int, input().split())
-    graph = [[] for _ in range(N+1)]
+    graph = {n: {} for n in range(1, N+1)}
 
     for _ in range(E):
         a, b, c = map(int, input().split())
-        graph[a].append((b, c))
-        graph[b].append((a, c))
+        graph[a][b] = c
+        graph[b][a] = c
 
     v1, v2 = map(int, input().split())
 
@@ -20,7 +20,7 @@ def main():
         q = [(0, node)]
         while q:
             d0, s = heappop(q)
-            for e, d1 in graph[s]:
+            for e, d1 in graph[s].items():
                 if (d:= d0 + d1) < dist[e]:
                     dist[e] = d
                     heappush(q, (d, e))
