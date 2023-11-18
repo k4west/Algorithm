@@ -19,5 +19,4 @@ def bi(a, x):
         k = bi(a,x//2)
         return mul(k, k)
 
-ans = bi(A, B)
-print("\n".join(" ".join(map(str, row)) for row in ans))
+print("\n".join(" ".join(map(str, row)) for row in bi(A, B)))
