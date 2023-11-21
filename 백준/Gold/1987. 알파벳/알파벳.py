@@ -2,34 +2,31 @@ import sys
 input = sys.stdin.readline
 
 R, C = map(int, input().split())
+L = R*C
 graph = []
 for _ in range(R):
-    graph.append(list(input().rstrip()))
+    graph.extend(list(map(lambda x:1 << ord(x)-65, input().rstrip())))
 
-v, ans = [False]*26, 1
-v[ord(graph[0][0])-65] = True
+ans = 1
 
-def dfs(d, i, j):
+def dfs(d, p, v):
     global ans
-
-    def f(n, c, x, y):
-        v[n] = True
-        dfs(c, x, y)
-        v[n] = False
-        
+    i, j = p//C, p%C
+          
     if ans < d: 
         ans = d
         if ans == 26:
             print(26)
             exit()
-    if (ni:=i+1) < R and not v[k:=ord(graph[ni][j])-65]:
-        f(k, d+1, ni, j)
-    if 0 <= (ni:=i-1) and not v[k:=ord(graph[ni][j])-65]:
-        f(k, d+1, ni, j)
-    if (nj:=j+1) < C and not v[k:=ord(graph[i][nj])-65]:
-        f(k, d+1, i, nj)
-    if 0 <= (nj:=j-1) and not v[k:=ord(graph[i][nj])-65]:
-        f(k, d+1, i, nj)
+    d += 1
+    if (i+1) < R and not (w:=graph[k:=p+C])&v:
+        dfs(d, k, v|w)
+    if 0 <= (i-1) and not (w:=graph[k:=p-C])&v:
+        dfs(d, k, v|w)
+    if (j+1) < C and not (w:=graph[k:=p+1])&v:
+        dfs(d, k, v|w)
+    if 0 <= (j-1) and not (w:=graph[k:=p-1])&v:
+        dfs(d, k, v|w)
 
-dfs(1, 0, 0)
+dfs(1, 0, graph[0])
 print(ans)
