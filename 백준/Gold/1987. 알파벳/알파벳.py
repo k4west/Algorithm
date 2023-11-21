@@ -17,7 +17,11 @@ def dfs(d, i, j):
         dfs(c, x, y)
         v[n] = False
         
-    if ans < d: ans = d
+    if ans < d: 
+        ans = d
+        if ans == 26:
+            print(26)
+            exit()
     if (ni:=i+1) < R and not v[k:=ord(graph[ni][j])-65]:
         f(k, d+1, ni, j)
     if 0 <= (ni:=i-1) and not v[k:=ord(graph[ni][j])-65]:
