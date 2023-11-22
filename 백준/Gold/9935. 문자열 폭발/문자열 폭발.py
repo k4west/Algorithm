@@ -1,6 +1,10 @@
+import sys
+input = sys.stdin.readline
+print = sys.stdout.write
+
 def main():
-    string = input()
-    bomb = list(input())
+    string = input().rstrip()
+    bomb = list(input().rstrip())
     b = len(bomb)
     x = bomb[-1]
 
