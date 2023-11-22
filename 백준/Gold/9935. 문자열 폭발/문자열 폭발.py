@@ -1,12 +1,11 @@
 string = input()
-bomb = input()
+bomb = list(input())
 b = len(bomb)
 
 stack = []
 for s in string:
     stack.append(s)
-    if "".join(stack[-b:]) == bomb:
-        for _ in range(b):
-            stack.pop()
+    if stack[-b:] == bomb:
+        del stack[-b:]
 
 print("".join(stack) if stack else "FRULA")
