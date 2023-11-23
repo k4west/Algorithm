@@ -30,6 +30,4 @@ def bfs(N, K):
 
 if __name__ == "__main__":
     N, K = map(int, input().split())
-    M = 10**5+1
-    v = [False]*(M)
     print(bfs(N, K))
