@@ -1,31 +1,31 @@
 import sys
+from heapq import heappop, heappush
 input = sys.stdin.readline
 INF = float('inf')
 
 n, m, r = map(int, input().split())
 items = [0] + list(map(int, input().split()))
-graph = [[INF]*(n+1) for _ in range(n+1)]
+graph = [[] for _ in range(n+1)]
 
 for _ in range(r):
     a, b, l = map(int, input().split())
-    graph[a][b] = l
-    graph[b][a] = l
-    
-for node in range(1, n+1):
-    graph[node][node] = 0
-    for i in range(1, n+1):
-        for j in range(i+1, n+1):
-            if graph[i][j] > graph[i][node] + graph[node][j]:
-                graph[i][j] = graph[i][node] + graph[node][j]
-                graph[j][i] = graph[i][j]
+    graph[a].append((b, l))
+    graph[b].append((a, l))
 
 ans = 0
 for i in range(1, n+1):
-    tmp = 0
-    for j in range(1, n+1):
-        if graph[i][j] <= m:
-            tmp += items[j]
-    if ans < tmp:
+    dist = [INF]*(n+1)
+    q = [(0, i)]
+    dist[i] = 0
+    while q:
+        d0, n0 = heappop(q)
+        if dist[n0] < d0:
+            continue
+        for n1, d1 in graph[n0]:
+            if (d := d0 + d1) < dist[n1]:
+                dist[n1] = d
+                heappush(q, (d, n1))
+    if ans < (tmp:=sum([item for d, item in zip(dist, items) if d <= m])):
         ans = tmp
 
 print(ans)
