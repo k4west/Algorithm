@@ -20,7 +20,7 @@ def main():
                 if graph[nr][nc] > 2:
                     graph[nr][nc] = -1
                     nq.append((nr, nc))
-            if not graph[(nr:=r+dr)][(nc:=c+dc)]:
+            if not graph[nr][nc]:
                 graph[nr][nc] = -1
                 q.append((nr, nc))
     print(t)
