@@ -33,8 +33,7 @@ def main():
     while (n:=ans[-1]) != A:
         ans.append(path[n])
 
-    print(dist[B], len(ans), sep='\n')
-    print(*ans[::-1])
+    print(dist[B], len(ans), " ".join(map(str, ans[::-1])), sep='\n')
 
 if __name__ == "__main__":
     main()
