@@ -8,54 +8,60 @@ for i in range(N):
     for j in range(N):
         if sea[i][j] == 9:
             start = [i, j]
+            sea[i][j] = 0
             break
 
 t = 0
 def search(i, j):
-    q = deque([(i, j)])
-    v = [[0]*N for _ in range(N)]
+    q, nq = deque([(i, j)]), []
+    v = {(i, j)}
     tmp = []
-    v[i][j] = 1
-    while q:
+    cnt = 1
+    while q or nq:
+        if not q:
+            if tmp:
+                break
+            q, nq = deque(nq), []
+            cnt += 1
+
         r, c = q.popleft()
-        if (nr:=r-1) >= 0 and (k:=sea[nr][c]) <= level and not v[nr][c]:
+        if (nr:=r-1) >= 0 and (k:=sea[nr][c]) <= level and (s:=(nr, c)) not in v:
             if 0 < k < level:
-                v[nr][c] = v[r][c] + 1
-                tmp.append((v[r][c], nr, c))
+                tmp.append((nr, c))
             else: 
-                q.append((nr, c))
-                v[nr][c] = v[r][c] + 1
-        if (nc:=c-1) >= 0 and (k:=sea[r][nc]) <= level and not v[r][nc]:
+                v.add(s)
+                nq.append((nr, c))
+        if (nc:=c-1) >= 0 and (k:=sea[r][nc]) <= level and (s:=(r, nc)) not in v:
             if 0 < k < level:
-                v[r][nc] = v[r][c] + 1
-                tmp.append((v[r][c], r, nc))
-            else: 
-                q.append((r, nc))
-                v[r][nc] = v[r][c] + 1
-        if (nc:=c+1) < N and (k:=sea[r][nc]) <= level and not v[r][nc]:
+                tmp.append((r, nc))
+            else:
+                v.add(s) 
+                nq.append((r, nc))
+        if (nc:=c+1) < N and (k:=sea[r][nc]) <= level and (s:=(r, nc)) not in v:
             if 0 < k < level:
-                v[r][nc] = v[r][c] + 1
-                tmp.append((v[r][c], r, nc))
-            else: 
-                q.append((r, nc))
-                v[r][nc] = v[r][c] + 1
-        if (nr:=r+1) < N and (k:=sea[nr][c]) <= level and not v[nr][c]:
+                tmp.append(( r, nc))
+            else:
+                v.add(s) 
+                nq.append((r, nc))
+        if (nr:=r+1) < N and (k:=sea[nr][c]) <= level and (s:=(nr, c)) not in v:
             if 0 < k < level:
-                v[nr][c] = v[r][c] + 1
-                tmp.append((v[r][c], nr, c))
-            else: 
-                q.append((nr, c))
-                v[nr][c] = v[r][c] + 1
-    return sorted(tmp, key=lambda x: (x[0], x[1], x[2]))
+                tmp.append((nr, c))
+            else:
+                v.add(s) 
+                nq.append((nr, c))
+    if tmp:
+        tmp.sort()
+        return cnt, tmp[0]
+    return False
 
 
 level, exp = 2, 0
 i, j = start
 while True:
-    if not (s:=deque(search(i, j))):
+    if not (s:=search(i, j)):
         break
+    k, (i, j) = s
     sea[i][j] = 0
-    k, i, j = s.popleft()
     t += k
 
     exp += 1
