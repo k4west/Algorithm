@@ -10,5 +10,5 @@ for i in range(N-1):
     area += x0*y1 - x1*y0
     x0, y0 = x1, y1
 area += x1*y - x*y1
-
-print(round(area/2, 1)*(2*int(area > 0)-1))
+ans = round(area/2, 1)
+print(max(ans, -ans))
