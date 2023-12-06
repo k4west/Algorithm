@@ -15,8 +15,8 @@ def main():
                 ans[card] += 1
                 ans[i] -= 1
     s = ""
-    for n in map(str, (ans[card] for card in cards)):
-        s += n + ' '
+    for n in cards:
+        s += str(ans[n]) + ' '
     print(s)
     
 if __name__ == "__main__":
