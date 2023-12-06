@@ -1,14 +1,13 @@
 N = int(input())
 cards = list(map(int, input().split()))
-ans = [-1]*1000001
-for i in cards: ans[i] = 0
-_sorted = sorted(cards)
-M = _sorted[-1]
-
-for i in range(N-1):
-    p = _sorted[i]
-    for j in range(2, M//_sorted[i]+1):
-        if ans[p*j] != -1:
-            ans[p*j] += 1
-            ans[p] -= 1
-print(*(-ans[cards[i]] for i in range(N)))
+M = max(cards)+1
+v = [False]*M
+ans = [0]*M
+for card in cards:
+    v[card] = True
+for card in cards:
+    for i in range(2*card, M, card):
+        if v[i]:
+            ans[card] += 1
+            ans[i] -= 1
+print(*(ans[card] for card in cards))
