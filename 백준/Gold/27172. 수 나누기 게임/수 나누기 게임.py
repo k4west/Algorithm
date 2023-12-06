@@ -14,7 +14,7 @@ def main():
             if v[i]:
                 ans[card] += 1
                 ans[i] -= 1
-    print(*(ans[card] for card in cards))
+    print(" ".join(map(str, (ans[card] for card in cards))))
 
 if __name__ == "__main__":
     main()
