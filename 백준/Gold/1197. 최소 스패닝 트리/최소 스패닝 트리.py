@@ -13,15 +13,22 @@ def main():
             parent[pr] = nr
         return r
 
+    def union_root(a, b):
+        if (x:=find_root(a)) == (y:=find_root(b)):
+            return False
+        if x < y:
+            parent[y] = x
+        else:
+            parent[x] = y
+        return True
+            
     w, v = 0, 0
     for a, b, c in graph:
-        if (x:=find_root(a)) == (y:=find_root(b)):
-            continue
-        parent[y] = x
-        w += c
-        v += 1
-        if v == V-1:
-            break
+        if union_root(a, b):
+            w += c
+            v += 1
+            if v == V-1:
+                break
     print(w)
 
 if __name__ == "__main__":
