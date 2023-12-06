@@ -7,8 +7,10 @@ graph.sort(key=lambda x: x[2])
 parent = [i for i in range(V+1)]
 
 def find_root(r):
-    while parent[r] != r:
-        r = parent[r]
+    nr = parent[r]
+    while nr != r:
+        pr, r, nr = r, nr, parent[nr]
+        parent[pr] = nr
     return r
 
 w, v = 0, 0
