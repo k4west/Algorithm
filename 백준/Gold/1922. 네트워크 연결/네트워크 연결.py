@@ -5,7 +5,7 @@ def main():
     E = int(input())
     graph = [list(map(int, input().split())) for _ in range(E)]
     graph.sort(key=lambda x: x[2])
-    parent = [i for i in range(V+1)]
+    parent = list(range(V+1))
 
     def find_root(r):
         nr = parent[r]
@@ -17,10 +17,7 @@ def main():
     def union_root(a, b):
         if (x:=find_root(a)) == (y:=find_root(b)):
             return False
-        if x < y:
-            parent[y] = x
-        else:
-            parent[x] = y
+        parent[x] = y
         return True
             
     w, v = 0, 0
