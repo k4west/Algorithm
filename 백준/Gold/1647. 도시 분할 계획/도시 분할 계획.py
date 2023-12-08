@@ -27,9 +27,8 @@ def main():
         w += c
         n += 1
         if n == N:
-            w -= c
-            break
-    print(w)
+            print(w-c)
+            return
 
 if __name__ == "__main__":
     main()
