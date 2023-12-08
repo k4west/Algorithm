@@ -3,9 +3,12 @@ input = sys.stdin.readline
 def main():
     V = int(input())
     E = int(input())
-    graph = [list(map(int, input().split())) for _ in range(E)]
-    graph.sort(key=lambda x: x[2])
-    parent = list(range(V+1))
+    graph = []
+    for _ in range(E):
+        a, b, c = map(int, input().split())
+        graph.append((c, a, b))
+    graph.sort(key=lambda x: x[0])
+    parent = [i for i in range(V+1)]
 
     def find_root(r):
         nr = parent[r]
@@ -17,11 +20,14 @@ def main():
     def union_root(a, b):
         if (x:=find_root(a)) == (y:=find_root(b)):
             return False
-        parent[x] = y
+        if x < y:
+            parent[y] = x
+        else:
+            parent[x] = y
         return True
             
     w, v = 0, 0
-    for a, b, c in graph:
+    for c, a, b in graph:
         if union_root(a, b):
             w += c
             v += 1
