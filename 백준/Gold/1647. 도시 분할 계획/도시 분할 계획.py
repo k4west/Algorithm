@@ -2,9 +2,9 @@ import sys
 input = sys.stdin.readline
 
 def find_root(root, n):
-    if (nr:=root[n]) == n:
+    if root[n] == n:
         return n
-    root[n] = find_root(root, nr)
+    root[n] = find_root(root, root[n])
     return root[n]
 
 def union_root(root, x, y):
