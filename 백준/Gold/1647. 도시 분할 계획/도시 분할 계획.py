@@ -1,5 +1,4 @@
 import sys
-from itertools import combinations as cb
 input = sys.stdin.readline
 
 def find_root(n):
@@ -21,6 +20,8 @@ def union_root(a, b):
 
 def main():
     ans = float('inf')
+    roads = [list(map(int, input().split())) for _ in range(M)]
+    roads.sort(key=lambda x: x[2])
     w, n = 0, 1
     for a, b, c in roads:
         if union_root(a, b):
@@ -34,7 +35,5 @@ def main():
 
 if __name__ == "__main__":
     N, M = map(int, input().split())
-    roads = [list(map(int, input().split())) for _ in range(M)]
-    roads.sort(key=lambda x: x[2])
     root = list(range(N+1))
     main()
