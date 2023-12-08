@@ -1,16 +1,14 @@
 import sys
 input = sys.stdin.readline
 
-def find_root(n):
-    global root
+def find_root(root, n):
     if (nr:=root[n]) == n:
         return n
-    root[n] = find_root(nr)
+    root[n] = find_root(root, nr)
     return root[n]
 
-def union_root(a, b):
-    global root
-    if (x:=find_root(a)) == (y:=find_root(b)):
+def union_root(root, a, b):
+    if (x:=find_root(root, a)) == (y:=find_root(root, b)):
         return False
     if x > y:
         root[x] = y
@@ -19,12 +17,14 @@ def union_root(a, b):
     return True
 
 def main():
-    ans = float('inf')
+    N, M = map(int, input().split())
+    root = list(range(N+1))
     roads = [list(map(int, input().split())) for _ in range(M)]
     roads.sort(key=lambda x: x[2])
+    ans = float('inf')
     w, n = 0, 1
     for a, b, c in roads:
-        if union_root(a, b):
+        if union_root(root, a, b):
             w += c
             n += 1
         if n == N:
@@ -34,6 +34,4 @@ def main():
     print(ans-c)
 
 if __name__ == "__main__":
-    N, M = map(int, input().split())
-    root = list(range(N+1))
     main()
