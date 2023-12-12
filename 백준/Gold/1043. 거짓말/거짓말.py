@@ -1,7 +1,7 @@
 import sys
 input = sys.stdin.readline
 
-N, M = map(int, input().split())
+_, M = map(int, input().split())
 n, *k = map(int, input().split())
 meeting = [{*list(map(int, input().split()))[1:]} for _ in range(M)]
 if not n:
