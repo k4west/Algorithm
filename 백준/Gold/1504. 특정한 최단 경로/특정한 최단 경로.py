@@ -20,6 +20,8 @@ def main():
         q = [(0, node)]
         while q:
             d0, s = heappop(q)
+            if d0 > dist[s]:
+                continue
             for e, d1 in graph[s].items():
                 if (d:= d0 + d1) < dist[e]:
                     dist[e] = d
