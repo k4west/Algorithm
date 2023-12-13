@@ -5,21 +5,23 @@ def main():
     s1 = input().rstrip()
     s2 = input().rstrip()
 
-    dp = [[0, ""] for _ in range(1000)]
+    dp = [""] * max(len(s1), len(s2))
 
     for a in s1:
         c, s = 0, ""
         for i, b in enumerate(s2):
-            if c < dp[i][0]:
-                c = dp[i][0]
-                s = dp[i][1]
+            if c < (t:=len(dp[i])):
+                c = t
+                s = dp[i]
             elif a == b:
-                dp[i][0] = c + 1
-                dp[i][1] = s + b
+                dp[i] = s + b
 
-    c, s = max(dp)
-    print(c)
-    if s: print(s)
-    
+    ans = ""
+    for s in dp:
+        if len(s) > len(ans):
+            ans = s
+    print(len(ans))
+    if ans: print(ans)
+
 if __name__ == "__main__":
     main()
