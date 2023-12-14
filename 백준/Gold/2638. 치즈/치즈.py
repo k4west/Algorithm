@@ -3,9 +3,9 @@ input = sys.stdin.readline
 
 def main():
     N, M = map(int, input().split())
-    d = [(1, 0), (0, 1), (-1, 0), (0, -1)]
-    margin = [[-1] * (M+2)]
-    graph = [[-1] + list(map(int, input().split())) + [-1] for _ in range(N)]
+    d = [(1,0),(0,1),(-1,0),(0,-1)]
+    margin = [[-1]*(M+2)]
+    graph = [[-1]+list(map(int, input().split()))+[-1] for _ in range(N)]
     graph = margin + graph + margin
 
     q, nq, t = [(1, 1)], [], 0
