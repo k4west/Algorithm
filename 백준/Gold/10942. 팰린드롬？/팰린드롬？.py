@@ -6,6 +6,7 @@ def main():
     num = list(map(int, input().split()))
     M = int(input())
     dp = [['0']*N for _ in range(N)]
+    ans = []
     
     for i in range(N):
         for s in range(N-i):
@@ -20,7 +21,8 @@ def main():
     
     for _ in range(M):
         S, E = map(int, input().split())
-        print(dp[S-1][E-1])
+        ans.append(dp[S-1][E-1])
+    print("\n".join(ans))
 
 if __name__ == "__main__":
     main()
