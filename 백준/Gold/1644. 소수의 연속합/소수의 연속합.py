@@ -13,12 +13,12 @@ def main():
     if not primes:
         print(0)
         return
-    tmp = c = 0
-    _p = iter(primes)
+    i = tmp = c = 0
     for p in primes:
         tmp += p
         while tmp > N:
-            tmp -= next(_p)
+            tmp -= primes[i]
+            i += 1
         if tmp == N:
             c += 1
     print(c)  
