@@ -11,17 +11,14 @@ def main():
     if not primes:
         print(0)
         return
-    E = len(primes)
-    s, e, tmp, c = 0, 1, 2, 0
-    while s < e:
-        while tmp < N and e < E:
-            tmp += primes[e]
-            e += 1
+    i = tmp = c = 0
+    for p in primes:
+        tmp += p
+        while tmp > N:
+            tmp -= primes[i]
+            i += 1
         if tmp == N:
             c += 1
-            
-        tmp -= primes[s]
-        s += 1
     print(c)  
 
 if __name__ == "__main__":
