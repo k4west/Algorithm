@@ -1,5 +1,5 @@
 def get_primes(N):
-    nums = [False, False] + [True]*(N-1)
+    nums = [True]*(N+1)
     for i in range(3, int(N**.5)+1, 2):
         if nums[i]:
             nums[i*i :: 2*i] = [False]*((N-i*i)//(2*i)+1)
