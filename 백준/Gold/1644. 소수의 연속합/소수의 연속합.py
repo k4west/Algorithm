@@ -1,14 +1,15 @@
+def get_primes(N):
+    nums = [False, False] + [True]*(N-1)
+    for i in range(3, int(N**.5)+1, 2):
+        if nums[i]:
+            nums[i*i :: 2*i] = [False]*((N-i*i)//(2*i)+1)
+    return [2] + [n for n in range(3, N+1, 2) if nums[n]]
+
 def main():
     import sys
     N = int(sys.stdin.readline())
 
-    nums = [False, False] + [True]*(N-1)
-    for i in range(2, int(N**.5)+1):
-        if nums[i]:
-            for j in range(i*i, N+1, i):
-                nums[j] = False
-
-    primes = [n for n in range(1, N+1) if nums[n]]
+    primes = get_primes(N)
     if not primes:
         print(0)
         return
