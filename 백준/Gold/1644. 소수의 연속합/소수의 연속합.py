@@ -1,5 +1,6 @@
 def main():
-    N = int(input())
+    import sys
+    N = int(sys.stdin.readline())
 
     nums = [False, False] + [True]*(N-1)
     for i in range(2, int(N**.5)+1):
@@ -11,12 +12,12 @@ def main():
     if not primes:
         print(0)
         return
-    i = tmp = c = 0
+    tmp = c = 0
+    _p = iter(primes)
     for p in primes:
         tmp += p
         while tmp > N:
-            tmp -= primes[i]
-            i += 1
+            tmp -= next(_p)
         if tmp == N:
             c += 1
     print(c)  
