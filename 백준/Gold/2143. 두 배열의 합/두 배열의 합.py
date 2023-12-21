@@ -1,7 +1,7 @@
+import sys
+input = sys.stdin.readline
+    
 def main():
-    import sys
-    input = sys.stdin.readline
-
     T = int(input())
     n, A = int(input()), list(map(int, input().split()))
     m, B = int(input()), list(map(int, input().split()))
