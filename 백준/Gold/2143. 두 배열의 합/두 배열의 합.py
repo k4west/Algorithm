@@ -5,8 +5,10 @@ input = sys.stdin.readline
 def subsum(N, L):
     Lsub = []
     for i in range(N):
-        for j in range(i+1, N+1):
-            Lsub.append(sum(L[i:j]))
+        ss = 0
+        for j in range(i, N):
+            ss += L[j]
+            Lsub.append(ss)
     return sorted(Lsub)
 
 T = int(input())
