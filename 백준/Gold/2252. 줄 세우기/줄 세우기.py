@@ -11,20 +11,21 @@ def main():
         a, b = map(int, input().split())
         graph[a].append(b)
         in_num[b] += 1
-    
+
     line = []
+    q = deque()
+
     for i in range(1, N+1):
         if not in_num[i]:
-            line.append(i)
+            q.append(i)
     
-    q = deque(line[:])
     while q:
         s0 = q.popleft()
+        line.append(s0)
         for s1 in graph[s0]:
             in_num[s1] -= 1
             if not in_num[s1]:
                 q.append(s1)
-                line.append(s1)
     
     print(" ".join(map(str, line)))
 
