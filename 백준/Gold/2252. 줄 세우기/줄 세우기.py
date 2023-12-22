@@ -1,32 +1,23 @@
 import sys
-from collections import deque
+sys.setrecursionlimit(10**6)
 input = sys.stdin.readline
     
 def main():
     N, M = map(int, input().split())
     graph = [[] for _ in range(N+1)]
-    in_num = [0]*(N+1)
+    v, line = [False]*(N+1), []
 
     for _ in range(M):
         a, b = map(int, input().split())
-        graph[a].append(b)
-        in_num[b] += 1
+        graph[b].append(a)
 
-    line = []
-    q = deque()
+    def dfs(n):
+        if v[n]: return
+        v[n] = True
+        for s in graph[n]: dfs(s)
+        line.append(str(n))
 
-    for i in range(1, N+1):
-        if not in_num[i]:
-            q.append(i)
-    
-    while q:
-        s0 = q.popleft()
-        line.append(str(s0))
-        for s1 in graph[s0]:
-            in_num[s1] -= 1
-            if not in_num[s1]:
-                q.append(s1)
-    
+    for i in range(1, N+1): dfs(i)
     print(" ".join(line))
 
 if __name__ == "__main__":
