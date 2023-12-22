@@ -21,13 +21,13 @@ def main():
     
     while q:
         s0 = q.popleft()
-        line.append(s0)
+        line.append(str(s0))
         for s1 in graph[s0]:
             in_num[s1] -= 1
             if not in_num[s1]:
                 q.append(s1)
     
-    print(" ".join(map(str, line)))
+    print(" ".join(line))
 
 if __name__ == "__main__":
     main()
