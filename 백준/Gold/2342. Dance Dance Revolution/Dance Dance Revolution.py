@@ -4,7 +4,7 @@ input = sys.stdin.readline
 def main():
     INF = float('inf')
     c = [[2, 2, 2, 2, 2], [0, 1, 3, 4, 3], [0, 3, 1, 3, 4], [0, 4, 3, 1, 3], [0, 3, 4, 3, 1]]
-    arr = list(map(int, input()[:-2].split()))
+    arr = map(int, input()[:-2].split())
     dp, a0 = [INF]*5, 0
     dp[0] = 0
     
