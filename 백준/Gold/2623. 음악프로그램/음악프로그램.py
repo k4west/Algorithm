@@ -1,5 +1,4 @@
 import sys
-from collections import deque
 input = sys.stdin.readline
 
 def main():
@@ -14,15 +13,15 @@ def main():
             in_num[t] += 1
             v.discard(t)
 
-    q = deque(list(v))    
+    s = list(v)
     ans = []
-    while q:
-        n = q.popleft()
+    while s:
+        n = s.pop()
         ans.append(str(n))
         for i in graph[n]:
             in_num[i] -= 1
             if not in_num[i]:
-                q.append(i)
+                s.append(i)
 
     if len(ans) != N:
         print(0)
