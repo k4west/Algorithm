@@ -10,9 +10,9 @@ def main():
     for _ in range(M):
         n, *order = map(int, input().split())
         for i in range(0, n-1):
-            graph[order[i]].append(order[i+1])
-            in_num[order[i+1]] += 1
-            v.discard(order[i+1])
+            graph[order[i]].append((t:=order[i+1]))
+            in_num[t] += 1
+            v.discard(t)
 
     q = deque(list(v))    
     ans = []
