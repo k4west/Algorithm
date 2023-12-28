@@ -1,11 +1,12 @@
 import sys
 input = sys.stdin.readline
 
-def main():
-    N, M = map(int, input().split())
-    dna = [input().rstrip() for _ in range(N)]
-    d, ans, hd, ss = {"A": 0, "C": 0, "G": 0, "T": 0}, "", 0, 'ACGT'
+N, M = map(int, input().split())
+dna = [input().rstrip() for _ in range(N)]
+d, ss = {"A": 0, "C": 0, "G": 0, "T": 0}, 'ACGT'
 
+def f():
+    ans, hd = "", 0
     for i in range(M):
         for j in range(N):
             d[dna[j][i]] += 1
@@ -21,5 +22,4 @@ def main():
 
     print(ans, hd, sep='\n')
 
-if __name__ == "__main__":
-    main()
+f()
