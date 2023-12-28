@@ -5,8 +5,7 @@ input = sys.stdin.readline
 def main():
     N, M = map(int, input().split())
     graph = [[] for _ in range(N+1)]
-    in_num, v = [0]*(N+1), [False]*(N+1)
-    v[0] = True
+    in_num, v = [0]*(N+1), set(range(1, N+1))
 
     for _ in range(M):
         n, *order = map(int, input().split())
@@ -14,30 +13,23 @@ def main():
         for i in range(1, n):
             graph[p].append((np:=order[i]))
             in_num[np] += 1
+            v.discard(np)
             p = np
 
-    q = deque([])
-    for i in range(1, N+1):
-        if not in_num[i]:
-            q.append(i)
-    
+    q = deque(list(v))    
     ans = []
     while q:
         n = q.popleft()
-        if v[n]:
-            ans = [0]
-            break
-        ans.append(n)
-        v[n] = True
+        ans.append(str(n))
         for i in graph[n]:
             in_num[i] -= 1
             if not in_num[i]:
                 q.append(i)
 
-    if False in v:
+    if len(ans) != N:
         print(0)
     else:
-        print(*ans, sep='\n')
+        print('\n'.join(ans))
 
 if __name__ == "__main__":
     main()
