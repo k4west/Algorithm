@@ -7,7 +7,7 @@ for _ in range(N):
     for i, s in enumerate(input().rstrip()):
         dna[i][s] += 1
 
-ans, c0 = "", 0
+ans, hd = "", 0
 for d in dna:
     ts, tc, td = '', 0, []
     for s, c in d.items():
@@ -15,9 +15,7 @@ for d in dna:
         if c > tc:
             ts, tc = s, c
     ans += ts
-    for s, c in td:
-        if s != ts:
-            c0 += c
+    hd += N-tc
 
 print(ans)
-print(c0)
+print(hd)
