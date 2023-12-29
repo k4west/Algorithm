@@ -5,8 +5,7 @@ def main():
     N, M = map(int, input().split())
     mc = sorted(zip(map(int, input().split()), map(int, input().split())), reverse=True)
     d = {0:0}
-    for i in range(N):
-        m, c = mc[i]
+    for m, c in mc:
         t = {}
         for dc, dm in d.items():
             tm, tc = min(M, m+dm), c+dc
