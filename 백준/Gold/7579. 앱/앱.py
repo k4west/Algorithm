@@ -3,17 +3,17 @@ input = sys.stdin.readline
 
 def main():
     N, M = map(int, input().split())
-    *memories, = map(int, input().split())
-    *costs, = map(int, input().split())
-    C = sum(costs)
-    dp = [0]*(C+1)
+    mc = sorted(zip(map(int, input().split()), map(int, input().split())), reverse=True)
+    d = {0:0}
     for i in range(N):
-        m, c = memories[i], costs[i]
-        for j in range(C, c-1, -1):
-            dp[j] = min(M, max(dp[j], dp[j-c]+m))
-
-    li = [c for c in range(C+1) if dp[c]==M]
-    print(min(li))
+        m, c = mc[i]
+        t = {}
+        for dc, dm in d.items():
+            tm, tc = min(M, m+dm), c+dc
+            if d.get(tc, 0) < tm:
+                t[tc] = tm
+        d.update(t)
+    print(min(c for c, m in d.items() if m==M))
 
 if __name__ == "__main__":
     main()
