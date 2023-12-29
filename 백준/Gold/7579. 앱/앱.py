@@ -5,7 +5,6 @@ def main():
     N, M = map(int, input().split())
     *memories, = map(int, input().split())
     *costs, = map(int, input().split())
-
     C = sum(costs)
     dp = [0]*(C+1)
     for i in range(N):
