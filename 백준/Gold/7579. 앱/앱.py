@@ -13,7 +13,7 @@ def main():
             dp[j] = min(M, max(dp[j], dp[j-c]+m))
 
     li = [c for c in range(C+1) if dp[c]==M]
-    print(sorted(li)[0])
+    print(min(li))
 
 if __name__ == "__main__":
     main()
