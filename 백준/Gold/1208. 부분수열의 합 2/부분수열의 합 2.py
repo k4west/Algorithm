@@ -4,7 +4,7 @@ input = sys.stdin.readline
 
 def main():
     N, S = map(int, input().split())
-    *arr, = map(int, input().split())
+    arr = tuple(map(int, input().split()))
     m = N//2
 
     def f(li):
