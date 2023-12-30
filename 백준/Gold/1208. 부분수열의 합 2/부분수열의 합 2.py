@@ -1,4 +1,5 @@
 import sys
+from collections import Counter
 input = sys.stdin.readline
 
 def main():
@@ -6,22 +7,15 @@ def main():
     *arr, = map(int, input().split())
     m = N//2
 
-    def fl(li):
+    def f(li):
         t = [0]
         for a in li:
             tmp = [a+b for b in t]
             t.extend(tmp)
         return  t
-    
-    def fd(li, s, a, d):
-        d[s] =  d.get(s, 0) + 1
-        for i in range(a, len(li)):
-            fd(li, s + li[i], i+1, d)
 
-
-    l = fl(arr[:m])
-    r = {}
-    fd(arr[m:], 0, 0, r)
+    l = f(arr[:m])
+    r = Counter(f(arr[m:]))
     
     c = 0
     if not S: c = -1
