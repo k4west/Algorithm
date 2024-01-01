@@ -8,10 +8,9 @@ def main():
         n = str(sum(int(i)*n.count(i) for i in '123456789'))
         c += 1
     
-    print(c)    # 횟수 출력
-    if not int(n)%3:
-        print('YES')
-    else: print('NO')
+    if n in '0369':
+        print(c, 'YES', sep='\n')
+    else: print(c, 'NO', sep='\n')
 
 if __name__ == '__main__':
     main()
