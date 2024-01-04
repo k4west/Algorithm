@@ -99,9 +99,8 @@ def main():
     def dfs(mat, c):
         if not c:
             return
-        for _ in range(c):
-            for f in (up, down, left, right):
-                f([row[:] for row in mat], c-1)
+        for f in (up, down, left, right):
+            f([row[:] for row in mat], c-1)
 
     dfs(matrix, 5)    
     print(ans)
