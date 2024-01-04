@@ -4,8 +4,14 @@ def main():
     N = int(input())
     matrix = [list(map(int, input().split())) for _ in range(N)]
 
-    def up(tmp, c):
+    def max_n(tmp):
         global ans
+        for i in range(N):
+            for j in range(N):
+                if ans < (a:=tmp[i][j]):
+                    ans = a
+
+    def up(tmp, c):
         for i in range(N):
             p = 0
             for j in range(1, N):
@@ -22,13 +28,9 @@ def main():
         if c:
             dfs(tmp, c)
         else:
-            for i in range(N):
-                for j in range(N):
-                    if ans < (a:=tmp[i][j]):
-                        ans = a
+            max_n(tmp)
                 
     def down(tmp, c):
-        global ans
         for i in range(N):
             p = -1
             for j in range(2, N+1):
@@ -45,13 +47,9 @@ def main():
         if c:
             dfs(tmp, c)
         else:
-            for i in range(N):
-                for j in range(N):
-                    if ans < (a:=tmp[i][j]):
-                        ans = a
+            max_n(tmp)
 
     def left(tmp, c):
-        global ans
         for i in range(N):
             p = 0
             for j in range(1, N):
@@ -68,13 +66,9 @@ def main():
         if c:
             dfs(tmp, c)
         else:
-            for i in range(N):
-                for j in range(N):
-                    if ans < (a:=tmp[i][j]):
-                        ans = a
+            max_n(tmp)
                 
     def right(tmp, c):
-        global ans
         for i in range(N):
             p = -1
             for j in range(2, N+1):
@@ -91,10 +85,7 @@ def main():
         if c:
             dfs(tmp, c)
         else:
-            for i in range(N):
-                for j in range(N):
-                    if ans < (a:=tmp[i][j]):
-                        ans = a
+            max_n(tmp)
 
     def dfs(mat, c):
         if not c:
