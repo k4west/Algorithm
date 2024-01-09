@@ -11,7 +11,7 @@ while True:
         if A == 13:
             ans.append("*")
         else:
-            ans.append(" ".join([str(A + 1)] * 3))
+            ans.append(f'{A+1} {A+1} {A+1}')
 
     elif A == B or B == C or C == A:  # pair
         unmatched = A ^ B ^ C
