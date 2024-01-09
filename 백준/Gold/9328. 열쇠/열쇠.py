@@ -1,21 +1,23 @@
 def dfs(h, w):
-    if (t := building[h][w]) == "*":
+    if (k := ord(building[h][w])) == 42:
         return 0
 
     docu = 0
     building[h][w] = "*"
-    if t == "$":
+    if k == 36:
         docu += 1
-    elif 96 < (k := ord(t)) < 123:
-        keys.add(t)
-        if t in locked:
-            for i, j in locked.pop(t):
+    elif 96 < k < 123:
+        keys.add(k)
+        if k in locked:
+            for i, j in locked.pop(k):
                 docu += dfs(i, j)
     elif 64 < k < 91:
-        if (tt := t.lower()) not in keys:
-            if tt not in locked:
-                locked[tt] = []
-            locked[tt].extend([(nh, nw) for dh, dw in d if check((nh := h + dh), (nw := w + dw))])
+        if (kk := k + 32) not in keys:
+            if kk not in locked:
+                locked[kk] = []
+            locked[kk].extend(
+                [(nh, nw) for dh, dw in d if check((nh := h + dh), (nw := w + dw))]
+            )
             return docu
 
     for dh, dw in d:
@@ -37,12 +39,12 @@ if __name__ == "__main__":
         H, W = map(int, input().split())
         check = lambda x, y: 0 <= x < H and 0 <= y < W
         building = [list(input().rstrip()) for _ in range(H)]
-        keys = set(input().rstrip())
+        keys = set(map(ord, input().rstrip()))
 
-        doors = [(i, j) for i in range(H) for j in range(W) if (i == 0 or i == H - 1) or (j == 0 or j == W - 1)]
-        while doors:
-            h, w = doors.pop()
-            documents += dfs(h, w)
+        for i in range(H):
+            for j in range(W):
+                if i == 0 or i == H - 1 or j == 0 or j == W - 1:
+                    documents += dfs(i, j)
         ans.append(str(documents))
 
     print("\n".join(ans))
