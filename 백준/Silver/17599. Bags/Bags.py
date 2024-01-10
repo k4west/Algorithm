@@ -1,2 +1,5 @@
-n, a = open(0)
-print(len(set(a.rstrip().split())))
+import sys
+input = sys.stdin.readline
+
+input()
+print(len(set(input().rstrip().split())))
