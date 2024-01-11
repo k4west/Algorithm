@@ -6,7 +6,7 @@ nums = [False] + [True] * (N)
 c = K if N >= K else N
 primes = [False, False] + [True] * (N - 1)
 
-for i in range(2, N + 1):
+for i in range(2, int(N**.5) + 1):
     if primes[i]:
         for j in range(i**2, N + 1, i):
             primes[j] = False
