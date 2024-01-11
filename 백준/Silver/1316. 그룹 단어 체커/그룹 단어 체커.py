@@ -1,14 +1,16 @@
 n = int(input())
-c = 0
-for i in range(n):
-    sr = list(input())
-    st = list(set(sr))
-    for j in st:
-        a = sr.index(j)
-        b = sr.count(j)
-        if b != 1 and sr[a: a + b] != [j] * b:
-            c += 1
-    if c != 0:
+for _ in range(n):
+    string = input()
+    t = string[0]
+    v = {t}
+    flag = False
+    for s in string:
+        if s != t:
+            if s in v:
+                flag = True
+                break
+            v.add(s)
+            t = s
+    if flag:
         n -= 1
-    c = 0
 print(n)
