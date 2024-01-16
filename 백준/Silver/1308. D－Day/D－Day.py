@@ -1,10 +1,4 @@
-import sys
-
-
-def yun(n):
-    return int((n % 4 == 0 and n % 25 != 0) or n % 400 == 0)
-
-
+yun = lambda n: int((n % 4 == 0 and n % 25 != 0) or n % 400 == 0)
 m_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
 
@@ -17,9 +11,8 @@ def count_days(y, m, d):
     return days
 
 
-input = lambda: map(int, sys.stdin.readline().split())
-y0, m0, d0 = input()
-y1, m1, d1 = input()
+y0, m0, d0 = map(int, input().split())
+y1, m1, d1 = map(int, input().split())
 
 if count_days(y1 - 1000, m1, d1) >= (t := count_days(y0, m0, d0)):
     print("gg")
