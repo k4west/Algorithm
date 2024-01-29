@@ -35,7 +35,7 @@ def main():
     for i in range(1, N + 1):
         find_root(i)
 
-    f_c = [[friedns[i], candies[i]] for i in range(1, N + 1) if i == roots[i]]
+    f_c = [(friedns[i], candies[i]) for i in range(1, N + 1) if i == roots[i]]
     f_c.sort(key=lambda x: (x[0], x[1]))
 
     dp = [0] * K
