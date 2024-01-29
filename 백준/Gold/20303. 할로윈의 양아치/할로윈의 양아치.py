@@ -21,10 +21,10 @@ def main():
     input = lambda: map(int, sys.stdin.readline().split())
     N, M, K = input()
     candies = list(input())
-    friends = [tuple(input()) for _ in range(M)]
     roots = [i for i in range(N + 1)]
 
-    for i, j in friends:
+    for _ in range(M):
+        i, j = input()
         union_root(i, j)
 
     for i in range(1, N+1):
