@@ -1,11 +1,12 @@
 import sys
-from heapq import heapify, heappop
+from heapq import heappush, heappop
 
 input()
 input = lambda: map(int, sys.stdin.readline().split())
 
-A = list(input())
-heapify(A)
+A = []
+for a in input():
+    heappush(A, a)
 B = input()
 
 S = 0
