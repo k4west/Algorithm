@@ -1,15 +1,13 @@
 import sys
-from heapq import heappush, heappop
 
 input()
-input = lambda: map(int, sys.stdin.readline().split())
+input = lambda: sorted((map(int, sys.stdin.readline().split())))
 
-A = []
-for a in input():
-    heappush(A, a)
+A = input()
 B = input()
 
 S = 0
-for b in sorted(B, reverse=True):
-    S += heappop(A) * b
+for a, b in zip(A[::-1], B):
+    S += a*b
+
 print(S)
