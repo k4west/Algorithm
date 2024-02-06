@@ -1,3 +1,2 @@
-import sys
-N, L = sys.stdin.readline().split()
-print("1"*(int(L)-1)+N)
+a, b=input().split()
+print('1'*(int(b)-1)+a)
