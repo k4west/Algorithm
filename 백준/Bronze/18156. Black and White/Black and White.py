@@ -1,33 +1,28 @@
 import sys
+
 input = sys.stdin.readline
 n = int(input())
 grid = [input().rstrip() for _ in range(n)]
 ans = 1
+
 def more_than_3(line):
-    count = 0
-    prev = "W"
+    count, prev = 0, "W"
     for s in line:
         if s == prev:
-            count += 1
-            if count == 3:
+            if (count := count + 1) == 3:
                 return True
         else:
-            count = 1
-            prev = s
+            count, prev = 1, s
     return False
-for row in grid:
-    if row.count("W") != n // 2:
-        ans = 0
-        break
-    if more_than_3(row):
-        ans = 0
-        break
-if ans:
-    for col in zip(*grid):
-        if col.count("W") != n // 2:
+
+for maps in (grid, zip(*grid)):
+    for line in maps:
+        if line.count("W") != n // 2:
             ans = 0
             break
-        if more_than_3(col):
+        if more_than_3(line):
             ans = 0
             break
+    if not ans:
+        break
 print(ans)
