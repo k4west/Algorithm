@@ -1,1 +1,2 @@
-print("\n".join(map(str, (sum(map(int, a.split())) for a in open(0)))))
+for a in open(0):
+    print(eval("+".join(a.split())))
