@@ -1,8 +1,4 @@
-import sys
-
 a = b = 0
-for n, p in zip(tuple(map(int, sys.stdin.readline().split())), (1, 5, 10, 20, 50, 100)):
-    if b <= (n * p):
-        b = n * p
-        a = p
+for n, p in zip(tuple(map(int, input().split())), (1, 5, 10, 20, 50, 100)):
+    if b <= (t:= n * p): a, b = p, t
 print(a)
