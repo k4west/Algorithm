@@ -1,15 +1,16 @@
 import sys
-def sol():
-    if (n:= len(string)) < 3: ans.append(string + surprising)
+input = sys.stdin.readline
+ans = []
+s = " is surprising."
+ns = " is NOT surprising."
+while (o:=input().strip())!="*":
+    n = len(o)
+    if n < 3: ans.append(o + s)
     else:
-        for i in range(n - 1):
+        for i in range(1, n):
             tmp = set()
-            for j in range(n - i - 1):
-                if (k := string[j] + string[j + i + 1]) in tmp:
-                    ans.append(string + not_surprising); return
-                else: tmp.add(k)
-        ans.append(string + surprising)
-input, ans = sys.stdin.readline, []
-surprising, not_surprising = " is surprising.", " is NOT surprising."
-while (string := input().strip()) != "*": sol()
+            for j in range(k:=n-i): tmp.add(o[j] + o[j+i])
+            if len(tmp)!=k:
+                ans.append(o+ns); break
+        else: ans.append(o+s)
 print("\n".join(ans))
