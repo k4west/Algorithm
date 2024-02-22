@@ -1,6 +1,11 @@
 import sys
 from collections import deque
 
+
+def sol(li: list) -> str:
+    return " ".join(map(str, sorted(li))) or "None"
+
+
 def main():
     input = sys.stdin.readline
     A, B, C = [], [], deque([])
@@ -14,9 +19,8 @@ def main():
                 A.append(a)
             else:
                 B.append(a)
-    print(" ".join(map(str, sorted(A))) or "None")
-    print(" ".join(map(str, sorted(B))) or "None")
-    print(" ".join(map(str, sorted((a for a, _ in C)))) or "None")
+    print("\n".join((sol(A), sol(B), sol((a for a, _ in C)))))
+
 
 if __name__ == "__main__":
     main()
