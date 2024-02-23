@@ -1,15 +1,28 @@
 import sys
-from collections import deque
-def sol(li):return " ".join(map(str,sorted(map(int, li)))) or "None"
+
+
+def sol(li: list) -> str:
+    return " ".join(map(str, sorted(map(int, li)))) or "None"
+
+
 def main():
     input = sys.stdin.readline
-    A, B, C = [], [], deque([])
+    A, B, C, F = [], [], [], []
+
     for _ in range(int(input())):
         type_, *num = input().split()
-        if type_ == '1': C.append(num)
+        if type_ == "1":
+            C.append(num)
         else:
-            a, b = C.popleft()
-            if num[0] == b: A.append(a)
-            else: B.append(a)
-    print("\n".join((sol(A),sol(B),sol((a for a,_ in C)))))
-if __name__ == "__main__":main()
+            F.append(num[0])
+    for i in range(n := len(F)):
+        (a, b), f = C[i], F[i]
+        if f == b:
+            A.append(a)
+        else:
+            B.append(a)
+    print("\n".join((sol(A), sol(B), sol((a for a, _ in C[n:])))))
+
+
+if __name__ == "__main__":
+    main()
