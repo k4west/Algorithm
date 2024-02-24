@@ -7,7 +7,7 @@ def main():
     for _ in range(int(input())):
         # t: 현재 땅에 있는 병사 수. li: 각각 병사의 군대 번호가 담긴 리스트
         t, *li = input().rstrip().split()
-        li = list(li)
+        li = tuple(li)
 
         # 절반을 초과해야 지배하므로 다른 군대의 병사 수를 합친 것보다 많아야 함
         major, count = 0, 0
