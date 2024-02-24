@@ -1,3 +1,4 @@
-from collections import Counter
-n = (Counter(str1 := input()) & Counter(str2 := input())).total()
-print(len(str1) + len(str2) - 2 * n)
+str1, str2 = input(), input()
+for s in str1:
+    if s in str2: str1, str2 = str1.replace(s, "", 1), str2.replace(s, "", 1)
+print(len(str1 + str2))
