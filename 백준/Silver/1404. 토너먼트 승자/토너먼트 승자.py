@@ -19,4 +19,4 @@ ans=[]
 for n in range(1,9):
     if (n+3)%8//4:ans.append(tmp[n-1]*sum(P[(n-1)*8+i]*tmp[i] for i in range(4,8)))
     else:ans.append(tmp[n-1]*sum(P[(n-1)*8+i]*tmp[i] for i in range(4)))
-print(" ".join(map(lambda x:f"{x:.13f}",ans)))
+print(" ".join(map(lambda x:f"{x:.9f}",ans)))
