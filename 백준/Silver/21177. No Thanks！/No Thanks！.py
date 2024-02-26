@@ -1,9 +1,9 @@
 a = open(0)
 next(a)
-cards = sorted(map(int, next(a).split()))
-score = 0
-prev = -1
-for num in cards:
-    if prev + 1 != num: score += num
-    prev = num
-print(score)
+c=sorted(map(int, next(a).split()))
+s = 0
+p = -1
+for n in c:
+    if p+1!=n:s+=n
+    p=n
+print(s)
