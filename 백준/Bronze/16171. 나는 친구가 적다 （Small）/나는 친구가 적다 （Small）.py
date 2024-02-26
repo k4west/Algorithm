@@ -1,4 +1,3 @@
-import re
-str1 = "".join(re.findall(r"[a-zA-Z]", input()))
-str2 = input()
-print(int(str2 in str1))
+s = input()
+for d in '0123456789': s = s.replace(d, '')
+print(int(input() in s))
