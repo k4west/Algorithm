@@ -1,0 +1,1 @@
+print(abs(eval("-".join(input().split()))))
