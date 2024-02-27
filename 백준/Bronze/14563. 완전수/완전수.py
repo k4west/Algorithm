@@ -1,4 +1,4 @@
-def Aliquot_sum(n):
+def f(n):
     s = 0
     for i in range(1, int(n**.5)+1):
         if n % i == 0: 
@@ -8,6 +8,6 @@ def Aliquot_sum(n):
 ans = []
 input()
 for n in map(int, input().split()):
-    if n in (6,28,496,8128): ans.append("Perfect")
-    else: ans.append(Aliquot_sum(n))
+    if n in {6,28,496,8128}: ans.append("Perfect")
+    else: ans.append(f(n))
 print("\n".join(ans))
