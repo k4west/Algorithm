@@ -4,10 +4,8 @@ def f(n):
         if n % i == 0: 
             s += i
             if i != (j:=n//i): s += j
+    if 2*n == s:
+        return 'Perfect'
     return ('Deficient', 'Abundant')[2*n < s]
-ans = []
 input()
-for n in map(int, input().split()):
-    if n in {6,28,496,8128}: ans.append("Perfect")
-    else: ans.append(f(n))
-print("\n".join(ans))
+print("\n".join((f(n) for n in map(int, input().split()))))
