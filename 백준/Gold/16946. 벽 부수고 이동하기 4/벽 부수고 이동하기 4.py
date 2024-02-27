@@ -33,8 +33,7 @@ def main():
                 for n in tmp: count += groups[n]
                 ans.append(count % 10)
             else: ans.append("0")
-    ans = "".join(map(str, ans))
-    print("\n".join((ans[i * M : (i + 1) * M] for i in range(N))))
+    print("\n".join(("".join(map(str, ans[i * M : (i + 1) * M])) for i in range(N))))
 
 if __name__ == "__main__":
     main()
