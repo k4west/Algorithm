@@ -1,5 +1,3 @@
-import sys
-input = sys.stdin.readline
 def Aliquot_sum(n):
     s = 0
     for i in range(1, int(n**.5)+1):
