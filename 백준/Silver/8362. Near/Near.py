@@ -7,15 +7,20 @@ def main():
     def sol(arr1, arr2):
         arr1 = list(arr1)
         arr1.sort()
+        R = len(arr1) - 1
         m_dist = 100_000_000
         for a in arr2:
-            l, r = 0, len(arr1) - 1
+            l, r = 0, R
             while l <= r:
                 m = (l + r) // 2
-                dist = abs(arr1[m] - a)
-                m_dist = min(m_dist, dist)
-                if arr1[m] < a: l = m + 1
-                elif arr1[m] > a: r = m - 1
+                if (t:= arr1[m]) < a: 
+                    l = m + 1
+                    dist = a - t
+                    if m_dist > dist: m_dist = dist
+                elif t > a: 
+                    r = m - 1
+                    dist = t - a
+                    if m_dist > dist: m_dist = dist
                 else: return 0
         return m_dist
 
