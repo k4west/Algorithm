@@ -5,4 +5,4 @@ while True:
     if a==0:break
     if a<b:a,b=b,a
     if c<d:c,d=d,c
-    print(f'{min(100,max(1,min(c*100//a,d*100//b)))}%')
+    print(f'{min(c*100//a,d*100//b,100)}%')
