@@ -5,10 +5,8 @@ def main():
     input()
 
     def sol(arr1, arr2):
-        if arr1 & arr2:
-            return 0
-        arr1 = list(arr1)
-        arr1.sort()
+        if arr1 & arr2: return 0
+        arr1 = sorted(arr1)
         R = len(arr1) - 1
         m_dist = 100_000_000
         for a in arr2:
