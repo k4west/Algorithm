@@ -1,0 +1,1 @@
+print("\n".join(map(str, [n*(n+1)//2 for n in map(int, open(0))][:-1])))
