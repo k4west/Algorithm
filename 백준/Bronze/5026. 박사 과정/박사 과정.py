@@ -1,1 +1,1 @@
-print("\n".join(map(str, [eval(s) if ord(s[0]) in range(48, 58) else 'skipped' for s in open(0)][1:])))
+print("\n".join(map(str, [eval(s) if ord(s[0]) != 80 else 'skipped' for s in open(0)][1:])))
