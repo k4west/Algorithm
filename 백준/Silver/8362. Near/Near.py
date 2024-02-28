@@ -5,6 +5,8 @@ def main():
     input()
 
     def sol(arr1, arr2):
+        if arr1 & arr2:
+            return 0
         arr1 = list(arr1)
         arr1.sort()
         R = len(arr1) - 1
@@ -21,7 +23,6 @@ def main():
                     r = m - 1
                     dist = t - a
                     if m_dist > dist: m_dist = dist
-                else: return 0
         return m_dist
 
     print(sol(input(), input()))
