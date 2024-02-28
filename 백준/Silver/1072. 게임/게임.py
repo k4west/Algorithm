@@ -1,7 +1,10 @@
 import sys
-X, Y = map(int, sys.stdin.readline().split())
-if (Z := (Y * 100) // X) >= 99: print(-1)
+X,Y=map(int, sys.stdin.readline().split())
+if(Z:=(Y*100)//X)>=99:print(-1)
 else:
-    i = (X * (Z + 1) - 100 * Y) // (99 - Z)
-    if ((Y + i) * 100) // (X + i) > Z: print(i)
-    else: print(i + 1)
+    l,r=1,1000000000
+    while l<=r:
+        m=(l+r)//2
+        if(Y+m)*100//(X+m)>Z:r=m-1
+        else:l=m+1
+    print(l)
