@@ -1,25 +1,25 @@
 import sys
 
-input = lambda: map(int, sys.stdin.readline().split())
-input()
-trees = list(set(input()))
-apples = set(input())
+def main():
+    input = lambda: set(map(int, sys.stdin.readline().split()))
+    input()
 
-trees.sort()
-m_dist = float("inf")
+    def sol(arr1, arr2):
+        arr1 = list(arr1)
+        arr1.sort()
+        m_dist = 100_000_000
+        for a in arr2:
+            l, r = 0, len(arr1) - 1
+            while l <= r:
+                m = (l + r) // 2
+                dist = abs(arr1[m] - a)
+                m_dist = min(m_dist, dist)
+                if arr1[m] < a: l = m + 1
+                elif arr1[m] > a: r = m - 1
+                else: return 0
+        return m_dist
 
-for num in apples:
-    left, right = 0, len(trees) - 1
-    while left <= right:
-        mid = (left + right) // 2
-        dist = abs(trees[mid] - num)
-        m_dist = min(m_dist, dist)
-        if trees[mid] < num:
-            left = mid + 1
-        elif trees[mid] > num:
-            right = mid - 1
-        else:
-            break
-    if m_dist == 0:
-        break
-print(m_dist)
+    print(sol(input(), input()))
+
+if __name__ == "__main__":
+    main()
