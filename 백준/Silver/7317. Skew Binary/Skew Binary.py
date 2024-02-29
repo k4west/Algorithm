@@ -1,18 +1,12 @@
 import sys
-
-n = 1
-li = [(n := n << 1) - 1 for _ in range(26)]
 input = sys.stdin.readline
+li = [(1 << i) - 1 for i in range(1, 27)]
 for _ in range(int(input())):
-    if d := int(input()):
-        s = d
-        tmp, i = [], 25
-        while d:
-            while d >= li[i]:
-                tmp.append(i)
-                d -= li[i]
-            i -= 1
-
-        print(f"{s} {tmp[::-1]}".replace(", ", ","))
-    else:
-        print("0 []")
+    d = t = int(input())
+    tmp = []
+    for i in range(25, -1, -1):
+        while t >= li[i]:
+            tmp.append(i)
+            t -= li[i]
+    tmp = ",".join(map(str, tmp[::-1]))
+    print(f"{d} [{tmp}]")
