@@ -2,9 +2,9 @@ import sys
 input = sys.stdin.readline
 print = sys.stdout.write
 def p(i, n):
-    while n >= 3000:
-        print(f"{i}\n" * 3000)
-        n -= 3000
+    while n >= 5000:
+        print(f"{i}\n" * 5000)
+        n -= 5000
     if n: print(f"{i}\n" * n)
 def main():
     N = int(input())
