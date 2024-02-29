@@ -1,14 +1,10 @@
 import sys
-N = int(sys.stdin.readline())
+input = sys.stdin.readline
+N = int(input())
 s = {}
 for i in range(N):
-    n = sys.stdin.readline().rstrip()
+    if (n:= input().rstrip()) in s: s[n] += 1
+    else: s[n] = 1
+for n in map(str, range(1, 10001)):
     if n in s:
-        s[n] += 1
-    else: 
-        s[n] = 1
-for n in range(1, 10001):
-    n = str(n)
-    if n in s:
-        for _ in range(s[n]):
-            sys.stdout.write(n+"\n")
+        for _ in range(s[n]): sys.stdout.write(n+"\n")
