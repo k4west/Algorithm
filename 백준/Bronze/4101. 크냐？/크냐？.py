@@ -1,0 +1,1 @@
+while (s := input())[0] != "0": print(("No", "Yes")[eval(s.replace(" ", ">"))])
