@@ -1,10 +1,6 @@
-import sys
-N, L, W, H = map(int, sys.stdin.readline().split())
-left, right = 0, (L * W * H / N) ** (1 / 3)
+N,L,W,H=map(int,input().split())
+l,r=0,(L*W*H/N)**(1/3)
 for _ in range(40):
-    mid = (left + right) / 2
-    if (L // mid) * (W // mid) * (H // mid) < N:
-        right = mid
-    else:
-        left = mid
-print(f"{left:.9f}")
+    if(L//(m:=(l+r)/2))*(W//m)*(H//m)<N:r=m
+    else:l=m
+print(f"{l:.9f}")
