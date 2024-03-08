@@ -8,4 +8,4 @@ for i in range(int(input())):
         if (org := prices[j] * 4 // 3) in prices:
             discounted.append(prices[j])
             prices.remove(org)
-    print(f"Case #{i+1}: {' '.join(map(str, discounted))}")
+    print(f"Case #{i+1}:", *discounted)
