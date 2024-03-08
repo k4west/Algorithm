@@ -1,8 +1,10 @@
 import sys
-T = int(sys.stdin.readline())
+input = sys.stdin.readline
+T = int(input())
 for _ in range(T):
-    i = int(sys.stdin.readline())
-    for c in [25, 10, 5, 1]:
-        print(i//c, end=" ")
+    tmp = []
+    i = int(input())
+    for c in (25, 10, 5, 1):
+        tmp.append(i//c)
         i %= c
-    print()
+    print(" ".join(map(str, tmp)))
