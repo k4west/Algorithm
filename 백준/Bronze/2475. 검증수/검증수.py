@@ -1,2 +1,1 @@
-import sys
-print(sum(map(lambda x:int(x)*int(x), sys.stdin.readline().strip().split()))%10)
+print(sum(map(lambda x:int(x)**2, open(0).read().split()))%10)
