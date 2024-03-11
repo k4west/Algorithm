@@ -1,1 +1,1 @@
-print(sum(map(lambda x:int(x)**2, open(0).read().split()))%10)
+print(sum(int(i)**2 for i in input().split())%10)
