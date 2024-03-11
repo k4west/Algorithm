@@ -1,7 +1,7 @@
-from heapq import heappop, heappush
+from heapq import heappop, heappush, heapify
 def solution(scoville, K):
     answer = 0
-    scoville.sort()
+    heapify(scoville)
     while (a:=heappop(scoville)) < K:
         if scoville:
             heappush(scoville, a + heappop(scoville)*2)
