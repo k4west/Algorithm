@@ -1,16 +1,13 @@
-from itertools import combinations
 def main():
-    N = int(input())
+    if (N:= int(input())) == 0:
+        return 'NO'
     factorials = [1]
-    i = 1
-    while (t:=factorials[-1]*i) < N:
-        factorials.append(t)
-        i += 1
-    if factorials[-1]*i == N:
-        return 'YES'
-    for i in range(1, len(factorials)+1):
-        for cb in combinations(factorials, i):
-            if sum(cb) == N:
-                return 'YES'
-    return 'NO'
+    for i in range(1, 21):
+        factorials.append(factorials[-1]*i)
+    for i in factorials[::-1]:
+        if N >= i:
+            N -= i
+    if N: return 'NO'
+    return 'YES'
+    
 print(main())
