@@ -14,11 +14,11 @@ def finite_decimal_number(z, b):
         while z % p == 0: z //= p
     return z == 1
 def cal_period(x, y, b):
-    d, idx = {x: 0}, 1
+    d, idx = [0]*y, 1
     current = x * b
     while True:
         current %= y
-        if current in d: return idx - d[current]
+        if d[current]: return idx - d[current]
         d[current] = idx
         idx += 1
         current *= b
