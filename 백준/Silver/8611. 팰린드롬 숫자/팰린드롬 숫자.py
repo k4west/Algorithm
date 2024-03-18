@@ -5,15 +5,11 @@ def is_palindrome(n):
 
 
 def b_format(n, b):
-    m = 1
-    nb = []
-    while True:
-        nb.append(n % (m * b) // m)
-        n -= nb[-1] * m
-        m *= b
-        if n < m:
-            break
-    return "".join(map(str, nb))[::-1]
+    nb = ""
+    while n:
+        n, m = n // b, n % b
+        nb += str(m)
+    return "".join(nb)[::-1]
 
 
 n = int(input())
@@ -21,7 +17,7 @@ ans = []
 for b in range(2, 11):
     nb = b_format(n, b)
     if is_palindrome(nb):
-        ans.append(str(b) + " " + nb)
+        ans.append(" ".join((str(b), nb)))
 if ans:
     print("\n".join(ans))
 else:
