@@ -1,9 +1,7 @@
 def is_palindrome(n):
-    m = len(n)
-    for i in range(m // 2):
-        if n[i] != n[-i - 1]:
-            return False
-    return True
+    if len(n) < 2 or n == n[::-1]:
+        return True
+    return False
 
 
 def b_format(n, b):
