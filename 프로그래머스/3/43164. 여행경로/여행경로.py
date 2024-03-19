@@ -1,4 +1,3 @@
-from collections import deque
 def solution(tickets):
     n = len(tickets)
     ticket_dict = {}
