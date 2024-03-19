@@ -1,10 +1,10 @@
 import sys
 def main():
-    a, *arr, = map(int, sys.stdin.readline().split())
-    for b in arr:
-        if a > b:
+    a = -1000000
+    for i in map(int, sys.stdin.readline().split()):
+        if a > i:
             print('Bad')
             return
-        a = b
+        a = i
     print('Good')
-main()
+sys.exit(main())
