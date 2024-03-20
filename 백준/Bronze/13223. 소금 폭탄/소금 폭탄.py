@@ -1,4 +1,9 @@
-now = sum(a*b for a, b in zip(map(int, input().split(':')), (3600, 60, 1)))
-target = sum(a*b for a, b in zip(map(int, input().split(':')), (3600, 60, 1)))
-time = (target - now) % 86400
-print(':'.join(map(lambda x: str(x).zfill(2), (time//3600, (time:=time%3600)//60, time%60))) if time else '24:00:00')
+def time2sec(h, m, s):
+    return h*3600 + m*60 + s
+now = time2sec(*map(int, input().split(':')))
+time = time2sec(*map(int, input().split(':')))
+time -= now
+if time <= 0:
+    time += 86400
+h, m, s = time//3600, (time:=time%3600)//60, time%60
+print(f'{h:02d}:{m:02d}:{s:02d}')
