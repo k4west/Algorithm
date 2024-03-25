@@ -1,6 +1,8 @@
+import sys
 def main():
+    input = sys.stdin.readline
     N = int(input())
-    s = input()
+    s = input().rstrip()
     d = {chr(i): 0 for i in range(97, 123)}
     if N % 2:
         d[s[N // 2]] -= 1
