@@ -2,8 +2,13 @@ import sys
 
 
 def check(board):
-    for t in row_col_diag(board):
-        for line in t:
+    a, b, c = [
+        board,
+        zip(*board),
+        [[board[i][i] for i in range(4)], [board[i][3 - i] for i in range(4)]],
+    ]
+    for d in (a, b, c):
+        for line in d:
             counts = [0, 0]
             for mark in line:
                 if mark == "T":
@@ -21,15 +26,6 @@ def check(board):
         if "." in line:
             return 3
     return 2
-
-
-def row_col_diag(board):
-    for t in [
-        board,
-        zip(*board),
-        [[board[i][i] for i in range(4)], [board[i][3 - i] for i in range(4)]],
-    ]:
-        yield t
 
 
 results = ["X won", "O won", "Draw", "Game has not completed"]
