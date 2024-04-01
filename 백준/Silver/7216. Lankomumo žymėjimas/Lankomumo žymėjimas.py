@@ -1,3 +1,2 @@
-N, k = map(int, input().split())
-(*arr,) = map(int, input().split())
-print(arr.index(k) + 1)
+N,k,*a=map(int,(input()+' '+input()).split())
+print(a.index(k)+1)
