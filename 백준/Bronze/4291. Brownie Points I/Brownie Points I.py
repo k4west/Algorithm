@@ -1,5 +1,4 @@
 import sys
-
 input = sys.stdin.readline
 ans = []
 while n := int(input()):
@@ -8,9 +7,7 @@ while n := int(input()):
     s = [0, 0]
     for x, y in li:
         t = (x - x0) * (y - y0)
-        if t > 0:
-            s[0] += 1
-        elif t < 0:
-            s[1] += 1
-    ans.append(" ".join(map(str, s)))
-print("\n".join(ans))
+        if t > 0: s[0] += 1
+        elif t < 0: s[1] += 1
+    ans.append(s)
+print("\n".join(map(lambda x: " ".join(map(str, x)), ans)))
