@@ -7,11 +7,10 @@ while n := int(input()):
     x0, y0 = li[n // 2]
     s = [0, 0]
     for x, y in li:
-        if x == x0 or y == y0:
-            continue
-        if (x > x0 and y > y0) or (x < x0 and y < y0):
+        t = (x - x0) * (y - y0)
+        if t > 0:
             s[0] += 1
-        else:
+        elif t < 0:
             s[1] += 1
     ans.append(" ".join(map(str, s)))
 print("\n".join(ans))
