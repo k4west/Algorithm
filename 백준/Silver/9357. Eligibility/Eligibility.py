@@ -1,10 +1,9 @@
-import sys
-input = sys.stdin.readline
+a = open(0)
 def main():
-    for t in range(int(input())):
+    for t in range(int(next(a))):
         d = {}
-        for _ in range(int(input())):
-            name_year = input().rstrip()
+        for _ in range(int(next(a))):
+            name_year = next(a).rstrip()
             name = name_year[:-5]
             year = name_year[-4:]
             if name in d: d[name].add(year)
