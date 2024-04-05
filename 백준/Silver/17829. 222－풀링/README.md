@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 123716 KB, 시간: 328 ms
+메모리: 123572 KB, 시간: 308 ms
 
 ### 분류
 
@@ -12,7 +12,7 @@
 
 ### 제출 일자
 
-2024년 4월 5일 11:45:28
+2024년 4월 5일 17:53:07
 
 ### 문제 설명
 
@@ -24,12 +24,12 @@
 	<li>
 	<p>행렬을 2×2 정사각형으로 나눈다.</p>
 
-	<p><img alt="" src="https://upload.acmicpc.net/61c48878-d2bb-4680-a7d3-8f9922f3c30f/-/preview/" style="width: 350px; height: 350px;"></p>
+	<p><img alt="" src="" style="width: 350px; height: 350px;"></p>
 	</li>
 	<li>
 	<p>각 정사각형에서 2번째로 큰 수만 남긴다. 여기서 2번째로 큰 수란, 정사각형의 네 원소를 크기순으로 a<sub>4 </sub>≤<sub> </sub>a<sub>3 </sub>≤ a<sub>2 </sub>≤<sub> </sub>a<sub>1</sub> 라 했을 때, 원소 a<sub>2</sub>를 뜻한다.</p>
 
-	<p><img alt="" src="https://upload.acmicpc.net/c2d98fd8-f0dd-4ab4-8fe7-f360e74fa86e/-/preview/" style="height: 350px; width: 676px;"></p>
+	<p><img alt="" src="" style="height: 350px; width: 676px;"></p>
 	</li>
 	<li>
 	<p>2번 과정에 의해 행렬의 크기가 줄어들게 된다.</p>
