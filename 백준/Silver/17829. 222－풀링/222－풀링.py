@@ -2,11 +2,15 @@ import sys
 
 
 def pooling(board, n):
-    tmp = []
+    new = []
     for i in range(n):
         a, b = 2 * i, 2 * i + 1
-        tmp.append([sorted(board[a][2 * j : 2 * (j + 1)] + board[b][2 * j : 2 * (j + 1)])[2] for j in range(n)])
-    return tmp
+        tmp = []
+        for j in range(n):
+            t = sorted(board[a][2 * j : 2 * (j + 1)] + board[b][2 * j : 2 * (j + 1)])[2] 
+            tmp.append(t)
+        new.append(tmp)
+    return new
 
 
 input = sys.stdin.readline
