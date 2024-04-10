@@ -1,6 +1,5 @@
-int(input())
-ss = input().replace("?", ".").replace("!", ".").split(".")
-for s in ss:
+input()
+for s in input().replace("?", ".").replace("!", ".").split("."):
     if s:
         s = s.replace(".", "")
         cnt = 0
