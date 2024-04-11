@@ -14,15 +14,17 @@ def main():
             A[a] += q
             S[b] += q
             A[b] += p
-        W = [s ** 2 / (s ** 2 + a ** 2) if s + a != 0 else 0 for s, a in zip(S[1:], A[1:])]
-        ma, mi = 0, 1
-        for w in W:
-            if ma < w:
-                ma = w
-            if mi > w:
-                mi = w
-        ans.append(int(1000 * ma))
-        ans.append(int(1000 * mi))
+        ma, mi = 0, 1000
+        for s, a in zip(S[1:], A[1:]):
+            if s + a != 0:
+                if ma < (w := 1000 * s**2 // (s**2 + a**2)):
+                    ma = w
+                if mi > w:
+                    mi = w
+            else:
+                mi = 0
+        ans.append(ma)
+        ans.append(mi)
     print(*ans, sep="\n")
 
 
