@@ -10,7 +10,9 @@ def main():
         c = [0] * 10
         for i in a:
             for j in b:
-                for k in map(int, str(i * j)):
-                    c[k] += 1
+                k = i*j
+                while k:
+                    c[k%10] += 1
+                    k //= 10
         print(*c, sep=' ')
 main()
