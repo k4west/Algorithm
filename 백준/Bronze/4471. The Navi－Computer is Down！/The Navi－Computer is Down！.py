@@ -1,5 +1,4 @@
 import sys
-
 def main():
     input = sys.stdin.readline
     ans = []
@@ -13,5 +12,4 @@ def main():
             d += 0.01
         ans.append(f"{dep} to {arr}: {d:0.2f}")
     print("\n".join(ans))
-
 main()
