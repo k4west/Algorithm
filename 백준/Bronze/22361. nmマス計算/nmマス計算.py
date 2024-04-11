@@ -1,7 +1,6 @@
 import sys
 def main():
     input = sys.stdin.readline
-    ans = []
     while True:
         n, m = map(int, input().split())
         if n == 0:
@@ -13,6 +12,5 @@ def main():
             for j in b:
                 for k in map(int, str(i * j)):
                     c[k] += 1
-        ans.append(" ".join(map(str, c)))
-    print("\n".join(ans))
+        print(*c, sep=' ')
 main()
