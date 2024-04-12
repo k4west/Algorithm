@@ -17,6 +17,6 @@ def main():
                     s //= t
             d[n] = cnt
         ans.append(cnt)
-    print(*ans, sep="\n")
+    print("\n".join(map(str, ans)))
 
 main()
