@@ -3,10 +3,8 @@ import sys
 def main():
     ans = []
     d = {}
-    input = sys.stdin.readline
-    for _ in range(int(input())):
-        n = int(input())
-        if n in d:
+    for n in sys.stdin.readlines()[1:]:
+        if (n:=int(n)) in d:
             cnt = d[n]
         else:
             cnt = 0
@@ -19,4 +17,5 @@ def main():
         ans.append(cnt)
     print("\n".join(map(str, ans)))
 
-main()
+if __name__ == "__main__":
+    main()
