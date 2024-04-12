@@ -9,7 +9,10 @@ def main():
         p, q = map(int, score.split("/"))
         d[assign][0] += p
         d[assign][1] += q
-    print(int(sum(pp * p / q for pp, (p, q) in zip(per, d.values()))))
+    s = 0
+    for pp, (p, q) in zip(per, d.values()):
+        s += pp * p / q
+    print(int(s))
 
 if __name__ == "__main__":
     main()
