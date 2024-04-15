@@ -16,6 +16,6 @@ def check():
     return '0'
 
 def main():
-    print("\n".join([check() for _ in range(int(input()))]))
+    print(*[check() for _ in range(int(input()))], sep="\n")
 
 main()
