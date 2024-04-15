@@ -1,9 +1,11 @@
 import sys
 
 def main():
-    arr = sorted(map(int, sys.stdin.readlines()[1:]))
+    input = sys.stdin.readline
+    n = int(input())
+    arr = sorted([int(input()) for _ in range(n)])
     s = sum(arr)
-    for i in range(len(arr) // 2):
+    for i in range(n//2):
         s += arr[-i-1] - arr[i]
     print(s)
 
