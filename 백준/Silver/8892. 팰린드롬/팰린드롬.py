@@ -6,14 +6,7 @@ def palindrome(s):
     for i in range(n//2):
         if s[i] != s[-i-1]:
             return False
-    return True
-
-def check(a, b):
-    if palindrome(a+b):
-        return a+b
-    elif palindrome(b+a):
-        return b+a
-    return False
+    return s
 
 def main():
     ans = []
@@ -25,7 +18,7 @@ def main():
             a = words[i]
             for j in range(i+1, k):
                 b = words[j]
-                if tmp:= check(a, b):
+                if tmp:= palindrome(a+b) or palindrome(b+a):
                     break
             if tmp:
                 ans.append(tmp)
