@@ -6,17 +6,13 @@ f=0
 for i in range(n):
     for j in range(n):
         if b[i+n][j]=='x':
-            if b[i][j]=='*':
-                f=1
-            cnt=0
+            if b[i][j]=='*':f=1
+            c=0
             for di,dj in d:
-                if 0<=(ni:=i+di)<n and 0<=(nj:=j+dj)<n and b[ni][nj]=='*':
-                    cnt += 1
-            b[i+n][j]=str(cnt)
+                if 0<=(ni:=i+di)<n and 0<=(nj:=j+dj)<n and b[ni][nj]=='*':c += 1
+            b[i+n][j]=str(c)
 if f:
     for i in range(n):
         for j in range(n):
-            if b[i][j]=='*':
-                b[i+n][j]='*'
-for l in b[n:]:
-    print("".join(l))
+            if b[i][j]=='*':b[i+n][j]='*'
+for l in b[n:]:print("".join(l))
