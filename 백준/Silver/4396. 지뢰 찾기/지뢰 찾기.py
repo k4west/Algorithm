@@ -10,11 +10,8 @@ for i in range(n):
                 f=1
             cnt=0
             for di,dj in d:
-                ni=i+di
-                nj=j+dj
-                if 0<=ni<n and 0<=nj<n:
-                    if b[ni][nj]=='*':
-                        cnt += 1
+                if 0<=(ni:=i+di)<n and 0<=(nj:=j+dj)<n and b[ni][nj]=='*':
+                    cnt += 1
             b[i+n][j]=str(cnt)
 if f:
     for i in range(n):
