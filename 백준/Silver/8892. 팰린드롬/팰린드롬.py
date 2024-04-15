@@ -1,27 +1,26 @@
 import sys
 input = sys.stdin.readline
 
-def palindrome(s):
-    if s == s[::-1]:
-        return s
-    return False
-
 def main():
     ans = []
     for _ in range(int(input())):
         k = int(input())
         words = [input().rstrip() for _ in range(k)]
-        tmp = False
-        for i in range(k-1):
+        flag = False
+        for i in range(k):
             a = words[i]
-            for j in range(i+1, k):
+            for j in range(k):
+                if i == j:
+                    continue
                 b = words[j]
-                if tmp:= palindrome(a+b) or palindrome(b+a):
+                s = a+b
+                if s == s[::-1]:
+                    ans.append(s)
+                    flag = True
                     break
-            if tmp:
-                ans.append(tmp)
+            if flag:
                 break
-        if not tmp:
+        if not flag:
             ans.append('0')
     print("\n".join(ans))
 
