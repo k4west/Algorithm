@@ -1,16 +1,16 @@
+import sys
+input = sys.stdin.readline
+
 def palindrome(s):
-    n = len(s)
-    for i in range(n//2):
-        if s[i] != s[-i-1]:
-            return False
-    return s
+    if s == s[::-1]:
+        return s
+    return False
 
 def main():
     ans = []
-    o = open(0)
-    for _ in range(int(next(o))):
-        k = int(next(o))
-        words = [next(o).rstrip() for _ in range(k)]
+    for _ in range(int(input())):
+        k = int(input())
+        words = [input().rstrip() for _ in range(k)]
         tmp = False
         for i in range(k-1):
             a = words[i]
