@@ -13,9 +13,10 @@ def check():
             s = a+b
             if s == s[::-1]:
                 return s
-    return '0'
+    return 0
 
 def main():
-    print(*[check() for _ in range(int(input()))], sep="\n")
+    for _ in range(int(input())):
+        print(check())
 
 main()
