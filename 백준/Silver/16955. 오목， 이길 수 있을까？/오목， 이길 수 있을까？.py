@@ -18,6 +18,7 @@ def main():
                             break
                         ti, tj = ni, nj
                     if cnt == 5 or (flag and cnt == 4 and 0<=(ni:=i-di)<10 and 0<=(nj:=j-dj)<10 and board[ni][nj]=='.'):
-                        return 1
-    return 0
-print(main())
+                        print(1)
+                        exit(0)
+    print(0)
+main()
