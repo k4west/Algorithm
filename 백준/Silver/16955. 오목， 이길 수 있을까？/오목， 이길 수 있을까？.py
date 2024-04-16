@@ -1,11 +1,10 @@
 def main():
-    dx = (-1, -1, -1, 0, 0, 1, 1, 1)
-    dy = (-1, 0, 1, -1, 1, -1, 0, 1)
+    d = ((-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1))
     board = [s for s in open(0)]
     for i in range(10):
         for j in range(10):
             if board[i][j] == "X":
-                for di, dj in zip(dx, dy):
+                for di, dj in d:
                     cnt = 1
                     flag = True
                     ti, tj = i, j
