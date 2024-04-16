@@ -2,16 +2,18 @@ def main():
     ans = []
     for i, s in enumerate(open(0)):
         cnt = 0
-        d = [0, 0]
+        d = 0
         for b in s.rstrip():
-            j = 0
             if b == "}":
-                if d[0] == d[1]:
+                if d <= 0:
                     cnt += 1
+                    d += 1
                 else:
-                    j += 1
-            d[j] += 1
-        cnt += abs(d[0] - d[1]) // 2
+                    d -= 1
+            else:
+                d += 1
+        cnt += abs(d) // 2
         ans.append(f"{i+1}. {cnt}")
+        i += 1
     print("\n".join(ans[:-1]))
 main()
