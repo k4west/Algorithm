@@ -2,7 +2,6 @@ import sys
 
 def main():
     n, *li = sys.stdin.readlines()
-    ans = []
     for i in range(int(n)):
         maps = [list(map(int, line.rstrip().split())) for line in li[i*6:(i+1)*6]]
         m = 0
@@ -13,6 +12,5 @@ def main():
                         if all(maps[p][q] for p in range(j, j+s) for q in range(k, k+t)):
                             if m < s*t:
                                 m = s*t
-        ans.append(m)
-    print("\n".join(map(str, ans)))
+        print(m)
 main()
