@@ -1,6 +1,3 @@
-import sys
-
-input = sys.stdin.readline
 ans = []
 for i in range(int(input())):
     L, n = map(int, input().split())
@@ -11,4 +8,4 @@ for i in range(int(input())):
         m += 1
 
     ans.append(f"Data Set {i+1}:\n{m}\n")
-print("\n".join(ans))
+print(*ans, sep="\n")
