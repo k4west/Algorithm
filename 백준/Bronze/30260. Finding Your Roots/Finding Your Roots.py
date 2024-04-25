@@ -11,4 +11,4 @@ for i in range(int(input())):
         m += 1
 
     ans.append(f"Data Set {i+1}:\n{m}\n")
-print(*ans, sep="\n")
+print("\n".join(ans))
