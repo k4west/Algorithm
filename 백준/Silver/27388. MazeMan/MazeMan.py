@@ -1,6 +1,6 @@
 import sys
 
-d = ((-1, 0), (0, 1), (1, 0), (0, -1))
+d = ((0, 1), (1, 0), (0, -1), (-1, 0))
 def f(i, j):
     q = [(i, j)]
     flag = False
@@ -15,32 +15,20 @@ def f(i, j):
     return flag
 
 def main():
-    h = d = 0
-    for i in range(m):
-        if graph[0][i] != 'X':
-            if f(0, i):
-                h += 1
+    i = s = t = 0
+    j = -1
+    for di, dj in d:
+        while 0 <= (ni:=i+di) < n and 0 <= (nj:=j+dj) < m:
+            i, j = ni, nj
+            if graph[ni][nj] != 'X':
+                if f(ni, nj):
+                    s += 1
 
-    for i in range(1, n):
-        if graph[i][-1] != 'X':
-            if f(i, m-1):
-                h += 1
-
-    for i in range(2, m+1):
-        if graph[-1][-i] != 'X':
-            if f(n-1, m-i):
-                h += 1
-    
-    for i in range(2, n):
-        if graph[-i][0] != 'X':
-            if f(n-i, 0):
-                h += 1
-    
     for i in range(n):
         for j in range(m):
             if graph[i][j] == '.':
-                d += 1
-    print(h, d)
+                t += 1
+    print(s, t)
 
 
 if __name__ == "__main__":
