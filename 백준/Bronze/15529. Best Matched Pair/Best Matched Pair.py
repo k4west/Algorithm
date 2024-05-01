@@ -1,8 +1,7 @@
-import sys
-input = sys.stdin.readline
 def main():
-    n = int(input())
-    arr = sorted(map(int, input().split()), reverse=True)
+    a = open(0)
+    n = int(next(a))
+    arr = sorted(map(int, next(a).split()), reverse=True)
     m = -1
     for i in range(n-1):
         a = arr[i]
