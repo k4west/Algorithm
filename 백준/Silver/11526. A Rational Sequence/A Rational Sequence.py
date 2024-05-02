@@ -14,10 +14,10 @@ for _ in range(int(next(a))):
             r.append(True)
         line += 1
     j = 1
-    for _ in range(p-1):
-        r.append(True)
-    for _ in range(q-1):
-        r.append(False)
+    if p-1:
+        r += [True]*(p-1)
+    if q-1:
+        r += [False]*(q-1)
     for t in r[::-1]:
         j *= 2
         if not t:
