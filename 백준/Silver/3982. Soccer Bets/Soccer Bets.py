@@ -7,6 +7,7 @@ for _ in range(int(next(a))):
             t1, t2 = t2, t1
         if not t1 in d:
             c.add(t1)
-        c.discard(t2)
+        if t2 in c:
+            c.remove(t2)
         d.add(t2)
     print(*c)
