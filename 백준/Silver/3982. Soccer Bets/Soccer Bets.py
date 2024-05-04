@@ -1,5 +1,4 @@
 a = open(0)
-ans = []
 for _ in range(int(next(a))):
     candi = set()
     dump = set()
@@ -15,5 +14,4 @@ for _ in range(int(next(a))):
                 candi.add(t2)
             candi.discard(t1)
             dump.add(t1)
-    ans.append(*candi)
-print("\n".join(ans))
+    print(*candi)
