@@ -3,8 +3,7 @@ rn = bytearray(m)
 rn[r] = 1
 a, c = a%m, c%m
 while not rn[r:=(a*r+c)%m]: rn[r] = 1
-k = 0
-prev = m
+k, prev = 0, m
 for i in range(m):
     if rn[i]:
         if k < (t:=i-prev): k = t
