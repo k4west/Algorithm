@@ -1,0 +1,1 @@
+print('\n'.join([f'Case {i}: Sorting... done!' for i in range(1, len(open(0).readlines()))]))
