@@ -1,1 +1,2 @@
-print('\n'.join([f'Case {i}: Sorting... done!' for i in range(1, len(open(0).readlines()))]))
+i=1
+for _ in [*open(0)][1:]: print(f'Case {i}: Sorting... done!');i+=1
