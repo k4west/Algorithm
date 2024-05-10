@@ -1,0 +1,1 @@
+print('\n'.join([(a:='\n'.join([(t:='@'*(n:=int(input())))*5]*n)), '\n'.join([t+' '*3*n+t]*3*n), a]))
