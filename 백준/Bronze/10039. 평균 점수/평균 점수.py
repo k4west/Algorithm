@@ -1,0 +1,1 @@
+print(sum([s if s > 40 else 40 for s in map(int, open(0).readlines())])//5)
