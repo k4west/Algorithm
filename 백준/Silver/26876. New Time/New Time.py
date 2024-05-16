@@ -1,3 +1,2 @@
-h,m=map(int,input().split(':'))
-H,M=map(int,input().split(':'))
-print((H-h-int(m>M))%24+(M-m)%60)
+a=[r-w for w, r in zip(map(int,input().split(':')), map(int,input().split(':')))]
+print((a[0]-int(a[1]<0))%24+a[1]%60)
