@@ -4,8 +4,9 @@ for i in range(2, int(n**.5)+1):
     if p[i]:
         for j in range(i*i, n+1, i):
             p[j] = False
-ans = []
-for i in map(int, open(0).readlines()[:-1]):
+a=open(0)
+ans=[]
+while (i:=int(next(a))) != -1:
     j = i
     tmp = set()
     for k in range(2, i+1):
