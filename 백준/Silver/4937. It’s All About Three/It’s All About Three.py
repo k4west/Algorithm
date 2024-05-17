@@ -10,10 +10,10 @@ def main():
         j=i
         tmp=[False]*10
         for k in range(2, i+1):
-            if p[k]:
+            if p[k] and j%k==0:
                 while j%k==0:
                     j//=k
-                    tmp[k%10]=True
+                tmp[k%10]=True
             if j==1:break
         if [i for i in range(10) if tmp[i]] == [3]:ans.append(f'{i} YES')
         else:ans.append(f'{i} NO')
