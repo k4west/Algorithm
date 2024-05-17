@@ -8,14 +8,14 @@ def main():
     ans=[]
     while (i:=int(next(a))) != -1:
         j=i
-        tmp=set()
+        tmp=[False]*10
         for k in range(2, i+1):
             if p[k]:
                 while j%k==0:
                     j//=k
-                    tmp.add(k%10)
+                    tmp[k%10]=True
             if j==1:break
-        if tmp=={3}:ans.append(f'{i} YES')
+        if [i for i in range(10) if tmp[i]] == [3]:ans.append(f'{i} YES')
         else:ans.append(f'{i} NO')
     print('\n'.join(ans))
 main()
