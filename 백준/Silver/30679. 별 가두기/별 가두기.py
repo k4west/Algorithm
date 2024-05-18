@@ -7,12 +7,12 @@ def main():
     h=[]
     for r in range(n-1):
         i,j,c=r,0,0
-        v={(i,j,c)}
+        v={401*(i+1)+4*(j+1)+c}
         while 0<=i<n and 0<=j<m:
             k,e=g[i][j],d[c]
             i+=k*e[0]
             j+=k*e[1]
-            if (t:=(i,j,c)) in v:h.append(r+1);break
+            if (t:=401*(i+1)+4*(j+1)+c) in v:h.append(r+1);break
             else:v.add(t)
             c=(c+1)%4
     print(len(h))
