@@ -1,16 +1,8 @@
 def main():
-    u=open(0)
-    f=lambda:map(int,next(u).split())
-    n,m=f()
-    a=f()
-    b=f()
-    q=[]
-    p=next(a)
-    c=[p]
+    u=open(0);f=lambda:map(int,next(u).split());n,m=f();a=f();b=f();q=[];p=next(a);c=[p];r=t=10**9
     for i in a:
         if p<i:p=i
         c.append(p)
-    r=t=10**9
     for h in b:
         s,e=0,n
         while s<e:
