@@ -22,5 +22,5 @@ def main():
         else:r=0
         q.append(r)
         if t>r:t=r
-    print(*q)
+    print(" ".join(map(str, q)))
 main()
