@@ -17,10 +17,7 @@ def main():
             m=(s+e+1)//2
             if h>c[m-1]:s=m
             else:e=m-1
-        if t-1>e:r=e
-        elif t>1:r=t-1
-        else:r=0
-        q.append(r)
+        q.append(r:=max(0,min(t-1,e)))
         if t>r:t=r
     print(" ".join(map(str, q)))
 main()
