@@ -1,11 +1,4 @@
 def main():
-    def bi(E,h):
-        s,e=0,E
-        while s<e:
-            m=(s+e+1)//2
-            if h>c[m-1]:s=m
-            else:e=m-1
-        return e
     u=open(0)
     f=lambda:map(int,next(u).split())
     n,m=f()
@@ -17,12 +10,17 @@ def main():
     for i in a:
         if p<i:p=i
         c.append(p)
-    r=s=10**9
+    r=t=10**9
     for h in b:
-        if s-1>(t:=bi(n,h)):r=t
-        elif s>1:r=s-1
+        s,e=0,n
+        while s<e:
+            m=(s+e+1)//2
+            if h>c[m-1]:s=m
+            else:e=m-1
+        if t-1>e:r=e
+        elif t>1:r=t-1
         else:r=0
         q.append(r)
-        if s>r:s=r
+        if t>r:t=r
     print(*q)
 main()
