@@ -7,8 +7,12 @@ def check(n, b):
         if tmp[i] != tmp[-i-1]:
             return False
     return True
-a,b,k=map(int,input().split())
-s=0
-for i in range(a,b+1):
-    s+=all(check(i,j) for j in range(2,k+1))
-print(s)
+def main():
+    a,b,k=map(int,input().split())
+    s=0
+    for i in range(a,b+1):
+        for j in range(2,k+1):
+            if not check(i,j):break
+        else: s+=1
+    print(s)
+main()
