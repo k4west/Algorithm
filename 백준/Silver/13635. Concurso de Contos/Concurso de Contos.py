@@ -9,5 +9,5 @@ def main():
                 c=j;l+=1
                 if l==L:l=0;t+=1
         T.append(t+1);i+=2
-    print(*T,sep='\n')
+    print('\n'.join(map(str,T)))
 main()
