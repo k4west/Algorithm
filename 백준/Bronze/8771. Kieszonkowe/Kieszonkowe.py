@@ -4,7 +4,7 @@ def main():
         next(a);s=sum(t:=[*map(int,next(a).split())]);m=1
         for i in t:
             m*=i
-            if m>s: T.append('ILOCZYN');break
-        else:T.append(['=','SUMA'][s>m])
+            if m>s:print('ILOCZYN');break
+        else:print('SUMA' if s>m else '=')
     print(*T,sep='\n')
 main()
