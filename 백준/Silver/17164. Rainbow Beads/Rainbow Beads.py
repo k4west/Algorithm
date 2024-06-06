@@ -1,11 +1,8 @@
+s=set('RB')
 def main():
-    input()
-    a=input().replace('V', ' ').split()
-    r=1
-    for i in a:
-        t,m=1,len(i)-1
-        for j in range(m):
-            if i[j]!=i[j+1]:t+=1
-            else:r=max(r,t);t=1
+    n=int(input());a=input();r=t=1
+    for i in range(n-1):
+        if set(a[i:i+2])==s:t+=1
+        else:r=max(r,t);t=1
     print(max(r,t))
 main()
