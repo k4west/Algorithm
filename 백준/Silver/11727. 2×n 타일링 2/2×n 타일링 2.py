@@ -1,5 +1,5 @@
-li = [1, 1]
-n = int(input())
-for _ in range(n-1):
-    li = [li[1],(li[1]+li[0]*2)%10007]
-print(li[1])
+def main():
+    li = [1, 1]
+    for _ in range(int(input())-1):li[0],li[1]=li[1],(li[1]+li[0]*2)%10007
+    print(li[1])
+main()
