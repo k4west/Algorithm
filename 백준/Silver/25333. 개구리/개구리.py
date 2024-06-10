@@ -1,7 +1,3 @@
-a=open(0)
-t=[]
-for _ in range(int(next(a))):
-    A,B,T=map(int,next(a).split())
+for A,B,T in map(lambda x: map(int,x.split()),open(0).readlines()[1:]):
     while B:A,B=B,A%B
-    t.append(T//A)
-print(*t,sep='\n')
+    print(T//A)
