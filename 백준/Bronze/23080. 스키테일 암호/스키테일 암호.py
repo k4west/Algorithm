@@ -1,2 +1,2 @@
-n=int(input())
-print(input()[::n])
+n,s=[*open(0)]
+print(s[::int(n)])
