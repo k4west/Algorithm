@@ -1,2 +1,2 @@
-n,s=[*open(0)]
+n,s=open(0)
 print(s[::int(n)])
