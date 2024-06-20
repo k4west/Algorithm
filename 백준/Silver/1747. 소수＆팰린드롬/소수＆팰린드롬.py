@@ -1,7 +1,4 @@
-def f(s):
-    for i in range(len(s)//2):
-        if s[i]!=s[-i-1]: return False
-    return True
+def f(s): return s==s[::-1]
 
 def g(n,m=1003001):
     primes = [False, False] + [True]*(m-1)
