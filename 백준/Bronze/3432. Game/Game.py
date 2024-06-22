@@ -13,10 +13,8 @@ def main():
         for r in range(3):
             for c in range(3):
                 s = t[r+1][c+1]
-                v = t[r][c]+s+t[r+2][c+2]
-                if s*3==v: p[s=='B']=True
-                v = t[r][c+2]+s+t[r+2][c]
-                if s*3==v: p[s=='B']=True
+                if s*2==t[r][c]+t[r+2][c+2]: p[s=='B']=True
+                if s*2==t[r][c+2]+t[r+2][c]: p[s=='B']=True
         
         a,b=map(int,p)
         w.append(['draw','A wins','B wins'][(a>b)+2*(a<b)])
