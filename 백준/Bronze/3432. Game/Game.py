@@ -11,8 +11,8 @@ def main():
             if j<3:
                 for k in range(3):
                     s = t[j+1][k+1]
-                    if s*2==t[j][k]+t[j+2][k+2]: p[s=='B']=1
-                    if s*2==t[j][k+2]+t[j+2][k]: p[s=='B']=1
+                    if s==t[j][k]==t[j+2][k+2]: p[s=='B']=1
+                    if s==t[j][k+2]==t[j+2][k]: p[s=='B']=1
         a,b=p
         w.append(['draw','A wins','B wins'][(a>b)+2*(a<b)])
     print('\n'.join(w))
