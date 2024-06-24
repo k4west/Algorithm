@@ -22,13 +22,13 @@
 
 <p>다음은 굵기 3의 막대를 사용하여 "<code>iupc</code>" 라는 문자열을 암호화하는 예시이다.</p>
 
-<p style="text-align: center;"><img alt="" src="" style="height: 219px; width: 400px;"></p>
+<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/21dd22ef-83b1-4ad7-9fec-d645306ee12f/-/preview/" style="height: 219px; width: 400px;"></p>
 
 <p>굵기가 \(X\)인 막대에 리본을 감고 세로로 글자 \(X\)개를 적으면 막대를 한바퀴 돌아오게 된다. 이 막대는 굵기가 3이므로, 세로로 3글자를 적으면 막대를 한바퀴 돌아올 것이다.</p>
 
 <p>암호화하는 문자열을 리본의 가장 왼쪽 끝 부분을 포함하는 가로 <strong>한 줄만</strong> 사용하여 쓰고, 남은 공간은 아무 문자로나 채운다.</p>
 
-<p style="text-align: center;"><img alt="" src="" style="height: 219px; width: 400px;"></p>
+<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/b6ade534-0048-480f-95aa-d7ce528f2c1d/-/preview/" style="height: 219px; width: 400px;"></p>
 
 <p>마지막으로 막대에서 리본을 풀면 암호화가 완료된다.</p>
 
