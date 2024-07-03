@@ -6,9 +6,12 @@ for _ in range(int(next(a))):
         d[word.lower()] = lang
 t=[]
 for i in a.readlines()[1:]:
-    for j in ',.!?;()':
-        i=i.replace(j, ' ')
-    sample=i.strip().lower().split()
+    sep = [j for j in ' ,.;!?()' if j in i]
+    sample=[i.strip().lower()]
+    for s in sep:
+        sample = [p.split(s) for p in sample]
+        sample.append([])
+        sample = sum(sample, [])
     for word in sample:
         word = word.lower()
         if word in d:
