@@ -1,15 +1,9 @@
 _,*a=map(lambda x: float(x)%2, open(0).read().split())
 n=len(a)
-se=so=to=te=0
-for odd in a:
-    if odd:
-        so+=to
-        te+=1
-        if to:
-            to=1
-    else:
-        se+=te
-        to+=1
-        if te:
-            te=1
-print(min(se,so))
+r=l=s=t=0
+for i, j in zip(a, a[::-1]):
+    if i:s+=1
+    else:r+=s
+    if j:t+=1
+    else:l+=t
+print(min(r,l))
