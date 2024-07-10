@@ -1,16 +1,10 @@
-import sys
-def main():
-    input = sys.stdin.readline
-    N = int(input())
-    s = input().rstrip()
-    d = {chr(i): 0 for i in range(97, 123)}
-    if N % 2:
-        d[s[N // 2]] -= 1
-    for t in s:
-        d[t] += 1
-    for v in d.values():
-        if v % 2:
-            print("No")
-            return
-    print("Yes")
-main()
+n,s=open(0)
+n=int(n)//2
+s=s.strip()
+s=s[:n]+s[-n:]
+def f():
+    for i in map(chr,range(97, 123)):
+        if s.count(i)%2:
+            return 'No'
+    return 'Yes'
+print(f())
