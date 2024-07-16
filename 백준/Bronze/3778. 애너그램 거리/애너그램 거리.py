@@ -1,7 +1,8 @@
 import sys
 input = sys.stdin.readline
 
-def dictance(A, B):
+def dictance():
+    A, B = sorted(input()), sorted(input())
     d = a_i = b_i = 0
     a_n, b_n = len(A), len(B)
     while a_i < a_n and b_i < b_n:
@@ -17,6 +18,5 @@ def dictance(A, B):
 
 t = []
 for i in range(int(input())):
-    A, B = map(lambda x: sorted(x.strip()), [input(), input()])
-    t.append(f'Case #{i+1}: {dictance(A, B)}')
+    t.append(f'Case #{i+1}: {dictance()}')
 print('\n'.join(t))
