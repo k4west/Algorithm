@@ -1,7 +1,4 @@
-n,*a=open(0)
-t = []
-for i in range(int(n)):
-    A, B = map(lambda x: sorted(x.strip()), a[2*i:2*i+2])
+def dictance(A, B):
     d = a_i = b_i = 0
     a_n, b_n = len(A), len(B)
     while a_i < a_n and b_i < b_n:
@@ -13,6 +10,11 @@ for i in range(int(n)):
                 a_i -= 1
         a_i += 1
         b_i += 1
-    d += a_n - a_i + b_n - b_i
-    t.append(f'Case #{i+1}: {d}')
+    return d + a_n - a_i + b_n - b_i
+
+n,*a=open(0)
+t = []
+for i in range(int(n)):
+    A, B = map(lambda x: sorted(x.strip()), a[2*i:2*i+2])
+    t.append(f'Case #{i+1}: {dictance(A, B)}')
 print('\n'.join(t))
