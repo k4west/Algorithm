@@ -1,0 +1,1 @@
+print(int(sum(map(float,open(0).read().replace('\n','').split(',')))))
