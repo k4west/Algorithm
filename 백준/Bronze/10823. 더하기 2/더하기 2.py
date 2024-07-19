@@ -1,1 +1,1 @@
-print(int(sum(map(float,open(0).read().replace('\n','').split(',')))))
+print(sum(map(int,open(0).read().replace('\n','').split(','))))
