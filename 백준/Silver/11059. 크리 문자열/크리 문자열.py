@@ -1,7 +1,7 @@
 def check(li, n):
     return sum(li[:n]) == sum(li[n:])
 
-S=[*map(int, list(input()))]
+S=[*map(float, list(input()))]
 n=len(S)
 i=n-n%2
 flag = False
