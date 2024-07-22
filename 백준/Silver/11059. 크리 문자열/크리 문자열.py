@@ -5,11 +5,10 @@ def main():
     for i in range(n):
         S[i+1]=S[i]+s[i]
     i=n-n%2
-    while i:
+    for i in range(n-n%2,0,-2):
         for j in range(n-i+1):
-            if S[j+i//2]-S[j] == S[j+i]-S[j+i//2]:
+            t=S[j+i//2]
+            if t-S[j]==S[j+i]-t:
                 print(i)
                 return
-        i -= 2
-    print(i)
 main()
