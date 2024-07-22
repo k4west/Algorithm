@@ -1,11 +1,2 @@
-import sys
-c = int(sys.stdin.readline())
-N = int(sys.stdin.readline())
-s = 0
-for _ in range(N):
-    t = eval("*".join(sys.stdin.readline().split()))
-    s += t
-if c == s:
-    print("Yes")
-else:
-    print("No")
+c, _, *arr = map(int, open(0).read().split())
+print(["No", "Yes"][c == sum((a*b for a, b in zip(arr[::2], arr[1::2])))])
