@@ -1,1 +1,1 @@
-print('\n'.join(map(lambda x:str(int((i:=int(x))&-i==i)),open(0).read().split()[1:])))
+print('\n'.join(map(lambda x:'01'[(i:=int(x))&-i==i],open(0).read().split()[1:])))
