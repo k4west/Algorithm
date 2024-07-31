@@ -1,0 +1,1 @@
+print(*[int(bin(i).count('1')==1) for i in map(int,open(0).read().split())][1:],sep='\n')
