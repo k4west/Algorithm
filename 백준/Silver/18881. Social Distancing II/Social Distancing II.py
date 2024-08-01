@@ -8,7 +8,6 @@ for i in range(n-1):
             m=t
 prev,c=a[0]
 for x,s in a[1:]:
-    if s and prev+m<=x:
-        c+=1
+    c+=s and prev+m<=x
     prev=x
 print(c)
