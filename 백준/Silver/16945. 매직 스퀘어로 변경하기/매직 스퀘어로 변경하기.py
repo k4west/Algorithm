@@ -1,4 +1,3 @@
-from itertools import permutations
 a=[*map(int,open(0).read().split())]
 def f(t):
     s=0
@@ -8,11 +7,9 @@ def f(t):
         else:
             s-=k
     return s
-def g(t):
-    return len(set(map(sum,[t[:3],t[3:6],t[6:9],t[::3],t[1::3],t[2::3],t[::4],t[2:7:2]])))==1
+t=[[2,7,6,9,5,1,4,3,8],[2,9,4,7,5,3,6,1,8],[4,3,8,9,5,1,2,7,6],[4,9,2,3,5,7,8,1,6],[6,1,8,7,5,3,2,9,4],[6,7,2,1,5,9,8,3,4],[8,1,6,3,5,7,4,9,2],[8,3,4,1,5,9,6,7,2]]
 m=81
-for i in permutations(range(1,10), 9):
-    if g(i):
-        if m>(t:=f(i)):
-            m=t
+for i in t:
+    if m>(t:=f(i)):
+        m=t
 print(m)
