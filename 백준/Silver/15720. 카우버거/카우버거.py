@@ -1,0 +1,10 @@
+a,b,c,d=open(0)
+a = [*map(int,a.split())]
+b = sorted(map(int,b.split()))
+c = sorted(map(int,c.split()))
+d = sorted(map(int,d.split()))
+n = min(a)
+t=sum(sum([b,c,d],[]))
+k=sum([sum(j[:i-n]) for i, j in zip(a,[b,c,d])])
+print(t)
+print((t-k)//10*9+k)
