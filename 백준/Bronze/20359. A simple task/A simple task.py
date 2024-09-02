@@ -1,3 +1,4 @@
-n=bin(int(input()))
-o=n.rstrip('0')
-print(int(o[2:],2), len(n)-len(o))
+n=int(input())
+p=0
+while n%2==0:n//=2;p+=1
+print(n, p)
