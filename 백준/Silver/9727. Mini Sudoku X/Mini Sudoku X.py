@@ -1,19 +1,11 @@
-m=set(range(1,7))
-def sol(rows):
-    rows = [*map(lambda x:[*map(int,x.split())],rows)]
-    squ=[[] for _ in range(2)]
-    for row in rows:
-        if 6!=len(set(row)):return 0
-        squ[0].extend(row[:3])
-        squ[1].extend(row[3:])
-        if len(squ[0])==6:
-            for s in squ:
-                if 6!=len(set(s)):return 0
-            squ=[[] for _ in range(2)]
-    for c in zip(*rows):
-        if 6!=len(c):return 0
-    if 6!=len(set([rows[i][i] for i in range(6)])):return 0
-    if 6!=len(set([rows[i][5-i] for i in range(6)])):return 0
+def sol(board):
+    for i in range(6):
+        if 6!=len(set(board[6*i:6*(i+1)])):return 0
+        if 6!=len(set(board[i:36:6])):return 0
+        j=i//2*12+i%2*3
+        if 6!=len(set(board[j:j+3]+board[j+6:j+9])):return 0
+    if 6!=len(set(board[::7])):return 0
+    if 6!=len(set(board[5::5])):return 0
     return 1
-n,*a=open(0)
-print('\n'.join([f'Case#{i+1}: {sol(a[6*i:6*(i+1)])}' for i in range(int(n))]))
+n,*a=map(int,open(0).read().split())
+print('\n'.join([f'Case#{i+1}: {sol(a[36*i:36*(i+1)])}' for i in range(n)]))
