@@ -1,6 +1,5 @@
-m=set(range(1,7))
 def check(li):
-    return set(li)==m
+    return len(set(li))==6
 def sol(rows):
     col=[[] for _ in range(6)]
     dia=[[] for _ in range(2)]
