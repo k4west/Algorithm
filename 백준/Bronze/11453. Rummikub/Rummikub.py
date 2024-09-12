@@ -6,9 +6,5 @@ def check(s):
         for j in 'bgry':
             if d[j][i:i+3]==[1,1,1]:return True
     return False
-def main():
-    a=open(0);t=[]
-    for _ in range(int(next(a))):m=int(next(a));s=next(a).split();t.append('YNEOS'[m<3 or not check(s)::2])
-    print('\n'.join(t))
-if __name__=="__main__":
-    main()
+a=open(0)
+for _ in range(int(next(a))):m=int(next(a));s=next(a).split();print('YNEOS'[m<3 or not check(s)::2])
