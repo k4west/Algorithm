@@ -13,23 +13,23 @@ def f(s, e):
                     v[j] = 1
         q, nq = nq, []
         
+a = open(0)
 result = []
 n = 1
-while True:
-    try:
-        graph = [[] for _ in range(21)]
-        for i in range(1, 20):
-            X, *countries = map(int, input().split())
-            for j in countries:
-                graph[i].append(j)
-                graph[j].append(i)
-        temp = [f'Test Set #{n}']
-        for _ in range(int(input())):
-            s, e = map(int, input().split())
-            c = f(s, e)
-            temp.append(f'{str(s).rjust(2, " ")} to {str(e).rjust(2, " ")}: {c}')
-        result.append('\n'.join(temp))
-        n += 1
-    except:
-        break
-print('\n\n'.join(result))
+while a:
+    graph = [[] for _ in range(21)]
+    for i in range(1, 20):
+        try:
+            X, *countries = map(int, next(a).split())
+        except:
+            exit(print('\n\n'.join(result)))
+        for j in countries:
+            graph[i].append(j)
+            graph[j].append(i)
+    temp = [f'Test Set #{n}']
+    for _ in range(int(next(a))):
+        s, e = map(int, next(a).split())
+        c = f(s, e)
+        temp.append(f'{str(s).rjust(2, " ")} to {str(e).rjust(2, " ")}: {c}')
+    result.append('\n'.join(temp))
+    n += 1
