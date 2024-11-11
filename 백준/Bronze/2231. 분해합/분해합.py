@@ -1,5 +1,4 @@
-import sys
-N = int(sys.stdin.readline())
+N = int(input())
 s = max(N - 63, 1)
 for n in range(s,N):
     t = n + sum(map(int, str(n)))
