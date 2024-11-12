@@ -1,16 +1,13 @@
-import sys
 from collections import deque
-input = sys.stdin.readline
-    
 def main():
-    N = int(input())
+    a = open(0)
+    N = int(next(a))
     graph = [[] for _ in range(N+1)]
     ans = [[] for _ in range(N+1)]
     for _ in range(N-1):
-        i, j = map(int, input().split())
+        i, j = map(int, next(a).split())
         graph[i].append(j)
         graph[j].append(i)
-
     q = deque([1])
     while q:
         i = q.popleft()
@@ -19,6 +16,4 @@ def main():
                 ans[n] = i
                 q.append(n)
     print("\n".join(map(str, ans[2:])))
-
-if __name__ == "__main__":
-    main()
+main()
