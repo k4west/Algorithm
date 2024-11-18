@@ -1,10 +1,10 @@
-import sys
-input = sys.stdin.readline
-T = int(input())
-for _ in range(T):
+a = open(0)
+r = []
+for _ in range(int(next(a))):
     tmp = []
-    i = int(input())
+    i = int(next(a))
     for c in (25, 10, 5, 1):
         tmp.append(i//c)
         i %= c
-    print(" ".join(map(str, tmp)))
+    r.append(" ".join(map(str, tmp)))
+print('\n'.join(r))
