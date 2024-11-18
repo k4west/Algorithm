@@ -1,8 +1,2 @@
 a = open(0)
-N = int(next(a))
-ropes = sorted(map(float, a.read().split()))
-m = 0
-for i in range(N):
-    if m < (t:=ropes[i]*(N-i)):
-        m = t
-print(int(m))
+print(int(max(i*j for i, j in zip(range(int(next(a)),0,-1), sorted(map(float, a.read().split()))))))
