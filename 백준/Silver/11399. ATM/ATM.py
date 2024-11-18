@@ -1,6 +1,3 @@
-import sys
-def f(N):
-    li = sorted(map(int, sys.stdin.readline().split()))
-    return sum([t*(N-i) for i, t in enumerate(li)])
-N = int(sys.stdin.readline())
-print(f(N))
+a = open(0)
+N = int(next(a))
+print(sum([t*(N-i) for i, t in enumerate(sorted(map(int, next(a).split())))]))
