@@ -1,21 +1,24 @@
-from collections import deque
+def check(i, j, liters):
+    if buckets[j]!=liters[j]:
+        t = min(liters[i], buckets[j]-liters[j])
+        liters[i] -= t
+        liters[j] += t
+        if not v[liters[0]][liters[1]][liters[2]]:
+            v[liters[0]][liters[1]][liters[2]] = 1
+            return liters
+    return False
+    
 def bfs(a, b, c):
-    q = deque([[a, b, c]])
+    q = [[a, b, c]]
     while q:
-        liters = q.popleft()
+        liters = q.pop()
         for i in range(3):
             if liters[i]:
                 for j in range(3):
                     if i==j:
                         continue
-                    if buckets[j]!=liters[j]:
-                        t = min(liters[i], buckets[j]-liters[j])
-                        tmp = [k for k in liters]
-                        tmp[i] -= t
-                        tmp[j] += t
-                        if not v[tmp[0]][tmp[1]][tmp[2]]:
-                            q.append(tmp)
-                            v[tmp[0]][tmp[1]][tmp[2]] = 1
+                    if (tmp:=check(i, j, [*liters])):
+                        q.append(tmp)
             elif not i:
                 r[liters[2]] = 1
 
