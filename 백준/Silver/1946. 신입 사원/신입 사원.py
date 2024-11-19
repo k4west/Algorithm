@@ -1,12 +1,12 @@
+import sys
+input = sys.stdin.readline
 def main():
-    a = open(0)
     t = []
-    for _ in range(int(next(a))):
+    for _ in range(int(input())):
         c = 0
-        n = int(next(a))
-        scores = sorted([tuple(map(int, next(a).split())) for _ in range(n)])
+        n = int(input())
         m = n+1
-        for _, i in scores:
+        for _, i in sorted([tuple(map(int, input().split())) for _ in range(n)]):
             if i < m:
                 c += 1
                 m = i
