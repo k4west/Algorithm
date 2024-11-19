@@ -3,13 +3,17 @@ input = sys.stdin.readline
 def main():
     t = []
     for _ in range(int(input())):
-        c = 0
+        c = 1
         n = int(input())
-        m = n+1
-        for _, i in sorted([tuple(map(int, input().split())) for _ in range(n)]):
-            if i < m:
+        li = [0] * (n+1)
+        for _ in range(n):
+            i, j = map(int, input().split())
+            li[i] = j
+        m = li[1]
+        for i in range(2, n+1):
+            if m > (j:=li[i]):
                 c += 1
-                m = i
+                m = j
         t.append(c)
     print('\n'.join(map(str, t)))
 main()
