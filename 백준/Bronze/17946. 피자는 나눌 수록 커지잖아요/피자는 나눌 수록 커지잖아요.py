@@ -1,0 +1,1 @@
+print('\n'.join('1'*int(input())))
