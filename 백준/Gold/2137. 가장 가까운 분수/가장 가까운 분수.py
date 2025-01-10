@@ -8,7 +8,7 @@ def main():
         if d==b: continue
         c = (d*a)//b
         for i in range(2):
-            if not check(c+i, d): continue
-            if (e_:=abs(a*d-b*(c+i))/(b*d)) and e_ < e: e, ans = e_, [c+i, d]
+            if check(c+i, d) and (e_:=abs(a*d-b*(c+i))/(b*d)) and e_ < e: e, ans = e_, [c+i, d]
     print(*ans)
-main()
+if __name__=="__main__":
+    main()
