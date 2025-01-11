@@ -18,6 +18,5 @@ def main():
         ans.append(' '.join(map(str, tmp+[k])))
     print('\n'.join(ans))
 
-if __name__=="__main__":
-    composites = composite(5_000_000)
-    main()
+composites = composite(5_000_000)
+main()
