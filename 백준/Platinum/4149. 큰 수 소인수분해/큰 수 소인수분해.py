@@ -59,7 +59,7 @@ def factorize(n):
 def main():
     n = int(open(0).read())
     ans = []
-    for p in set(factorize(n)):
+    for p in sorted(set(factorize(n))):
         while n%p == 0:
             ans.append(p)
             n //= p
