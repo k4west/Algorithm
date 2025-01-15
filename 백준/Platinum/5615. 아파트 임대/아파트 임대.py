@@ -8,25 +8,24 @@ def powmod(a, d, n):
         d //= 2
     return result
 
-def miller_rabin(n):
-    s, d = 0, n-1
+def miller_rabin(m):
+    s, d = 0, m-1
     while d%2 == 0:
         s += 1
         d //= 2
     for a in primes:
-        if a == n: break
-        x = powmod(a, d, n)
-        if x == 1 or x == n-1: continue
+        x = powmod(a, d, m)
+        if x == 1 or x == m-1: continue
         for _ in range(s-1):
-            x = powmod(x, 2, n)
-            if x == n-1: break
+            x = powmod(x, 2, m)
+            if x == m-1: break
         else: return False
     return True
     
 def main():
     cnt = 0
     for n in map(int, open(0).read().split()[1:]):
-        cnt += miller_rabin(2*n+1)
+        cnt += miller_rabin((m:=2*n+1)) or m in primes
     print(cnt)
 
 if __name__ == "__main__":
