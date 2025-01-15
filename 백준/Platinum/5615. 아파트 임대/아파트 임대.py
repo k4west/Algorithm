@@ -11,14 +11,10 @@ def main():
             s += 1
             d //= 2
         for a in primes:
-            x, y = 1, d
-            while y > 0:
-                if y%2: x = (x*a)%m
-                a = (a*a)%m
-                y //= 2
+            x = pow(a, d, m)
             if x == 1 or x == m-1: continue
             for _ in range(s-1):
-                x = x*x%m
+                x = pow(x, 2, m)
                 if x == m-1: break
             else:
                 flag = False
