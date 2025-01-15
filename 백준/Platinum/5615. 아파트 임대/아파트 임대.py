@@ -1,9 +1,11 @@
 def main():
-    primes = [2, 3, 5, 7, 11]
+    primes = [2, 7, 61]
     cnt = 0
     for n in map(int, open(0).read().split()[1:]):
+        if (m:=2*n+1) in primes or n < 4:
+            cnt += 1
+            continue
         flag = True
-        m = 2*n+1
         s, d = 0, m-1
         while d%2 == 0:
             s += 1
@@ -21,6 +23,6 @@ def main():
             else:
                 flag = False
                 break
-        cnt += flag or m in primes
+        cnt += flag
     print(cnt)
 main()
