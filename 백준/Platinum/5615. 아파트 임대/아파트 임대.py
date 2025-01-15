@@ -23,6 +23,11 @@ def miller_rabin(n):
         else: return False
     return True
     
+def main():
+    cnt = 0
+    for n in map(int, open(0).read().split()[1:]):
+        cnt += miller_rabin(2*n+1)
+    print(cnt)
 
 if __name__ == "__main__":
-    print(sum(miller_rabin(2*n+1) for n in map(int, open(0).read().split()[1:])))
+    main()
