@@ -14,7 +14,7 @@ def miller_rabin(n):
         s += 1
         d //= 2
     for a in primes:
-        if a >= n: break
+        if a == n: break
         x = powmod(a, d, n)
         if x == 1 or x == n-1: continue
         for _ in range(s-1):
