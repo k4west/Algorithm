@@ -1,4 +1,4 @@
-primes = [2, 3, 5, 7, 11, 13]
+primes = [2, 3, 5, 7, 11]
 
 def gcd(a, b):
     while b: a, b = b, a%b
