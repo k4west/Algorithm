@@ -1,8 +1,9 @@
 def main():
-    n, *arr = map(int, open(0).read().split())
-    t = m = arr[0]
-    for i in range(1, n):
-        t = max(arr[i], t+arr[i])
+    a = open(0)
+    t = m = float('-inf')
+    next(a)
+    for i in map(int, next(a).split()):
+        t = max(i, t+i)
         if m < t: m = t
     print(m)
 main()
