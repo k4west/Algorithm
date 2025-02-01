@@ -1,9 +1,10 @@
 def main():
     n, *arr = map(int, open(0).read().split())
-    dp = [0 for _ in range(n+1)]
+    t = m = arr[0]
     
-    for i in range(n):
-        dp[i] = max(arr[i], dp[i-1] + arr[i])
-    dp[-1] = dp[0]
-    print(max(dp))
+    for i in range(1, n):
+        t = max(arr[i], t+arr[i])
+        m = max(m, t)
+    
+    print(m)
 main()
