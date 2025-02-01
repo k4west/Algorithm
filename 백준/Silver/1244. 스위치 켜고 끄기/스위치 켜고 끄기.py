@@ -1,15 +1,19 @@
 def main():
+    def change(i):
+        switches[i] ^= 1
+    
+    
     def multiple(n, m):
         for i in range(n-1, m, n):
-            switches[i] ^= 1
+            change(i)
 
 
     def symmetry(n, m):
         count = 1
         switches[n] ^= 1
         while count <= n < m-count and switches[n+count] == switches[n-count]:
-            switches[n+count] ^= 1
-            switches[n-count] ^= 1
+            change(n-count)
+            change(n+count)
             count += 1
     
     a = open(0)
@@ -23,5 +27,5 @@ def main():
     
     print('\n'.join(' '.join(map(str, switches[20*i:20*i+20])) for i in range((m+19)//20)))
 
-
+    
 main()
