@@ -1,5 +1,4 @@
-import sys
-_ = sys.stdin.readline()
-d = list(sys.stdin.readline().split())
-n = sys.stdin.readline().rstrip()
-print(d.count(n))
+N = int(input())
+*arr, = map(int, input().split())
+v = int(input())
+print(arr.count(v))
