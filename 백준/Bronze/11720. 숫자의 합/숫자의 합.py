@@ -1,2 +1,5 @@
-_, n = open(0)
-print(eval("+".join(list(n.rstrip()))))
+input()
+s = 0
+for i in input():
+    s += int(i)
+print(s)
