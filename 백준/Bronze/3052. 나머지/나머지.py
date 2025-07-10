@@ -1,4 +1,4 @@
-s = set()
-for i in open(0):
-    s.add(int(i)%42)
-print(len(s))
+r = set()
+for i in range(10):
+    r.add(int(input())%42)
+print(len(r))
