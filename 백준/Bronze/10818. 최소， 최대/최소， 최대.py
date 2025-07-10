@@ -1,4 +1,9 @@
-import sys
-_ = sys.stdin.readline()
-li = list(map(int, sys.stdin.readline().split()))
-print(min(li), max(li))
+N = int(input())
+m, *arr = map(int, input().split())
+M = m
+for i in arr:
+    if i < m:
+        m = i
+    elif i > M:
+        M = i
+print(m, M)
