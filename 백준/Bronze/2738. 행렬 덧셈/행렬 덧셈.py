@@ -1,9 +1,5 @@
-import sys
-N, M = map(int, sys.stdin.readline().split())
-A = [[0]*M for _ in range(N)]
-for i in range(2*N):
-    temp = map(int, sys.stdin.readline().split())
-    for j, k in enumerate(temp):
-        A[i%N][j] += k
-for a in A:
-    print(*a)
+N, M = map(int, input().split())
+A = [[*map(int, input().split())] for _ in range(N)]
+B = [[*map(int, input().split())] for _ in range(N)]
+for i in range(N):
+    print(*[A[i][j] + B[i][j] for j in range(M)])
