@@ -1,4 +1,6 @@
-import sys
-_, X = map(int, sys.stdin.readline().split())
-li = map(int, sys.stdin.readline().split())
-print(*[i for i in li if i < X])
+N, X = map(int, input().split())
+li = []
+for i in map(int, input().split()):
+    if i < X:
+        li.append(i)
+print(*li)
