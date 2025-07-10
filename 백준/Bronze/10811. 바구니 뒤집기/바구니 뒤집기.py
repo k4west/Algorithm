@@ -1,7 +1,6 @@
-import sys
-N, M = map(int, sys.stdin.readline().split())
-B = list(range(1,N+1))
+N, M = map(int, input().split())
+arr = [i for i in range(N+1)]
 for _ in range(M):
-    i, j = map(int, sys.stdin.readline().split())
-    B = B[:i-1]+B[i-1:j][::-1]+B[j:]
-print(*B)
+    i, j = map(int, input().split())
+    arr[i:j+1] = arr[j:i-1:-1]
+print(*arr[1:])
