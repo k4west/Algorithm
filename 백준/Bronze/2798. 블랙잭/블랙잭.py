@@ -1,13 +1,18 @@
-a = open(0)
-N, M = map(int, next(a).split())
-C = list(map(int, a.read().split()))
-
-temp, result = 0, 0
-for a in range(N - 2):
-    for b in range(a + 1, N - 1):
-        for c in range(b + 1, N):
-            temp = C[a] + C[b] + C[c]
-            if result < temp <= M:
-                result = temp
-
-print(result)
+N, M = map(int, input().split())
+cards = sorted(map(int, input().split()))
+A = m = 0
+for i in range(N-2-m):
+    a = cards[i]
+    if a > M:
+        break
+    for j in range(i+1, N-1-m):
+        b = cards[j]
+        if a+b > M:
+            break
+        for k in range(j+1, N-m):
+            c = cards[k]
+            if (t:=a+b+c) > M:
+                break
+            if A < t:
+                A = t
+print(A)
