@@ -1,18 +1,12 @@
-import sys
-input = sys.stdin.readline
-
 N = int(input())
+ranks = [1 for _ in range(N)]
+people = [[*map(int, input().split())]+[i] for i in range(N)]
+people.sort(key=lambda x:(-x[0], -x[1]))
 
-P = [[0, 0]] * N
-for n in range(N):
-    P[n] = list(map(int, input().split()))
-
-answer = [0] * N
-for i in range(N):
-    c = 1
-    for j in range(N):
-        if (P[i][0] < P[j][0] and P[i][1] < P[j][1]):
+for i, (w, h, o) in enumerate(people):
+    c = 0
+    for w1, h1, _ in people[:i]:
+        if w!=w1 and h < h1:
             c += 1
-    answer[i] = c
-
-print(*answer)
+    ranks[o] += c
+print(*ranks)
