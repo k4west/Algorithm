@@ -1,26 +1,18 @@
-import sys
-
-def f(string):
-    li = []
-    for s in string:
-        if s == "(" or s == "[":
-            li.append(s)
-        elif s == ")": 
-            if li and li[-1] == "(":
-                li.pop()
+def check(s):
+    order = []
+    for i in s:
+        if i in ob:
+            order.append(ob[i])
+        elif i in cb:
+            if not order or i != order[-1]:
+                return 'no'
             else:
-                li.append(s)
-                break
-        elif s == "]": 
-            if li and li[-1] == "[":
-                li.pop()
-            else:
-                li.append(s)
-                break
-    return "yes" if li==[] else "no"
-    
-while True:
-    string = sys.stdin.readline().rstrip()
-    if string == ".":
-        break
-    print(f(string))
+                order.pop()
+    return 'yes' if not order else 'no'
+        
+ans = []
+ob = {'(':')', '[':']'}
+cb = [')', ']']
+while '.'!=(s:= input()):
+    ans.append(check(s))
+print('\n'.join(ans))
