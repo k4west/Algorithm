@@ -1,8 +1,11 @@
-_,*a=open(0)
-for i in a:
-    s=0
-    j,*b=map(int,i.split())
-    for k,p in enumerate(b):
-        for q in b[:k]:
-            if q>p:s+=1
-    print(j,s)
+P = int(input())
+ans = []
+for _ in range(P):
+    count = 0
+    T, *heights = map(int, input().split())
+    for i, h in enumerate(heights):
+        for p in heights[:i]:
+            if p > h:
+                count += 1
+    ans.append(' '.join(map(str, (T, count))))
+print('\n'.join(ans))
