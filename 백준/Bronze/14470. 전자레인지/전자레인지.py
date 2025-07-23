@@ -1,6 +1,13 @@
-a, b, c, d, e = map(int, open(0).read().split())
-if a < 0:
-    t = -a*c+d+b*e
-else:
-    t = (b-a)*e+(not a)*d
+A = int(input())
+B = int(input())
+C = int(input())
+D = int(input())
+E = int(input())
+t = 0
+if A < 0:
+    t -= A*C
+    A = 0
+if A == 0:
+    t += D
+t += (B - A) * E
 print(t)
