@@ -1,9 +1,10 @@
-N, I, M = map(int, input().split())
+a = open(0)
+N, I, M = map(int, next(a).split())
 fishes = []
 xs = set()
 ys = set()
 for _ in range(M):
-    r, c = map(int, input().split())
+    r, c = map(int, next(a).split())
     fishes.append((r, c))
     xs.add(r)
     ys.add(c)
