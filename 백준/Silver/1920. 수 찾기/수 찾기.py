@@ -1,8 +1,4 @@
-import sys
-input = sys.stdin.readline
-
 input()
-A = set(input().split())
+A = set(map(int, input().split()))
 input()
-answer = ['1' if b in A else '0' for b in input().split()]
-print(*answer, sep="\n")
+print("\n".join('1' if n in A else '0' for n in map(int, input().split())))
