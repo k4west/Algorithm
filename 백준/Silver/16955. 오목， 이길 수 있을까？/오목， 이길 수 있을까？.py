@@ -1,15 +1,33 @@
+def check(row):
+    d = {'.': 0, 'X': 0, 'O': 0}
+    s = 0
+    for i, j in enumerate(row):
+        if j == 'X':
+            d['X'] += 1
+        elif j == '.':
+            d['.'] += 1
+        if i >= 5:
+            d[row[s]] -= 1
+            s += 1
+        if d['X'] == 4 and d['.'] == 1:
+            return 1
+    return 0
+
 def main():
-    d = (-11, -10, -9, -1, 1, 9, 10, 11)
-    board = "".join(s.rstrip() for s in open(0))
-    for i in range(100):
-        if board[i] == "X":
-            for di in d:
-                cnt, flag, ti, ni = 1, True, i, i+di
-                while 0 <= ni < 100 and abs(ti//10 - ni//10) < 2 and abs(ti%10 - ni%10) < 2:
-                    if board[ni] == "X": cnt += 1
-                    elif board[ni] == "." and flag: cnt += 1; flag = False
-                    else: break
-                    ti, ni = ni, ni+di
-                if cnt == 5 or (flag and cnt == 4 and 0<=(ni:=i-di)<10 and board[ni]=='.'): print(1); exit(0)
-    print(0)
-main()
+    board = [input() for _ in range(10)]
+    for i in range(10):
+        row = board[i]
+        if check(row) or check([row[i] for row in board]):
+            return 1   
+    for i in range(10):
+        if i < 6:   # \ 대각선
+            for j in range(6):
+                if check([board[i+k][j+k] for k in range(10-max(i, j))]):
+                    return 1
+        if i > 3:   # / 대각선
+            for j in range(6):
+                if check([board[i-k][j+k] for k in range(min(i+1, 10-j))]):
+                    return 1
+    return 0
+
+print(main())
