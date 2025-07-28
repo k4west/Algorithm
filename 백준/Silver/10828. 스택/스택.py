@@ -1,11 +1,6 @@
 import sys
 input = sys.stdin.readline
 
-N = int(input())
-op = [0] * N
-for i in range(N):
-    op[i] = list(map(str, input().split()))
-
 class Stack:
     stack = []
 
@@ -34,8 +29,15 @@ class Stack:
         else:
             print(Stack.stack[-1])
 
-for i in range(N):
-    if len(op[i]) == 2:
-        getattr(Stack(), op[i][0])(int(op[i][1]))
-    else:
-        getattr(Stack(), op[i][0])()
+def main():
+    N = int(input())
+    op = [0] * N
+    for i in range(N):
+        op[i] = list(map(str, input().split()))
+    for i in range(N):
+        if len(op[i]) == 2:
+            getattr(Stack(), op[i][0])(int(op[i][1]))
+        else:
+            getattr(Stack(), op[i][0])()
+
+main()
