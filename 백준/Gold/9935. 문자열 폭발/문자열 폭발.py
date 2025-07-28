@@ -1,20 +1,18 @@
-import sys
-input = sys.stdin.readline
-print = sys.stdout.write
+string = input()
+bomb = input()
+stack = []
+length = len(bomb)
+cnt = 0
 
-def main():
-    string = input().rstrip()
-    bomb = list(input().rstrip())
-    b = len(bomb)
-    x = bomb[-1]
-
-    stack = []
-    for s in string:
-        stack.append(s)
-        if s == x and stack[-b:] == bomb:
-            del stack[-b:]
-
-    print("".join(stack) if stack else "FRULA")
-
-if __name__ == "__main__":
-    main()
+for s in string:
+    stack.append(s)
+    cnt += 1
+    if cnt >= length:
+        idx = 0
+        while length >= 1-idx and stack[idx-1] == bomb[idx-1]:
+            idx -= 1
+        if length == -idx:
+            for _ in range(length):
+                stack.pop()
+                cnt -= 1
+print(''.join(stack) if stack else 'FRULA')
