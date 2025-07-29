@@ -1,13 +1,18 @@
-import sys
-sys.setrecursionlimit(300000)
-
-
 def dfs(r, c):
-    for dr, dc in d:
-        nr, nc = r+dr, c+dc
-        if 0 <= nr < N and 0 <= nc < M and graph[nr][nc] >= T:
-            graph[nr][nc] = -1
-            dfs(nr, nc)
+    stack = []
+    while True:
+        for dr, dc in d:
+            nr, nc = r+dr, c+dc
+            if 0 <= nr < N and 0 <= nc < M and graph[nr][nc] >= T:
+                graph[nr][nc] = -1
+                stack.append((r, c))
+                r, c = nr, nc
+                break
+        else:
+            if stack:
+                r, c = stack.pop()
+            else:
+                break
 
 
 d = ((-1, 0), (1, 0), (0, -1), (0, 1))
