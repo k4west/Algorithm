@@ -1,29 +1,33 @@
-import sys
-input = sys.stdin.readline
+# 빈 격자를 탐색해 가면서 인접한 치즈가 있는 지 확인
+# 빈 격자는 방문 후 -1로 표시
+# 치즈를 발견 -> 표시를 해줌 ++
+# 치즈의 2면 이상이 공기와 접촉 > 2 -> 녹음
+# 치즈가 녹은 자리는 다음에 검사할 항목이 됨
 
-def main():
-    N, M = map(int, input().split())
-    d = [(1,0),(0,1),(-1,0),(0,-1)]
-    margin = [[-1]*(M+2)]
-    graph = [[-1]+list(map(int, input().split()))+[-1] for _ in range(N)]
-    graph = margin + graph + margin
-
-    q, nq, t = [(1, 1)], [], 0
+def bfs(p):
+    q, nq = [p], []
+    cnt = 0
     while q or nq:
         if not q:
             q, nq = nq, []
-            t += 1
+            cnt += 1
         r, c = q.pop()
         for dr, dc in d:
-            if graph[(nr:=r+dr)][(nc:=c+dc)] > 0:
-                graph[nr][nc] += 1
-                if graph[nr][nc] > 2:
-                    graph[nr][nc] = -1
-                    nq.append((nr, nc))
-            if not graph[nr][nc]:
-                graph[nr][nc] = -1
-                q.append((nr, nc))
-    print(t)
+            nr, nc = r+dr, c+dc
+            if 0 <= nr < N and 0 <= nc < M:
+                if not cheese[nr][nc]:
+                    cheese[nr][nc] = -1
+                    q.append((nr, nc))
+                if cheese[nr][nc] > 0:
+                    cheese[nr][nc] += 1
+                    if cheese[nr][nc] > 2:
+                        cheese[nr][nc] = -1
+                        nq.append((nr, nc))
+    return cnt
 
-if __name__ == "__main__":
-    main()
+
+d = ((-1, 0), (1, 0), (0, -1), (0, 1))
+N, M = map(int, input().split())
+cheese = [[*map(int, input().split())] for _ in range(N)]
+cheese[0][0] = -1
+print(bfs((0, 0)))
