@@ -1,17 +1,21 @@
-def dfs(c):
-    for nc in graph[c]:
-        if not visited[nc]:
-            visited[nc] = 1
-            dfs(nc)
+def bfs(n):
+    q, nq = [n], []
+    while q or nq:
+        if not q:
+            q, nq = nq, []
+        for node in graph[q.pop()]:
+            if not visited[node]:
+                visited[node] = 1
+                nq.append(node)
 
 
 C = int(input())
 graph = [[] for _ in range(C+1)]
-visited = [0]*(C+1)
-visited[1] = 1
+visited = [0] * (C+1)
 for _ in range(int(input())):
-    s, e = map(int, input().split())
-    graph[s].append(e)
-    graph[e].append(s)
-dfs(1)
+    a, b = map(int, input().split())
+    graph[a].append(b)
+    graph[b].append(a)
+visited[1] = 1
+bfs(1)
 print(sum(visited)-1)
