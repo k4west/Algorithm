@@ -1,18 +1,14 @@
-def dfs(r, c):
-    stack = []
-    while True:
+def bfs(p):
+    q, nq = [p], []
+    while q or nq:
+        if not q:
+            q, nq = nq, []
+        r, c = q.pop()
         for dr, dc in d:
             nr, nc = r+dr, c+dc
             if 0 <= nr < M and 0 <= nc < N and graph[nr][nc]:
                 graph[nr][nc] = 0
-                stack.append((r, c))
-                r, c = nr, nc
-                break
-        else:
-            if stack:
-                r, c = stack.pop()
-            else:
-                break
+                nq.append((nr, nc))
 
 
 ans = []
@@ -24,11 +20,11 @@ for _ in range(int(input())):
         r, c = map(int, input().split())
         graph[r][c] = 1
     cnt = 0
-    for r in range(M):
-        for c in range(N):
-            if graph[r][c]:
-                graph[r][c] = 0
-                dfs(r, c)
+    for x in range(M):
+        for y in range(N):
+            if graph[x][y]:
+                graph[x][y] = 0
+                bfs((x, y))
                 cnt += 1
     ans.append(cnt)
 print('\n'.join(map(str, ans)))
