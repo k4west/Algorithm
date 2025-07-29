@@ -1,32 +1,29 @@
 import sys
-input = sys.stdin.readline
- 
-dy = [-1,1,0,0]
-dx = [0,0,-1,1]
- 
-def mod(y,x):
-    temp = [(y,x)]
-    while temp:
-        y ,x = temp.pop()
-        for i in range(4):
-            Y = y  + dy[i]
-            X = x + dx[i]
-            if 0 <= Y < N and 0 <= X < M and A[Y][X]:
-                A[Y][X] = 0
-                temp.append((Y,X))
- 
+sys.setrecursionlimit(10000)
+
+
+def dfs(r, c):
+    for dr, dc in d:
+        nr, nc = r+dr, c+dc
+        if 0 <= nr < M and 0 <= nc < N and graph[nr][nc]:
+            graph[nr][nc] = 0
+            dfs(nr, nc)
+
+
+ans = []
+d = ((-1, 0), (1, 0), (0, -1), (0, 1))
 for _ in range(int(input())):
-    M,N,K = map(int,input().split())
-    A = [[0]*M for _ in range(N)]
+    M, N, K = map(int, input().split())
+    graph = [[0]*N for _ in range(M)]
     for _ in range(K):
-        X,Y = map(int,input().split())
-        A[Y][X] = 1
-    c = 0
-    for a in range(N):
-        for b in range(M):
-            if A[a][b]:
-                A[a][b] = 0
-                c += 1
-                mod(a,b)
-                
-    print(c)
+        r, c = map(int, input().split())
+        graph[r][c] = 1
+    cnt = 0
+    for r in range(M):
+        for c in range(N):
+            if graph[r][c]:
+                graph[r][c] = 0
+                dfs(r, c)
+                cnt += 1
+    ans.append(cnt)
+print('\n'.join(map(str, ans)))
