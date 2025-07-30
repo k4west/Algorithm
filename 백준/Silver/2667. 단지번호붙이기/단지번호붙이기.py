@@ -1,26 +1,29 @@
-def main():
-    a = open(0)
-    N = int(next(a))
-    d = ((-1,0), (1,0), (0,-1), (0,1))
-    graph = [list(next(a).strip()) for _ in range(N)]
-    answer = []
+def bfs(r, c):
+    cnt = 1
+    graph[r][c] = 0
+    q = [(r, c)]
 
-    def dfs(y, x, c):
-        graph[y][x] = '0'
-        for dy, dx in d:
-            ny, nx = y+dy, x+dx
-            if 0 <= ny < N and 0 <= nx < N and graph[ny][nx] == '1':
-                c = dfs(ny, nx, c+1)
-        return c
+    while q:
+        r, c = q.pop(0)
+        for dr, dc in d:
+            nr = r + dr
+            nc = c + dc
 
-    for i in range(N):
-        for j in range(N):
-            if graph[i][j] == '1':
-                answer.append(dfs(i, j, 1))
+            if 0 <= nr < N and 0 <= nc < N and graph[nr][nc]:
+                cnt += 1
+                graph[nr][nc] = 0
+                q.append((nr, nc))
+    return cnt
 
-    answer.sort()
-    print(len(answer))
-    print("\n".join(map(str, answer)))
 
-if __name__=="__main__":
-    main()
+ans = []
+d = ((-1, 0), (1, 0), (0, -1), (0, 1))
+N = int(input())
+graph = [[*map(int, input())] for _ in range(N)]
+
+for i in range(N):
+    for j in range(N):
+        if graph[i][j]:
+            ans.append(bfs(i, j))
+
+print('\n'.join(map(str, [len(ans)]+sorted(ans))))
