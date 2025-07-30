@@ -1,26 +1,27 @@
-import sys
-N, M = map(int, sys.stdin.readline().split())
-d = ((-1,0), (1,0), (0,-1), (0,1))
-maze= []
-for _ in range(N):
-    maze.append(list(sys.stdin.readline().rstrip()))
-q = [[(0,0)]]
-v = {(0,0)}
-def f(c=1):
-    while q != [[]]:
-        c += 1
-        li = q.pop(0)
-        tmp = []
-        for y, x in li:
-            for dy, dx in d:
-                ny, nx = y+dy, x+dx
-                if 0 <= ny < N and 0 <= nx < M:
-                    new = (ny, nx)
-                    if new == (N-1, M-1):
-                        return c
-                    if maze[ny][nx] == '1' and new not in tmp:
-                        if new not in v:
-                            tmp.append(new)
-                        v.add(new)
-        q.append(tmp)
-print(f())
+def bfs():
+    cnt = 1
+    q, nq = [(0, 0)], []
+    graph[0][0] = 0
+
+    while q or nq:
+        if not q:
+            q, nq = nq, []
+            cnt += 1
+
+        r, c = q.pop(0)
+        for dr, dc in d:
+            nr, nc = r + dr, c + dc
+
+            if nr == N-1 and nc == M-1:
+                return cnt + 1
+
+            if 0 <= nr < N and 0 <= nc < M and graph[nr][nc] == 1:
+                graph[nr][nc] = 0
+                nq.append((nr, nc))
+
+
+ans = []
+d = ((-1, 0), (1, 0), (0, -1), (0, 1))
+N, M = map(int, input().split())
+graph = [[*map(int, input())] for _ in range(N)]
+print(bfs())
