@@ -1,8 +1,7 @@
-n = int(input())
-a = [[0 for i in range(100)] for j in range(100)]
-for i in range(n):
+paper = [[0]*100 for _ in range(100)]
+for _ in range(int(input())):
     x, y = map(int, input().split())
-    for s in range(x, x + 10):
-        for t in range(y, y + 10):
-            a[s][t] = 1
-print(sum(sum(a,[])))
+    for i in range(x, x+10):
+        for j in range(y, y+10):
+            paper[i][j] = 1
+print(sum(sum(paper, [])))
