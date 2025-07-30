@@ -1,24 +1,23 @@
-def bfs(n):
-    # 초기화
+def dfs(n):
+    stack = []
     dist = 0
     visited[n] = 1
-    q, nq = [n], []
-
-    while q:
-        for n in q:
-            for nn in graph[n]:
-                if nn == G:
-                    return dist + 1
-                
-                if not visited[nn]:
-                    nq.append(nn)
-                    visited[nn] = 1
-        
-        q, nq = nq, []
-        dist += 1
-    
-    return -1
-
+    while True:
+        for nn in graph[n]:
+            if nn == G:
+                return dist + 1
+            if not visited[nn]:
+                dist += 1
+                visited[nn] = 1
+                stack.append(n)
+                n = nn
+                break
+        else:
+            if stack:
+                n = stack.pop()
+                dist -= 1
+            else:
+                return 0
 
 n = int(input())
 graph = [[] for _ in range(n+1)]
@@ -31,4 +30,4 @@ for _ in range(m):
     graph[x].append(y)
     graph[y].append(x)
 
-print(bfs(S))
+print(dfs(S) or -1)
