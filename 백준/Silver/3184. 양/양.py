@@ -1,32 +1,19 @@
-def bfs(r, c):
-    # 초기화
-    q = [(r, c)]
-    sheep = wolves = 0
+import sys
+sys.setrecursionlimit(10**5)
+
+def dfs(r, c, o, v):
     t = graph[r][c]
     if t == 'o':
-        sheep += 1
+        o += 1
     elif t == 'v':
-        wolves += 1
-    graph[r][c] = '#'   # 방문 표시는 해당 좌표를 울타리로 표시하기
+        v += 1
+    graph[r][c] = '#'
 
-    while q:
-        r, c = q.pop(0)
-        for dr, dc in d:
-            nr, nc = r+dr, c+dc
-            if 0 <= nr < R and 0 <= nc < C and graph[nr][nc] != '#':
-                t = graph[nr][nc]
-                if t == 'o':
-                    sheep += 1
-                elif t == 'v':
-                    wolves += 1
-
-                graph[nr][nc] = '#'
-                q.append((nr, nc))
-
-    if sheep > wolves:
-        ans[0] += sheep
-    else:
-        ans[1] += wolves
+    for dr, dc in d:
+        nr, nc = r+dr, c+dc
+        if 0 <= nr < R and 0 <= nc < C and graph[nr][nc] != '#':
+            o, v = dfs(nr, nc, o, v)
+    return o, v
 
 
 ans = [0, 0]    # [sheep, wolves]
@@ -38,5 +25,11 @@ for r in range(R):
     for c in range(C):
         # 울타리(=#)가 아니면 모두 탐색
         if graph[r][c] != '#':
-            bfs(r, c)
+            o, v = dfs(r, c, 0, 0)
+            if o > v:
+                v = 0
+            else:
+                o = 0
+            ans[0] += o
+            ans[1] += v
 print(*ans)
