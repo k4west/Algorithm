@@ -1,14 +1,15 @@
-import sys
-sys.setrecursionlimit(10**5)
-
-
-def dfs(r, c):
+def bfs(r, c):
+    q, nq = [(r, c)], []
     cnt = 1
-    for dr, dc in d:
-        nr, nc = r + dr, c + dc
-        if 0 <= nr < N and 0 <= nc < M and passage[nr][nc]:
-            passage[nr][nc] = 0
-            cnt += dfs(nr, nc)
+    while q:
+        for r, c in q:
+            for dr, dc in d:
+                nr, nc = r+dr, c+dc
+                if 0 <= nr < N and 0 <= nc < M and passage[nr][nc]:
+                    passage[nr][nc] = 0
+                    nq.append((nr, nc))
+                    cnt += 1
+        q, nq = nq, []
     return cnt
 
 
@@ -20,10 +21,12 @@ for _ in range(K):
     passage[r-1][c-1] = 1
 
 
-A = []
+A = 1
 for r in range(N):
     for c in range(M):
         if passage[r][c]:
             passage[r][c] = 0
-            A.append(dfs(r, c))
-print(max(A))
+            t = bfs(r, c)
+            if A < t:
+                A = t
+print(A)
