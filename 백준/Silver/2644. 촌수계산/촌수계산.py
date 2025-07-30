@@ -1,14 +1,34 @@
-def main():
-    n, a, b, m, *p = map(int,open(0).read().split())
-    root = [[] for _ in range(n+1)]
-    for i in range(m): x, y = p[2*i:2*i+2]; root[x].append(y); root[y].append(x)
-    v, c, q, nq = set(), 0, [a], []
-    while q or nq:
-        c += 1
-        for node in q:
-            for i in root[node]:
-                if i == b: print(c); return
-                if i not in v: nq.append(i); v.add(i)
+def bfs(n):
+    # 초기화
+    dist = 0
+    visited[n] = 1
+    q, nq = [n], []
+
+    while q:
+        for n in q:
+            for nn in graph[n]:
+                if nn == G:
+                    return dist + 1
+                
+                if not visited[nn]:
+                    nq.append(nn)
+                    visited[nn] = 1
+        
         q, nq = nq, []
-    print(-1)
-main()
+        dist += 1
+    
+    return -1
+
+
+n = int(input())
+graph = [[] for _ in range(n+1)]
+visited = [0]*(n+1)
+
+S, G = map(int, input().split())
+m = int(input())
+for _ in range(m):
+    x, y = map(int, input().split())
+    graph[x].append(y)
+    graph[y].append(x)
+
+print(bfs(S))
