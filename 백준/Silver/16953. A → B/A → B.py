@@ -1,15 +1,19 @@
-def main():
-    A, B = map(int, input().split())
+def bfs(a):
+    q = [(a, 1)]
+    v = set()
 
-    c = 1
-    while A < B:
-        if not B%2: B //= 2
-        elif B%10 == 1: B //= 10
-        else: break
-        c += 1
+    while q:
+        a, cnt = q.pop(0)
+        for op in ops:
+            b = op(a)
+            if b == B:
+                return cnt + 1
+            if b not in v and b < B:
+                v.add(b)
+                q.append((b, cnt+1))
+    return -1
 
-    if A == B: print(c)
-    else: print("-1")
 
-if __name__ == "__main__":
-    main()
+A, B = map(int, input().split())
+ops = [lambda x: 2*x, lambda x: x*10 + 1]
+print(bfs(A))
