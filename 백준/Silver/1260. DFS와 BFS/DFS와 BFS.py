@@ -1,41 +1,50 @@
-import sys
+def dfs(s):
+    ans = [s]
+    stack = []
+    visited = [0]*(N+1)
 
-def dfs(S):
-    v[S] = True
-    li.append(S)
-    for a in A[S]:
-        if not v[a]:
-            dfs(a)
+    visited[s] = 1
 
-def bfs(S):
-    v[S] = True
-    q = [S]
+    while True:
+        for n in graph[s]:
+            if not visited[n]:
+                visited[n] = 1
+                stack.append(s)
+                ans.append(n)
+                s = n
+                break
+        else:
+            if stack:
+                s = stack.pop()
+            else:
+                return ' '.join(map(str, ans))
+
+
+def bfs(s):
+    ans = [s]
+    q = [s]
+    visited = [0]*(N+1)
+
+    visited[s] = 1
     while q:
-        node = q.pop(0)
-        li.append(node)
-        for a in A[node]:
-            if not v[a]:
-                v[a] = True
-                q.append(a)
+        s = q.pop(0)
+        for n in graph[s]:
+            if not visited[n]:
+                visited[n] = 1
+                q.append(n)
+                ans.append(n)
+    return ' '.join(map(str, ans))
 
-N, M, S = map(int, sys.stdin.readline().split())
-A = [[] for _ in range(N + 1)]
 
+N, M, V = map(int, input().split())
+graph = [[] for _ in range(N+1)]
 for _ in range(M):
-    i, j = map(int, sys.stdin.readline().split())
-    A[i].append(j)
-    A[j].append(i)
-
-for a in A:
-    if a:
-        a.sort()
-        
-li = []
-v = [False] * (N+1)
-dfs(S)
-print(" ".join(map(str, li)))
-
-li = []
-v = [False] * (N+1)
-bfs(S)
-print(" ".join(map(str, li)))
+    n1, n2 = map(int, input().split())
+    graph[n1].append(n2)
+    graph[n2].append(n1)
+    
+for n in range(1, N+1):
+    graph[n].sort()
+    
+print(dfs(V))
+print(bfs(V))
