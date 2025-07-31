@@ -1,32 +1,35 @@
-import sys
+def bfs(q, p):
+    day = 0
+    nq = []
 
-def f():
-    M, N = map(int, sys.stdin.readline().split())
-    Box =  []
-    for _ in range(N):
-        Box.extend(sys.stdin.readline().split())
-    ripe = []
-    for i, t in enumerate(Box):
-        if t=='1':
-            ripe.append((i))
-    day = -1
-    while ripe:
-        day += 1
-        temp = []
-        for t in ripe:
-            if t//M > 0 and Box[t-M]=='0':
-                Box[t-M] = '1'
-                temp.append(t-M)
-            if t//M < N-1 and Box[t+M]=='0':
-                Box[t+M] = '1'
-                temp.append(t+M)
-            if t%M > 0 and Box[t-1]=='0':
-                Box[t-1] = '1'
-                temp.append(t-1)
-            if t%M < M-1 and Box[t+1]=='0':
-                Box[t+1] = '1'
-                temp.append(t+1)
-        ripe = temp
-    print((day,-1)['0' in Box])
-if  __name__ == "__main__":
-    f()
+    while q or nq:
+        if not q:
+            q, nq = nq, []
+            day += 1
+        r, c = q.pop()
+        for dr, dc in d:
+            nr, nc = r+dr, c+dc
+            if 0 <= nr < N and 0 <= nc < M and not tomato[nr][nc]:
+                tomato[nr][nc] = 1
+                p -= 1
+                nq.append((nr, nc))
+    return -1 if p else day
+
+
+d = ((-1, 0), (1, 0), (0, -1), (0, 1))
+M, N = map(int, input().split())
+tomato = []
+ripen = []
+unripe = 0
+
+for r in range(N):
+    *row, = map(int, input().split())
+    tomato.append(row)
+
+    for c, t in enumerate(row):
+        if t == 1:
+            ripen.append((r, c))
+        elif not t:
+            unripe += 1
+
+print(bfs(ripen, unripe))
