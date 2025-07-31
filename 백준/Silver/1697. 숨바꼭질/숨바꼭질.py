@@ -1,22 +1,24 @@
-import sys
-from collections import deque
-input = sys.stdin.readline
+def bfs():
+    q, nq = [K], []
+    t = 0
+    v = set()
+    while q or nq:
+        if not q:
+            q, nq = nq, []
+            t += 1
+        k = q.pop()
+        if k == N:
+            return t
 
-def an():
-    q = deque()
-    q.append(N)
-    while q:
-        n = q.popleft()
-        if n == K:
-            print(answer[n])
-            break
-        for i in (n -1, n + 1, 2 * n): 
-            if 0 <= i <= M and not answer[i]:
-                q.append(i)
-                answer[i] = answer[n] + 1
+        if not k % 2 and k//2 not in v:
+            n = k//2
+            v.add(n)
+            nq.append(n)
+
+        for n in (k-1, k+1):
+            if n not in v:
+                v.add(n)
+                nq.append(n)        
 
 N, K = map(int, input().split())
-M = 10 ** 5
-answer = [0] * (M + 1)
-
-an()
+print(bfs())
