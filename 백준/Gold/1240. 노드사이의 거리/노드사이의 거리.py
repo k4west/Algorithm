@@ -1,29 +1,54 @@
-def dfs(s, e):
+def bfs(s=1):
+    q, nq = [s], []
+    visited = [0] * (N + 1)
+    roots[s] = (0, 0)
+    lvl = 0
+
     visited[s] = 1
 
-    for m, w in trees[s]:
-        if m == e:
-            return w
-        
-        if not visited[m]:
-            t = dfs(m, e)
-            if t:
-              return t + w
-    return 0
+    while q or nq:
+        if not q:
+            q, nq = nq, []
+            lvl += 1
+        parent = q.pop()
+        for child, w in graph[parent]:
+            if visited[child]:
+                continue
 
+            visited[child] = 1
+            roots[child] = (parent, w)
+            level[child] = lvl + 1
+            nq.append(child)
+
+
+def lca(x, y):
+    dist = 0
+    if level[x] < level[y]:
+        x, y = y, x
+    while level[x] > level[y]:
+        x, xw = roots[x]
+        dist += xw
+    while x != y:
+        x, xw = roots[x]
+        y, yw = roots[y]
+        dist += xw + yw
+    return dist
+
+
+a = open(0)
+N, M = map(int, next(a).split())
+roots = [0] * (N + 1)
+level = [0] * (N + 1)
+graph = [[] for _ in range(N + 1)]
+
+for _ in range(N - 1):
+    n1, n2, w = map(int, next(a).split())
+    graph[n1].append((n2, w))
+    graph[n2].append((n1, w))
+bfs()
 
 ans = []
-N, M = map(int, input().split())
-trees = [[] for _ in range(N+1)]
-
-for _ in range(N-1):
-    s, e, w = map(int, input().split())
-    trees[s].append((e, w))
-    trees[e].append((s, w))
- 
 for _ in range(M):
-    s, e = map(int, input().split())
-    visited = [0]*(N+1)
-    ans.append(dfs(s, e))
-
+    n1, n2 = map(int, next(a).split())
+    ans.append(lca(n1, n2))
 print('\n'.join(map(str, ans)))
