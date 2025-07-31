@@ -1,23 +1,21 @@
 def main():
     d = ((1, 0), (0, 1), (1, 1), (-1, 1))
-    graph = [[*map(int, input().split())] for _ in range(19)]
+    board = [*map(int, open(0).read().split())]
+    t = 0
     for i in range(19):
         for j in range(19):
-            if t := graph[i][j]:
+            if (s:=board[19*i+j]):
                 for di, dj in d:
-                    if 0 <= i-di < 19 and 0 <= j-dj < 19 and graph[i-di][j-dj] == t:
-                        continue
-                    cnt = 1
-                    ni, nj = i, j
-                    while 0 <= (ni := ni+di) < 19 and 0 <= (nj := nj+dj) < 19 and graph[ni][nj] == t:
-                        cnt += 1
-                        if cnt > 5:
-                            break
-                    if cnt == 5:
-                        print(t)
+                    c = 0
+                    ni, nj = i+di, j+dj
+                    while 0 <= ni < 19 and nj < 19 and s == board[19*ni+nj]:
+                        c += 1
+                        ni, nj = ni+di, nj+dj
+                    if c == 4:
+                        if 0<=i-di<19 and j-dj >= 0 and s==board[19*(i-di)+j-dj]:
+                            continue
+                        print(s)
                         print(i+1, j+1)
                         return
-    print(0)
-
-
+    print(t)
 main()
