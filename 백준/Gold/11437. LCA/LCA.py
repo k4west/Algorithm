@@ -9,7 +9,7 @@ def bfs(s=1):
         if not q:
             q, nq = nq, []
             lvl += 1
-        parent = q.pop(0)
+        parent = q.pop()
         for child in graph[parent]:
             if visited[child]:
                 continue
