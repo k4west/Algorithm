@@ -23,11 +23,6 @@ def bfs(s=1):
 
 def lca(x, y):
     dist = 0
-    i, j = x, y
-    if i > j:
-        i, j = j, i
-    if (i, j) in record:
-        return record[(i, j)]
     if level[x] < level[y]:
         x, y = y, x
     while level[x] > level[y]:
@@ -37,7 +32,6 @@ def lca(x, y):
         x, xw = roots[x]
         y, yw = roots[y]
         dist += xw + yw
-    record[i, j] = dist
     return dist
 
 
@@ -46,7 +40,6 @@ N, M = map(int, next(a).split())
 roots = [0] * (N + 1)
 level = [0] * (N + 1)
 graph = [[] for _ in range(N + 1)]
-record = {}
 
 for _ in range(N - 1):
     n1, n2, w = map(int, next(a).split())
