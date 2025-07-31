@@ -1,3 +1,6 @@
+from sys import stdin
+input = stdin.readline
+
 def bfs1(r, c):
     q = [(r, c)]
     visited[r][c] = 1
