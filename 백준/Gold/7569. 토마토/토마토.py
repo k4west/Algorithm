@@ -1,55 +1,48 @@
-import sys
-from collections import deque
+M, N, H = map(int, input().split())
+tomato = [[] for _ in range(H)]
+ripen = []
+unripe = 0
 
-def main():
-    M, N, H = map(int, sys.stdin.readline().split())
-    tomato = [[] for _ in range(H)]
-    ripen = deque()
-    new_ripen = deque()
+# 1: 익은 토마토
+# 0: 안 익은 토마토
+# -1: 토마토 없음
+for h in range(H):
+    for n in range(N):
+        *row, = map(int, input().split())
+        tomato[h].append(row)
+        for m, t in enumerate(row):
+            if t == 0:
+                unripe += 1
+            elif t == 1:
+                ripen.append((h, n, m))
+                tomato[h][n][m] = -1
+
+if not unripe:
+    print(0)
+elif not ripen:
+    print(-1)
+else:
     days = 0
+    d = ((-1, 0, 0), (1, 0, 0), (0, 0, -1), (0, 0, 1), (0, 1, 0), (0, -1, 0))  # 위, 아래, 왼쪽, 오른쪽, 앞, 뒤
+    new_ripen = []
 
-    for i in range(H):
-        box = []
-        for j in range(N):
-            row = list(map(int, sys.stdin.readline().split()))
-            box.append(row)
-            for k, t in enumerate(row):
-                if t == 1:
-                    ripen.append((i, j, k))
-        tomato[i] = box
-    
+    # 익은 토마토 인접을 탐색
     while ripen or new_ripen:
         if not ripen:
-            ripen, new_ripen = new_ripen, ripen
+            ripen, new_ripen = new_ripen, []
             days += 1
 
-        h, n, m = ripen.popleft()
-        h1, h2, n1, n2, m1, m2 = h + 1, h - 1, n + 1, n - 1, m + 1, m - 1
-        if h1 < H and not tomato[h1][n][m]:
-            new_ripen.append((h1, n, m))
-            tomato[h1][n][m] = 1
-        if 0 <= h2 and not tomato[h2][n][m]:
-            new_ripen.append((h2, n, m))
-            tomato[h2][n][m] = 1
-        if n1 < N and not tomato[h][n1][m]:
-            new_ripen.append((h, n1, m))
-            tomato[h][n1][m] = 1
-        if 0 <= n2 and not tomato[h][n2][m]:
-            new_ripen.append((h, n2, m))
-            tomato[h][n2][m] = 1
-        if m1 < M and not tomato[h][n][m1]:
-            new_ripen.append((h, n, m1))
-            tomato[h][n][m1] = 1
-        if 0 <= m2 and not tomato[h][n][m2]:
-            new_ripen.append((h, n, m2))
-            tomato[h][n][m2] = 1
+        h, n, m = ripen.pop()   # 순서 상관 없어서 pop(0) 대신 그냥 pop()
+        for dh, dm, dn in d:
+            nh = h + dh
+            nn = n + dn
+            nm = m + dm
+            if 0 <= nh < H and 0 <= nn < N and 0 <= nm < M and not tomato[nh][nn][nm]:
+                unripe -= 1
+                new_ripen.append((nh, nn, nm))
+                tomato[nh][nn][nm] = -1
 
-    for i in range(H):
-        for col in range(N):
-            if 0 in tomato[i][col]:
-                    print('-1')
-                    return        
-    print(days)
-
-if __name__ == "__main__":
-    main()
+    if unripe:
+        print(-1)
+    else:
+        print(days)
