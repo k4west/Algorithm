@@ -1,5 +1,5 @@
 import sys
-sys.setrecursionlimit(10**9)
+sys.setrecursionlimit(10**6)
 
 # 문제 요약
 # .: 길
@@ -10,25 +10,17 @@ sys.setrecursionlimit(10**9)
 
 # . -> @으로 변경 후 최단 경로에 .표시하기
 
-def dfs(r, c, s):
-    global ans, dist
-
-    if dist == s:
-        return False
-    
+def dfs(r, c):
     for dr, dc in d:
         if 0 <= (nr:= r+dr) < N and 0 <= (nc := c+dc) < M and maze[nr][nc] == '@':
             maze[nr][nc] = '.'
             if nr == er and nc == ec:
-                if dist > s:
-                    dist = s
-                    ans = [row[:] for row in maze]
                 return True
-            dfs(nr, nc, s+1)
+            if dfs(nr, nc):
+                return True
             maze[nr][nc] = '@'
+    return False
 
-
-ans = []
 dist = float("inf")
 d = ((-1, 0), (1, 0), (0, -1), (0, 1))
 N, M = map(int, input().split())
@@ -52,8 +44,7 @@ for r in range(N):
 # 최단 경로 찾기 & .(@) 표시하기
 (sr, sc), (er, ec) = gate
 maze[sr][sc] = '.'
-dfs(sr, sc, 0)
-
+dfs(sr, sc)
 
 # 출력
-print('\n'.join(''.join(row) for row in ans))
+print('\n'.join(''.join(row) for row in maze))
