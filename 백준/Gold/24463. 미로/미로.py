@@ -1,6 +1,3 @@
-import sys
-sys.setrecursionlimit(10**6)
-
 # 문제 요약
 # .: 길
 # +: 벽
@@ -11,15 +8,27 @@ sys.setrecursionlimit(10**6)
 # . -> @으로 변경 후 최단 경로에 .표시하기
 
 def dfs(r, c):
-    for dr, dc in d:
-        if 0 <= (nr:= r+dr) < N and 0 <= (nc := c+dc) < M and maze[nr][nc] == '@':
-            maze[nr][nc] = '.'
-            if nr == er and nc == ec:
-                return True
-            if dfs(nr, nc):
-                return True
-            maze[nr][nc] = '@'
-    return False
+    stack = []
+    visited = [[0]*M for _ in range(N)]
+    visited[r][c] = 1
+    
+    while True:
+        for dr, dc in d:
+            if 0 <= (nr:= r+dr) < N and 0 <= (nc := c+dc) < M and maze[nr][nc] == '@' and not visited[nr][nc]:
+                maze[nr][nc] = '.'
+                if nr == er and nc == ec:
+                    return
+                
+                visited[nr][nc] = 1
+                stack.append((r, c, nr, nc))
+                r, c = nr, nc
+                break
+        else:
+            if stack:
+                r, c, nr, nc = stack.pop()
+                maze[nr][nc] = '@'
+            else:
+                break
 
 dist = float("inf")
 d = ((-1, 0), (1, 0), (0, -1), (0, 1))
