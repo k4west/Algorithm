@@ -1,31 +1,27 @@
-import sys
-input = sys.stdin.readline
-A = [list(map(int, input().split())) for _ in range(5)]
-B = [list(map(int, input().split())) for _ in range(5)]
-bingo = 0
+d = ((-1, 0),  (1, 0), (0, -1), (0, 1))
 
-def f(A, i, j):
-    count = 0
-    if i == j and A[0][0] + A[1][1] + A[2][2] + A[3][3]+ A[4][4] == 0:
-        count += 1
-    if i + j == 4 and A[0][4] + A[1][3] + A[2][2] + A[3][1]+ A[4][0] == 0:
-        count += 1
-    if sum(A[i]) == 0:
-        count += 1
-    if A[0][j] + A[1][j] + A[2][j] + A[3][j]+ A[4][j] == 0:
-        count += 1
-    return count
-
+plate = []
+dct = {}
 for r in range(5):
-    for c in range(5):
-        n = B[r][c]
-        for i in range(5):
-            if n in A[i]:
-                for j in range(5):
-                    if A[i][j] == n:
-                        A[i][j] = 0
-                        break
-                bingo += f(A, i, j)
-                if bingo >= 3:
-                    print(r * 5 + c + 1)
-                    exit()
+    *row, = map(int, input().split())
+    plate.append(row)
+    for c, n in enumerate(row):
+        dct[n] = (r, c)
+
+cnt = 2
+for idx, n in enumerate(sum([[*map(int, input().split())] for _ in range(5)], [])):
+    r, c = dct[n]
+    plate[r][c] = 0
+    if idx > 3:
+        if not sum(plate[r]):
+            cnt -= 1
+        if not sum([row[c] for row in plate]):
+            cnt -=1
+        if r == c and not sum(plate[i][i] for i in range(5)):
+            cnt -= 1
+        if r+c == 4 and not sum(plate[i][4-i] for i in range(5)):
+            cnt -= 1
+        if cnt < 0:
+            break
+
+print(idx+1)
