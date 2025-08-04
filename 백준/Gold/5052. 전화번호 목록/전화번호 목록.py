@@ -1,29 +1,11 @@
-def dfs(li):
-    nd = {i: [] for i in map(str, range(10))}
-    n = len(li)
-
-    for last in li:
-        num, length = last
-        if length:
-            nd[num[0]].append((num[1:], length-1))
-        elif n > 1:
-            return False
-
-    for i in map(str, range(10)):
-        if nd[i] and not dfs(nd[i]):
-            return False
-    return True
-
-
 ans = []
-for _ in range(int(input())):
-    d = {i: [] for i in map(str, range(10))}
-    for _ in range(int(input())):
-        s = input()
-        d[s[0]].append((s[1:], len(s)-1))
+a = open(0)
+for _ in range(int(next(a))):
+    books = [next(a).strip() for _ in range(int(next(a)))]
+    books.sort()
 
-    for i in map(str, range(10)):
-        if not dfs(d[i]):
+    for i, j in zip(books, books[1:]):
+        if j.startswith(i):
             ans.append('NO')
             break
     else:
