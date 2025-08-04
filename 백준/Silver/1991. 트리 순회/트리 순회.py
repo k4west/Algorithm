@@ -1,19 +1,25 @@
-def dfs(s):
-    li[0] += s
-    for i, child in enumerate(trees[s]):
-        if i:
-            li[1] += s
-        if child != '.':
-            dfs(child)
-            li[2] += child
+from sys import stdin
+input = stdin.readline
+n = int(input())
+graph = {}
+for _ in range(n):
+    p, l, r = input().rstrip().split()
+    graph[p] = [l, r]
 
+def rec(s):
+    a, b, c = s, s, ""
+    for i, t in enumerate(graph[s]):
+        if t == ".":
+            continue
+        x, y, z = rec(t)
+        if i%2:
+            a += x
+            b += y
+            c += z
+        else:
+            a += x
+            b = y + b
+            c = z
+    return a, b, c+s
 
-trees = {}
-li = ['']*3
-for _ in range(int(input())):
-    parent, left, right = input().split()
-    trees[parent] = (left, right)
-
-dfs('A')
-li[2] += 'A'
-print('\n'.join(li))
+print("\n".join(rec("A")))
