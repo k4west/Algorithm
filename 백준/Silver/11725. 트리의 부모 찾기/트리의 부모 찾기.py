@@ -1,19 +1,19 @@
-from collections import deque
-def main():
-    a = open(0)
-    N = int(next(a))
-    graph = [[] for _ in range(N+1)]
-    ans = [[] for _ in range(N+1)]
-    for _ in range(N-1):
-        i, j = map(int, next(a).split())
-        graph[i].append(j)
-        graph[j].append(i)
-    q = deque([1])
-    while q:
-        i = q.popleft()
-        for n in graph[i]:
-            if not ans[n]: 
-                ans[n] = i
-                q.append(n)
-    print("\n".join(map(str, ans[2:])))
-main()
+N = int(input())
+
+graph = [[] for _ in range(N+1)]
+for _ in range(N-1):
+    a, b = map(int, input().split())
+    graph[a].append(b)
+    graph[b].append(a)
+
+trees = [0]*(N+1)
+trees[1] = -1
+q = [1]
+while q:
+    parent = q.pop()
+    for child in graph[parent]:
+        if not trees[child]:
+            trees[child] = parent
+            q.append(child)
+
+print('\n'.join(map(str, trees[2:])))
