@@ -1,25 +1,20 @@
-from sys import stdin
-input = stdin.readline
-n = int(input())
-graph = {}
-for _ in range(n):
-    p, l, r = input().rstrip().split()
-    graph[p] = [l, r]
+def bfs(s):
+    order[0] += s
+    for i, c in enumerate(trees[s]):
+        if i:
+            order[1] += s
+        if c != '.':
+            bfs(c)
+    order[2] += s
 
-def rec(s):
-    a, b, c = s, s, ""
-    for i, t in enumerate(graph[s]):
-        if t == ".":
-            continue
-        x, y, z = rec(t)
-        if i%2:
-            a += x
-            b += y
-            c += z
-        else:
-            a += x
-            b = y + b
-            c = z
-    return a, b, c+s
 
-print("\n".join(rec("A")))
+N = int(input())
+trees = {}
+for _ in range(N):
+    p, l, r = input().split()
+    trees[p] = [l, r]
+
+order = ['']*3
+bfs('A')
+
+print('\n'.join(order))
