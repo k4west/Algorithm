@@ -4,14 +4,18 @@ def dfs(depth):
         return
 
     for i in range(1, N+1):
-        if not i in li:
-            li.append(i)
-            dfs(depth+1)
-            li.pop()
+        if visited[i]:
+            continue
+        li.append(i)
+        visited[i] = 1
+        dfs(depth+1)
+        li.pop()
+        visited[i] = 0
 
 
 ans = []
 N, M = map(int, input().split())
+visited = [0]*(N+1)
 li = []
 dfs(0)
 print('\n'.join(ans))
