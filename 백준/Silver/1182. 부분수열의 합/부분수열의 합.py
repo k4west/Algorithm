@@ -1,25 +1,14 @@
-import sys
-input = sys.stdin.readline
+def dfs(s, k):
+    global cnt
 
-def main():
-    N, S = map(int, input().split())
-    *arr, = map(int, input().split())
-    l, r, m = {}, {}, N//2
+    if s and k == S:
+        cnt += 1
 
-    def f(li, s, a, d):
-        d[s] =  d.get(s, 0) + 1
-        for i in range(a, len(li)):
-            f(li, s + li[i], i+1, d)
+    for i in range(s, N):
+        dfs(i+1, k+li[i])
 
-    f(arr[:m], 0, 0, l)
-    f(arr[m:], 0, 0, r)
-    c = 0
-    if not S: c = -1
 
-    for lk in l:
-        if (rk:=S-lk) in r:
-            c += l[lk] * r[rk]
-    print(c)
-
-if __name__ == "__main__":
-    main()
+cnt = 0
+N, S, *li = map(int, open(0).read().split())
+dfs(0, 0)
+print(cnt)
