@@ -1,5 +1,15 @@
-from itertools import combinations
+def dfs(depth):
+    if depth == M:
+        print(' '.join(map(str, li)))
+        return
 
-N, M = map(int, input().split())
-for p in combinations(range(1,N + 1), M):
-    print(*p)
+    s = li[-1]+1 if depth else 1
+    for i in range(s, N+1):
+        li.append(i)
+        dfs(depth+1)
+        li.pop()
+
+
+N, M = map(int, open(0).read().split())
+li = []
+dfs(0)
