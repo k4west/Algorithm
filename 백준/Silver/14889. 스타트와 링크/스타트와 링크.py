@@ -13,7 +13,10 @@ def get_diff(li):
 
 def bt(depth, s):
     global diff
-
+    
+    if N-s < M-depth:
+        return
+    
     if depth == M:
         tmp = get_diff(team)
         if diff > tmp:
