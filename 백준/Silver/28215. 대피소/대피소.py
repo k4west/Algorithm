@@ -9,7 +9,7 @@ def f(i, j, safe):
         return
 
     if j == K:
-        t = max(min(get_dist(h, houses[s]) for s in safe) for k, h in enumerate(houses) if k not in safe)
+        t = max(min(distances[s][k] for s in safe) for k in range(N) if k not in safe)
         if ans > t:
             ans = t
         return
@@ -21,6 +21,16 @@ def f(i, j, safe):
 ans = float("inf")
 N, K = map(int, input().split())
 houses = [[*map(int, input().split())] for _ in range(N)]
-visited = [0]*N
-f(0, 0, [])
+
+distances = [[0]*N for _ in range(N)]
+for r in range(N):
+    for c in range(r+1, N):
+        dist = get_dist(houses[r], houses[c])
+        distances[r][c] = dist
+        distances[c][r] = dist
+
+if N == K:
+    ans = 0
+else:
+    f(0, 0, [])
 print(ans)
