@@ -1,21 +1,7 @@
-def bt(depth, op_str):
+def bt(depth, val):
     global min_val, max_val
 
     if depth == N-1:
-        val = A[0]
-        for op, num in zip(op_str, A[1:]):
-            if op == '+':
-                val += num
-            if op == '-':
-                val -= num
-            if op == '*':
-                val *= num
-            if op == '/':
-                if val*num < 0:
-                    val //= -num
-                    val *= -1
-                else:
-                    val //= num
         if max_val < val:
             max_val = val
         if min_val > val:
@@ -25,7 +11,19 @@ def bt(depth, op_str):
     for i in range(N-1):
         if not visited[i]:
             visited[i] = 1
-            bt(depth+1, op_str+ops[i])
+            op = ops[i]
+            if op == '+':
+                n_val = val + A[depth+1]
+            if op == '-':
+                n_val = val - A[depth+1]
+            if op == '*':
+                n_val = val * A[depth+1]
+            if op == '/':
+                if val*A[depth+1] < 0:
+                    n_val = -(val // -A[depth+1])
+                else:
+                    n_val = val // A[depth+1]
+            bt(depth+1, n_val)
             visited[i] = 0
 
 
@@ -38,6 +36,6 @@ INF = float("inf")
 max_val = -INF
 min_val = INF
 
-bt(0, "")
+bt(0, A[0])
 print(max_val)
 print(min_val)
