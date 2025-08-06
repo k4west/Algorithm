@@ -1,12 +1,13 @@
-import sys
-input = sys.stdin.readline
-def main():
-    N, M = map(int, input().split())
-    t = [0] + list(map(int, input().split()))
-    for i in range(1, N+1):
-        t[i] += t[i-1]
-    for _ in range(M):
-        s, e = map(int, input().split())
-        print(t[e]-t[s-1])
-if __name__ == "__main__":
-    main()
+ans = []
+N, M = map(int, input().split())
+*li, = map(int, input().split())
+
+accumulated = [0]*(N+1)
+for i in range(N):
+    accumulated[i] = accumulated[i-1] + li[i]
+
+for _ in range(M):
+    s, e = map(int, input().split())
+    ans.append(accumulated[e-1]-accumulated[s-2])
+
+print('\n'.join(map(str, ans)))
