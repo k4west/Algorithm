@@ -1,20 +1,19 @@
-import sys
+def bt(i, p):
+    global max_p
+
+    if max_p < p:
+        max_p = p
+
+    for j in range(i, N):
+        tj, pj = TP[j]
+        if j+tj <= N:
+            bt(j+tj, p+pj)
 
 
-def main():
-    input = sys.stdin.readline
-    N = int(input())
-    consultings = [tuple(map(int, input().split())) for _ in range(N)]
-    dp = [0] * (N + 1)
+N = int(input())
+TP = [[*map(int, input().split())] for _ in range(N)]
 
-    for i in range(N):
-        t, p = consultings[i]
-        for j in range(i + t, N + 1):
-            if dp[j] < (np := dp[i] + p):
-                dp[j] = np
+max_p = 0
+bt(0, 0)
 
-    print(dp[-1])
-
-
-if __name__ == "__main__":
-    main()
+print(max_p)
