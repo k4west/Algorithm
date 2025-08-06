@@ -1,6 +1,6 @@
-def get_diff(li):
-    team_a = [i for i, j in enumerate(li) if j]
-    team_b = [i for i, j in enumerate(li) if not j]
+def get_diff(info: list) -> int:
+    team_a = [i for i, j in enumerate(info) if j]
+    team_b = [i for i, j in enumerate(info) if not j]
 
     score_a = score_b = 0
     for i in range(M):
@@ -11,23 +11,22 @@ def get_diff(li):
     return abs(score_a - score_b)
 
 
-def bt(depth, s):
+def bt(depth: int, s: int) -> None:
     global diff
-    
+
     if N-s < M-depth:
         return
-    
+
     if depth == M:
         tmp = get_diff(team)
         if diff > tmp:
             diff = tmp
         return
 
-    for i in range(s, N):
-        if not team[i]:
-            team[i] = 1
-            bt(depth+1, i+1)
-            team[i] = 0
+    bt(depth, s+1)
+    team[s] = 1
+    bt(depth+1, s+1)
+    team[s] = 0
 
 
 N = int(input())
