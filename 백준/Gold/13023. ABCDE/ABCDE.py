@@ -10,7 +10,7 @@ for _ in range(M):
 
 
 for cur in range(1, N+1):
-    stack = [(cur, 0, len(graph[cur]))]
+    stack = [(cur, 0)]
     visited[cur] = 1
     cnt = 0
 
@@ -19,19 +19,19 @@ for cur in range(1, N+1):
             ans = 1
             break
         
-        cur, idx, n = stack.pop()
-        if idx == n:
+        cur, idx = stack.pop()
+        if idx == len(graph[cur]):
             visited[cur] = 0
             cnt -= 1
             continue
         
         nxt = graph[cur][idx]
-        stack.append((cur, idx+1, n))
+        stack.append((cur, idx+1))
         
         if not visited[nxt]:
             visited[nxt] = 1
             cnt += 1
-            stack.append((nxt, 0, len(graph[nxt])))
+            stack.append((nxt, 0))
     
     if ans:
         break
