@@ -1,51 +1,43 @@
-import sys
-input = sys.stdin.readline
-ans= 10000
-
-def main():
-    N, M = map(int, input().split())
-    town = [input().rstrip().split() for _ in range(N)]
-    houses, chicken = [], []
-    nc = 0
-
-    for i in range(N):
-        for j in range(N):
-            if town[i][j] == '2':
-                chicken.append((i, j))
-                nc += 1
-
-    for r1 in range(N):
-        for c1 in range(N):
-            if town[r1][c1] == '1':
-                houses.append([abs(r2-r1)+abs(c2-c1) for r2, c2 in chicken])
-
-    visited = [False] * nc
-    def distance():
-        indices = [i for i in range(nc) if visited[i]]
-        s_dist = 0
-        for house in houses:
-            dist = 100
-            for idx in indices:
-                if house[idx] < dist:
-                    dist = house[idx]
-            s_dist += dist        
-        return s_dist
-
-    def dfs(n, idx):
-        global ans
-        if n == M:
-            s_dist = distance()
-            if s_dist < ans: ans = s_dist
-        
-        for i in range(idx, nc):
-            if not visited[i]:
-                visited[i] = True
-                dfs(n+1, i)
-                visited[i] = False
-
-    dfs(0, 0)
-    print(ans)
+def get_dist(a, b):
+    return abs(a[0]-b[0]) + abs(a[1]-b[1])
 
 
-if __name__ == "__main__":
-    main()
+def get_chic_dist():
+    for i in range(H):
+        for j in range(C):
+            distances[i][j] = get_dist(houses[i], chickens[j])
+
+
+def bt(n, s, li):
+    global min_dist
+
+    if n:
+        total = sum(min(distances[i][j] for j in li) for i in range(H))
+        if min_dist > total:
+            min_dist = total
+
+    if n == M:
+        return
+
+    for i in range(s, C):
+        bt(n+1, i+1, li+[i])
+
+
+min_dist = 10000
+N, M = map(int, input().split())
+
+houses = []
+chickens = []
+for r in range(N):
+    for c, t in enumerate(input().split()):
+        if t == "1":
+            houses.append((r, c))
+        elif t == "2":
+            chickens.append((r, c))
+
+C, H = len(chickens), len(houses)
+distances = [[0]*C for _ in range(H)]
+get_chic_dist()
+
+bt(0, 0, [])
+print(min_dist)
