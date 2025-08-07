@@ -1,21 +1,22 @@
-def g(i, j, N):
-    global wb
-    c = A[i][j]
-    if N == 1: wb[c] += 1; return
-    M = N//2
-    for s in range(i,i+N):
-        for t in range(j,j+N):
-            if A[s][t] != c:
-                g(i,j,M)
-                g(i+M,j,M)
-                g(i,j+M,M)
-                g(i+M,j+M,M)
-                return
-    wb[c] += 1
+def f(r, c, n):
+    if not n:
+        return
     
-import sys
-N = int(sys.stdin.readline())
-A = [list(map(int, sys.stdin.readline().split())) for _ in range(N)]
-wb = [0, 0]
-g(0, 0, N)
-print(*wb, sep='\n')
+    s = sum(sum(row[c:c+n]) for row in paper[r:r+n])
+    if s == n*n:
+        ans[1] += 1
+    elif not s:
+        ans[0] += 1
+    else:
+        n //= 2
+        f(r, c, n)
+        f(r, c+n, n)
+        f(r+n, c, n)
+        f(r+n, c+n, n)
+
+
+ans = [0, 0]
+N = int(input())
+paper = [[*map(int, input().split())] for _ in range(N)]
+f(0, 0, N)
+print(*ans, sep='\n')
