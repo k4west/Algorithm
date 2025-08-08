@@ -1,7 +1,16 @@
 def bi_search(s, e, li):
+    if sum(li) <= M:
+        return max(li)
+    
     while s <= e:
         m = (s + e) // 2
-        sm = sum(min(r, m) for r in li)
+        
+        sm = 0
+        for r in li:
+            if r < m:
+                sm += r
+            else:
+                sm += m
 
         if sm == M:
             return m
@@ -15,4 +24,4 @@ def bi_search(s, e, li):
 N = int(input())
 *req, = map(int, input().split())
 M = int(input())
-print(bi_search(0, max(req), req))
+print(bi_search(0, 100000, req))
