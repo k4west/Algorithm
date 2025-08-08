@@ -1,14 +1,20 @@
-heights = [int(input()) for _ in range(9)]
-s = sum(heights)
-li = []
+def f(n, i, hs, tmp):
+    global ans
 
-for i in range(8):
-    for j in range(i+1, 9):
-        if s == 100 + heights[i] + heights[j]:
-            li = [heights[k] for k in range(9) if k != i and k != j]
-            break
-    if li:
-        break
+    if n+9-i < 7 or ans or hs > 100:
+        return
 
+    if n == 7:
+        if hs == 100:
+            ans = tmp
+        return
+
+    f(n, i+1, hs, tmp)
+    f(n+1, i+1, hs+li[i], tmp+[li[i]])
+
+
+ans = []
+*li, = [int(input()) for _ in range(9)]
 li.sort()
-print(*li, sep='\n')
+f(0, 0, 0, [])
+print(*ans, sep='\n')
