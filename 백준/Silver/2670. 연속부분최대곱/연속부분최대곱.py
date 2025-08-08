@@ -1,6 +1,7 @@
 N = int(input())
-fs = [float(input()) for _ in range(N)] + [0]
+li = [float(input()) for _ in range(N)]
+dp = [0]*(N+1)
+
 for i in range(N):
-    if fs[i] < (t:=fs[i] * fs[i-1]):
-        fs[i] = t
-print(f"{max(fs):.3f}")
+    dp[i+1] = max(li[i], dp[i]*li[i])
+print(f"{max(dp):.3f}")
