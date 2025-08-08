@@ -1,11 +1,18 @@
-P = int(input())
 ans = []
-for _ in range(P):
-    count = 0
-    T, *heights = map(int, input().split())
-    for i, h in enumerate(heights):
-        for p in heights[:i]:
-            if p > h:
-                count += 1
-    ans.append(' '.join(map(str, (T, count))))
-print('\n'.join(ans))
+for _ in range(int(input())):
+    T, *li, = map(int, input().split())
+
+    cnt = 0
+    stack = li[:1]
+    for h in li[1:]:
+        tmp = []
+        while stack and stack[-1] > h:
+            tmp.append(stack.pop())
+            cnt += 1
+        stack.append(h)
+        while tmp:
+            stack.append(tmp.pop())
+
+    ans.append(f"{T} {cnt}")
+
+print("\n".join(ans))
