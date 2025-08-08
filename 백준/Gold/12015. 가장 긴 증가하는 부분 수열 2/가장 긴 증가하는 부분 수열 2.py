@@ -1,25 +1,21 @@
-import sys
-input = sys.stdin.readline
+N = int(input())
+*li, = map(int, input().split())
+ans = [li[0]]
 
-def main():
-    N = int(input())
-    arr = tuple(map(int, input().split()))
-    ans = [arr[0]]
+M = 1
+for a in li[1:]:
+    if ans[-1] < a:
+        ans.append(a)
+        M += 1
+    else:
+        s, e = 0, M-1
+        while s <= e:
+            m = (s+e)//2
+            if ans[m] < a:
+                s = m + 1
+            else:
+                e = m - 1
+        if e+1 < M:
+            ans[e+1] = a
 
-    for a in arr[1:]:
-        if a > ans[-1]: ans.append(a)
-        else:
-            s, e, t = 0, len(ans)-1, N
-            while s <= e:
-                m = (s+e)//2
-                if ans[m] >= a: 
-                    e = m-1
-                    t = m
-                else:
-                    s = m+1
-            if t!= N:
-                ans[t] = a
-    print(len(ans))
-
-if __name__ == "__main__":
-    main()
+print(len(ans))
