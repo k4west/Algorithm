@@ -1,13 +1,18 @@
-from sys import stdin
-input = stdin.readline
-
 N = int(input())
-A = list(map(int, input().split()))
-p = [A[0]]
+*A, = map(int, input().split())
+dp = [A[0]]
+ans = 1
 
-for a in A[1:]:
-    if a > p[-1]: p.append(a)
+for i in range(1, N):
+    a = A[i]
+
+    if dp[-1] < a:
+        dp.append(a)
+        ans += 1
     else:
-        for i, b in enumerate(p):
-            if a <= b: p[i] = a; break
-print(len(p))
+        for j in range(ans):
+            if dp[j] >= a:
+                dp[j] = a
+                break
+
+print(ans)
