@@ -1,19 +1,10 @@
-import sys
-input = sys.stdin.readline
-
 N = int(input())
-S = [0]
-R = [0] * (N + 1)
-for _ in range(N):
-    S.append(int(input()))
+stairs = [0] + [int(input()) for _ in range(N)]
 
-if N == 1:
-    print(S[1])
-else:
-    R[1] = S[1]
-    R[2] = S[1] + S[2]
+dp = [0]*(N+2)
+dp[1] = stairs[1]
 
-    for i in range(3, N + 1):
-        R[i] = max(R[i - 3] + S[i - 1], R[i - 2]) + S[i]
+for i in range(2, N+1):
+    dp[i] = max(dp[i-2], dp[i-3] + stairs[i-1]) + stairs[i]
 
-    print(R[N])
+print(dp[N])
