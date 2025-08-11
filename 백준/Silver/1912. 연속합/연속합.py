@@ -1,9 +1,8 @@
-def main():
-    a = open(0)
-    t = m = -1000
-    next(a)
-    for i in map(int, next(a).split()):
-        t = t*(t>0) + i
-        if m < t: m = t
-    print(m)
-main()
+n = int(input())
+*li, = map(int, input().split())
+
+for i in range(1, n):
+    if li[i-1] > 0:
+        li[i] += li[i-1]
+
+print(max(li))
