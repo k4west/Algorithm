@@ -1,1 +1,1 @@
-print(["CY","SK"][int(next(open(0)))%2])
+print(["CY","SK"][int(input())%2])
