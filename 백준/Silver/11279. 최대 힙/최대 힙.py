@@ -1,13 +1,16 @@
-import heapq
-def f(a):
-    next(a)
-    li, t = [], []
-    for n in a:
-        if n=="0\n":
-            if li: t.append(str(-heapq.heappop(li)))
-            else: t.append("0")
-        else:
-            heapq.heappush(li, -int(n))
-    print(*t, sep="\n")
-a = open(0)
-f(a)
+from heapq import heappush, heappop
+
+ans = []
+hq = []
+N = int(input())
+
+for _ in range(N):
+    x = int(input())
+    if x:
+        heappush(hq, -x)
+    elif hq:
+        ans.append(-heappop(hq))
+    else:
+        ans.append(0)
+
+print("\n".join(map(str, ans)))
