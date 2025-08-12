@@ -6,11 +6,10 @@ M = int(input())
 limits.sort(reverse=True)
 weights.sort(reverse=True)
 
-if limits[0] < weights[0]:
-    cost = -1
-else:
+cost = -1
+
+if limits[0] >= weights[0]:
     cranes = [0]*N
-    visited = [0]*M
 
     for w in weights:
         idx = 0
@@ -24,5 +23,8 @@ else:
 
         cranes[idx] += 1
 
-    cost = max(cranes)
+    for tmp in cranes:
+        if cost < tmp:
+            cost = tmp
+
 print(cost)
