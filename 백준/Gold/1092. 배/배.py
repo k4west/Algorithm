@@ -1,7 +1,8 @@
-N = int(input())
-*limits, = map(int, input().split())
-M = int(input())
-*weights, = map(int, input().split())
+a = open(0)
+N = int(next(a))
+*limits, = map(int, next(a).split())
+M = int(next(a))
+*weights, = map(int, next(a).split())
 
 limits.sort(reverse=True)
 weights.sort(reverse=True)
