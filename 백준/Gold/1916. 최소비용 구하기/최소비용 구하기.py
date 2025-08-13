@@ -1,53 +1,38 @@
-def get_closest_city():
-    city = 0
-    cost = INF
-
-    # 방문 하지 않은 도시들 중에서 가장 비용이 적은 도시 구하기
-    for idx in range(1, N+1):
-        if visited[idx]:
-            continue
-
-        tmp = costs[idx]
-        if cost > tmp:
-            city = idx
-            cost = tmp
-
-    visited[city] = 1
-    return city
+from heapq import heappop, heappush
 
 
 def dijkstra(start):
     # 초기화
+    hq = []
     for city, cost in graph[start].items():
         costs[city] = cost
+        heappush(hq, (cost, city))
 
-    # start를 제외한 나머지 노드를 가까운 순서로 탐색
-    for _ in range(N-1):
-        cur = get_closest_city()
-        cost_c = costs[cur]
+    while hq:
+        cost_c, cur = heappop(hq)
 
         # 더 저렴한 비용이 있다면 반영하기
         for nxt, cost_n in graph[cur].items():
             cost = cost_c + cost_n
             if costs[nxt] > cost:
                 costs[nxt] = cost
+                heappush(hq, (cost, nxt))
 
 
 INF = float("INF")
-N = int(input())    # 도시의 개수 N(1 ≤ N ≤ 1,000)
-M = int(input())    # 버스의 개수 M(1 ≤ M ≤ 100,000)
+a = open(0)
+N = int(next(a))    # 도시의 개수 N(1 ≤ N ≤ 1,000)
+M = int(next(a))    # 버스의 개수 M(1 ≤ M ≤ 100,000)
 
 graph = [{} for _ in range(N+1)]    # 도시의 번호: 1 ~ N
 costs = [INF]*(N+1)
-visited = [0]*(N+1)
 for _ in range(M):                  # 출발, 도착, 비용; 1 ≤ cost ≤ 100,000
-    s, e, c = map(int, input().split())
+    s, e, c = map(int, next(a).split())
     if graph[s].get(e, INF) > c:
         graph[s][e] = c
 
-S, E = map(int, input().split())    # 출발, 도착 -> 최소 비용
+S, E = map(int, next(a).split())    # 출발, 도착 -> 최소 비용
 costs[S] = 0
-visited[S] = 1
 dijkstra(S)
 
 print(costs[E])
