@@ -1,35 +1,41 @@
-import sys
-input = sys.stdin.readline
-def main():
-    V, E = map(int, input().split())
-    graph = [list(map(int, input().split())) for _ in range(E)]
-    graph.sort(key=lambda x: x[2])
-    parent = [i for i in range(V+1)]
+from heapq import heapify, heappop
 
-    def find_root(r):
-        nr = parent[r]
-        while nr != r:
-            pr, r, nr = r, nr, parent[nr]
-            parent[pr] = nr
-        return r
 
-    def union_root(a, b):
-        if (x:=find_root(a)) == (y:=find_root(b)):
-            return False
-        if x < y:
-            parent[y] = x
-        else:
-            parent[x] = y
-        return True
-            
-    w, v = 0, 0
-    for a, b, c in graph:
-        if union_root(a, b):
-            w += c
-            v += 1
-            if v == V-1:
-                break
-    print(w)
+def find(x):
+    while x != roots[x]:
+        x = roots[x]
 
-if __name__ == "__main__":
-    main()
+    return x
+
+
+def union(a, b):
+    a = find(a)
+    b = find(b)
+
+    if a > b:
+        a, b = b, a
+
+    roots[b] = a
+
+
+V, E = map(int, input().split())
+*roots, = range(V+1)
+
+nodes = []
+for _ in range(E):
+    A, B, C = map(int, input().split())
+    nodes.append((C, A, B))
+heapify(nodes)
+
+total = cnt = 0
+while cnt < V-1:
+    c, a, b = heappop(nodes)
+
+    if find(a) == find(b):
+        continue
+
+    union(a, b)
+    total += c
+    cnt += 1
+
+print(total)
