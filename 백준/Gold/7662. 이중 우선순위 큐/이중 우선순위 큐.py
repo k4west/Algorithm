@@ -1,13 +1,14 @@
 from heapq import heappop, heappush
 
+a = open(0)
 ans = []
-for _ in range(int(input())):
+for _ in range(int(next(a))):
     cnt = 0                 # 삽입된 정수 수
     maxQ, minQ = [], []     # 최대/최소 큐
     dct = {}                # 삽입된 정수의 갯수를 관리
 
-    for _ in range(int(input())):
-        op, n = input().split()
+    for _ in range(int(next(a))):
+        op, n = next(a).split()
         if op == 'I':       # ‘I n’은 정수 n을 Q에 삽입
             n = int(n)      # -2^31 <= n < 2^31
             cnt += 1
