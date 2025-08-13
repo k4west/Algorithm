@@ -1,49 +1,37 @@
-from heapq import heappop, heapify
+from heapq import heappop, heappush
 
 
-def find(x):
-    tmp = []
-    while x != roots[x]:
-        tmp.append(x)
-        x = roots[x]
-    
-    for px in tmp:
-        roots[px] = x
+def prim(s):
+    visited = [0]*(N+1)
+    total = cnt = 0
 
-    return x
+    hq = [(0, s)]
+    while hq:
+        cw, cur = heappop(hq)
+        if visited[cur]:
+            continue
+
+        visited[cur] = 1
+        total += cw
+        cnt += 1
+
+        if cnt == N:
+            return total
+
+        for nxt, nw in graph[cur].items():
+            if not visited[nxt]:
+                heappush(hq, (nw, nxt))
 
 
-def union(a, b):
-    a = find(a)
-    b = find(b)
-
-    if a > b:
-        a, b = b, a
-
-    roots[b] = a
-
+INF = float("inf")
+ans = []
 
 N = int(input())
-*roots, = range(N)
-
-nodes = []
+graph = [{} for _ in range(N+1)]
 for i in range(N):
     for j, c in enumerate(map(int, input().split())):
-        nodes.append((c, i, j))
-heapify(nodes)
+        if graph[i].get(j, INF) > c:
+            graph[i][j] = c
+            graph[j][i] = c
 
-total = cnt = 0
-while nodes:
-    c, i, j = heappop(nodes)
-
-    if find(i) == find(j):
-        continue
-
-    union(i, j)
-    total += c
-    cnt += 1
-
-    if cnt == N-1:
-        break
-
-print(total)
+print(prim(1))
