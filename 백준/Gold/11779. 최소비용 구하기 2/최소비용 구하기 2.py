@@ -1,39 +1,48 @@
-import sys
+from sys import stdin
 from heapq import heappop, heappush
-input = sys.stdin.readline
 
-def main():
-    INF = float('inf')
-    n = int(input())
-    m = int(input())
-    buses = [{} for _ in range(n+1)]
-    for _ in range(m):
-        a, b, c = map(int, input().split())
-        if c < buses[a].get(b, INF):
-            buses[a][b] = c
-    A, B = map(int, input().split())
+input = stdin.readline
 
+def dijkstra():
+    hq = [(0, S)]
+    distance[S] = 0
 
-    dist = [INF]*(n+1)
-    dist[A] = 0
-    path = [0]*(n+1)
-
-    li = [(0, A)]
-    while li:
-        c0, n0 = heappop(li)
-        if c0 > dist[n0]:
+    while hq:
+        cc, cur = heappop(hq)
+        if cc > distance[cur]:  # 큐에 있는 요금(갱신에 반영할 요금)이 현재 보다 비싸면 무시
             continue
-        for n1, c1 in buses[n0].items():
-            if (c:=c0+c1) < dist[n1]:
-                dist[n1] = c
-                path[n1] = n0
-                heappush(li, (c, n1))
+        
+        if cur == E:
+            break
 
-    ans = [B]
-    while (n:=ans[-1]) != A:
-        ans.append(path[n])
+        for nxt, nc in graph[cur].items():
+            c = cc + nc
+            if c >= distance[nxt]:   # 비싸면 무시
+                continue
 
-    print(dist[B], len(ans), " ".join(map(str, ans[::-1])), sep='\n')
+            distance[nxt] = c       # 더 저럼하면 반영
+            visited[nxt] = cur      # 경로 표시
+            heappush(hq, (c, nxt))
 
-if __name__ == "__main__":
-    main()
+
+INF = float("inf")
+n = int(input())
+m = int(input())
+
+graph = [{} for _ in range(n+1)]
+for _ in range(m):
+    s, e, c = map(int, input().split())
+    if graph[s].get(e, INF) > c:
+        graph[s][e] = c
+
+S, E = map(int, input().split())
+
+distance = [INF]*(n+1)
+visited = [0]*(n+1)
+dijkstra()
+
+ans = [E]               # 방문 순서를 역으로 추적
+while ans[-1] != S:     # 시작 지점을 만날 때까지
+    ans.append(visited[ans[-1]])
+
+print(distance[E], len(ans), " ".join(map(str, ans[::-1])), sep='\n')
