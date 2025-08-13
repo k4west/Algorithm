@@ -2,8 +2,13 @@ from sys import stdin
 
 
 def find(x):
+    tmp = []
     while x != roots[x]:
+        tmp.append(x)
         x = roots[x]
+    
+    for px in tmp:
+        roots[px] = x
 
     return x
 
