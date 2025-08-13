@@ -1,3 +1,6 @@
+from sys import stdin
+
+
 def find(x):
     while x != roots[x]:
         x = roots[x]
@@ -14,6 +17,8 @@ def union(a, b):
 
     roots[b] = a
 
+
+input = stdin.readline
 
 ans = []
 n, m = map(int, input().split())
