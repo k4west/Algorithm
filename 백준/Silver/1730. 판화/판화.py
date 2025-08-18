@@ -1,27 +1,23 @@
-d = {"U": (-1, 0), "D": (1, 0), "L": (0, -1), "R": (0, 1)}  # 상하좌우
-N = int(input())    # 목판의 크기 N (2 ≤ N ≤ 10)
-mok = [list('.'*N) for _ in range(N)]
+d = {'U': (0, -1, 1), 'D': (0, 1, 1), 'L': (-1, 0, 2), 'R': (1, 0, 2)}
+trace = ".|-+"      # {0: ".", 1: "|", 2: "-", 3: "+"}
+
+N = int(input())
+graph = [[0]*N for _ in range(N)]
+
 r = c = 0
-first = True
-prev = t = '.'
-
-for dr, dc in map(lambda x: d[x], input()):     # 로봇 팔을 움직이는 명령의 순서; 최대 250
-    nr, nc = r+dr, c+dc
-    if 0 <= nr < N and 0 <= nc < N:             # 격자 바깥으로 나가면, 무시
-        t = '|' if dr else "-"                  # 방향에 따른 흔적
-
-        if first or (prev == t and (mok[r][c] == '.' or mok[r][c] == t)):
-            mok[r][c] = t       # 첫 흔적
-
-        else:
-            mok[r][c] = '+'     # 수직, 수평
-
+for i in input():
+    dr, dc, t = d[i]
+    nr = r + dr
+    nc = c + dc
+    
+    if 0 <= nr < N and 0 <= nc < N:
+        graph[c][r] |= t
+        graph[nc][nr] |= t
         r, c = nr, nc
-        prev = t
-        first = False
+    
+    # | 비트 연산(or); 피연산자 이진수 자리에 하나라도 1이면 1로 아니면 0으로 계산
+    # 0 | 1 = 1 | 1 = 1 -> |
+    # 0 | 2 = 2 | 2 = 2 -> -
+    # 1 | 2 = 2 | 1 = 3 -> +
 
-if mok[r][c] == '.' or mok[r][c] == t:
-    mok[r][c] = t       # 첫 흔적
-else:
-    mok[r][c] = '+'     # 수직, 수평
-print("\n".join("".join(row) for row in mok))
+print('\n'.join(''.join(trace[i] for i in row) for row in graph))
