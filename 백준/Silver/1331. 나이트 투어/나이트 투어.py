@@ -10,9 +10,9 @@ N = 6   # 6×6 체스판
 chess = [list('.'*N) for _ in range(N)]
 trace = [tuple(map(lambda x: p[x], input())) for _ in range(36)]
 
-if len(set(trace)) == 36 and check(trace[0], trace[-1]):
-    for i in range(35):
-        if not check(trace[i], trace[i+1]):
+if len(set(trace)) == 36:
+    for i in range(36):
+        if not check(trace[i-1], trace[i]):
             break
     else:
         ans = "Valid"
