@@ -11,15 +11,16 @@ flag = False
 
 for k, (dr, dc) in d.items():
     r, c = r0-1, c0-1
-    v = [[set() for _ in range(M)] for _ in range(N)]
-    v[r][c].add((dr, dc))
+    v = [[0]*M for _ in range(N)]
+    v[r][c] = 1 << (2*dr+dc + 2 + (2*dr+dc < 0))
 
     t = 0
     while True:
         nr, nc = r+dr, c+dc
         t += 1
         if 0 <= nr < N and 0 <= nc < M:
-            if (dr, dc) in v[nr][nc]:
+            dd = 2*dr+dc + 2 + (2*dr+dc < 0)
+            if (v[nr][nc] >> dd) & 1:
                 flag = True
                 break
 
@@ -27,10 +28,10 @@ for k, (dr, dc) in d.items():
                 break
 
             if graph[nr][nc] == '\\':
-                v[nr][nc].add((dr, dc))
+                v[nr][nc] |= 1 << dd
                 dr, dc = dc, dr
             elif graph[nr][nc] == '/':
-                v[nr][nc].add((dr, dc))
+                v[nr][nc] |= 1 << dd
                 dr, dc = -dc, -dr
 
             r, c = nr, nc
