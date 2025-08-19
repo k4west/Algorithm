@@ -1,47 +1,60 @@
-hexagram = [
-    [(1, 1), (1, 3), (1, 5), (1, 7)],
-    [(3, 1), (3, 3), (3, 5), (3, 7)],
-    [(0, 4), (1, 3), (2, 2), (3, 1)],
-    [(0, 4), (1, 5), (2, 6), (3, 7)],
-    [(1, 1), (2, 2), (3, 3), (4, 4)],
-    [(1, 7), (2, 6), (3, 5), (4, 4)]
-]
+def check():
+    for row in p:
+        if sum(nums[idx] for idx in row) != 26:
+            return False
+    return True
 
 
-def check_sum():
-    for i, pos in enumerate(hexagram):
-        if sum(alpha2num(star[r][c]) for r, c in pos) != 26:
-            return
-    print("\n".join("".join(row) for row in star))
-    exit()
+def bt(d):
+    global flag
+
+    if flag or (all(nums[1:5]) and sum(nums[1:5]) != 26):
+        return
+
+    if d == 12:
+        if check():
+            flag = True
+        return
+
+    if nums[d]:
+        bt(d+1)
+        return
+
+    for num in range(1, 13):
+        if not v[num]:
+            v[num] = 1
+            nums[d] = num
+            bt(d+1)
+            v[num] = 0
+            if flag:
+                return
+            nums[d] = 0
 
 
-def alpha2num(a):
-    return (ord(a)-64) % 56
+flag = False
+p = (
+    (0, 2, 5, 7),
+    (1, 2, 3, 4),
+    (0, 3, 6, 10),
+    (7, 8, 9, 10),
+    (1, 5, 8, 11),
+    (4, 6, 9, 11)
+)
+stars = [list(input()) for _ in range(5)]
+pos = []
+nums = []
+v = [0]*13
+*candi, = range(1, 13)
 
-
-def num2alpha(n):
-    return chr(n+64)
-
-
-def bt(n):
-    if n == N:
-        return check_sum()
-
-    for i in range(N):
-        if not v[i]:
-            v[i] = 1
-            star[unfilled[n][0]][unfilled[n][1]] = alphas[i]
-            bt(n+1)
-            v[i] = 0
-
-
-star = [list(input()) for _ in range(5)]
-alphas = sorted(set(map(num2alpha, range(1, 13))) - {star[r][c] for r, c in sum(hexagram, []) if star[r][c] != 'x'})
-unfilled = sorted(set(sum([[(r, c) for r, c in pos if star[r][c] == 'x'] for pos in hexagram], [])))
-state = []
-
-N = len(alphas)
-v = [0]*N
+for i in range(5):
+    for j, k in enumerate(stars[i]):
+        if k > '.':
+            n = (ord(k)-64) % 56
+            v[n] = 1
+            nums.append(n)
+            pos.append((i, j))
 
 bt(0)
+for (i, j), n in zip(pos, nums):
+    stars[i][j] = chr(n+64)
+print("\n".join("".join(row) for row in stars))
