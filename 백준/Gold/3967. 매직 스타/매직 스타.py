@@ -8,9 +8,6 @@ def check():
 def bt(d):
     global flag
 
-    if flag or (all(nums[1:5]) and sum(nums[1:5]) != 26):
-        return
-
     if d == 12:
         if check():
             flag = True
@@ -20,14 +17,17 @@ def bt(d):
         bt(d+1)
         return
 
+    if flag or (nums[1] and nums[2] and nums[3] and nums[4] and sum(nums[1:5]) != 26):
+        return
+
     for num in range(1, 13):
         if not v[num]:
             v[num] = 1
             nums[d] = num
             bt(d+1)
-            v[num] = 0
             if flag:
                 return
+            v[num] = 0
             nums[d] = 0
 
 
