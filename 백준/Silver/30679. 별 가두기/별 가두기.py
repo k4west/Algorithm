@@ -1,9 +1,37 @@
-def main():
-    a=open(0);f=lambda:map(int,next(a).split());d=(0,1,0,-1);n,m=f();g=[[*f()] for _ in range(n)];h=[];v=[[[-1 for _ in range(4)] for _ in range(m)] for _ in range(n)]
-    for r in range(n-1):
-        i,j,c=r,0,0
-        while 0<=i<n and 0<=j<m and v[i][j][c]==-1:v[i][j][c]=r;k,p,q=g[i][j],d[c],d[(c+1)%4];i+=k*p;j+=k*q;c=(c+1)%4
-        if 0<=i<n and 0<=j<m and (v[i][j][c]==r or v[i][j][c]+1 in h):h.append(r+1)
-    print(len(h))
-    if h:print(*h)
-main()
+d = ((0, 1), (1, 0),  (0, -1), (-1, 0))  # 오른쪽, 아래, 왼쪽, 위
+
+ans = []
+N, M = map(int, input().split())
+graph = [[*map(int, input().split())] for _ in range(N)]
+
+for r0 in range(N):
+    flag = False
+    r, c, direction = r0, 0, 0
+    v = [[[0]*4 for _ in range(M)] for _ in range(N)]
+    v[r][c][direction] = 1
+
+    while True:
+        step = graph[r][c]
+        dr, dc = d[direction]
+        nr, nc = r + dr * step, c + dc * step   # 별이 놓인 칸에 적힌 수만큼
+
+        if 0 <= nr < N and 0 <= nc < M:
+            direction = (direction + 1) % 4     # 시계 방향 90도.
+            if v[nr][nc][direction]:
+                flag = True
+                break
+
+            v[nr][nc][direction] = 1
+            r, c = nr, nc
+
+        else:
+            break
+
+    if flag:
+        ans.append(r0+1)
+
+if ans:
+    print(len(ans))     # 올려둘 수 있는 칸 수
+    print(" ".join(map(str, sorted(ans))))  # 몇 번째 행인지 공백을 사이에 두고 오름차순
+else:
+    print(0)
