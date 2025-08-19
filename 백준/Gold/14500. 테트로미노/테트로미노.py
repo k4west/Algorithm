@@ -1,47 +1,39 @@
-from sys import stdin
-input = stdin.readline
+# 2:48 시작한지 68분
+# 3:26 틀림
+# 3:58 틀림
+# 4:14 중단
+# 4:37 다시..?
+
+def bt(cnt, r, c, sm):
+    global ans
+
+    if cnt == 4:    # 4개 -> 종료
+        if ans < sm:
+            ans = sm
+        return
+
+    for dr, dc in d:
+        nr, nc = r+dr, c+dc
+        if 0 <= nr < N and 0 <= nc < M and not visited[nr][nc]:
+            visited[nr][nc] = 1
+            s = graph[nr][nc]
+            bt(cnt+1, r, c, sm+s)
+            bt(cnt+1, nr, nc, sm+s)
+            visited[nr][nc] = 0
+
+
+
+
 ans = 0
+d = ((-1, 0), (1, 0), (0, -1), (0, 1))
+N, M = map(int, input().split())
+graph = [[*map(int, input().split())] for _ in range(N)]
+visited = [[0]*M for _ in range(N)]
 
-def main():
-    N, M = map(int, input().split())
-    d = ((-1, 0), (1, 0), (0, -1), (0, 1))
-    T = [list(map(int, input().split())) for _ in range(N)]
-    m = max(map(max, T))    # 가장 큰 값
-    
-    def dfs(y, x, cnt, s):
-        global ans
+for i in range(N):
+    for j in range(M):
+        # (i, j)를 포함한 최대 값 구하기 <- 이후에 포함 x
+        visited[i][j] = 1
+        bt(1, i, j, graph[i][j])
 
-        # 남은 기회로 모두 최댓값을 탐색하는 경우의 값이 
-        # 현재 정답보다 작으면 탐색의 의미가 없음
-        if ans > s + m*(4-cnt):
-            return
-        
-        if cnt == 4:        # 4칸 탐색 완료시
-            ans = max(ans, s)   # 정답을 최댓값으로 업데이트
-            return
-        
-        for dy, dx in d:    # 상, 하, 좌, 우
-            ny, nx = y + dy, x + dx
-            # 범위 내 방문 안 한 칸으로 탐색
-            if 0 <= ny < N and 0 <= nx < M and T[ny][nx]:
-                t = T[ny][nx]
-                if cnt == 2:    # 테트로미노 모양 반영
-                    T[ny][nx] = False       # 탐색 표시
-                    dfs(y, x, cnt+1, s+t)   # 탐색한 칸 수 +1, 탐색한 칸들의 합 업데이트
-                    T[ny][nx] = t       # 다른 탐색의 경우의 수에 포함하기 위해 원래 값으로 복원
-                T[ny][nx] = False
-                dfs(ny, nx, cnt+1, s+t)
-                T[ny][nx] = t
-
-    for row in range(N):
-        for col in range(M):
-            t = T[row][col]
-            T[row][col] = False
-            dfs(row, col, 1, t)
-            T[row][col] = t
-
-    print(ans)
-
-
-if __name__ == "__main__":
-    main()
+print(ans)
