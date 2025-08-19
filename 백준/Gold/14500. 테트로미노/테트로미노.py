@@ -1,11 +1,8 @@
-# 2:48 시작한지 68분
-# 3:26 틀림
-# 3:58 틀림
-# 4:14 중단
-# 4:37 다시..?
-
 def bt(cnt, r, c, sm):
     global ans
+    
+    if ans > sm + (4-cnt)*m:
+        return
 
     if cnt == 4:    # 4개 -> 종료
         if ans < sm:
@@ -22,17 +19,15 @@ def bt(cnt, r, c, sm):
             visited[nr][nc] = 0
 
 
-
-
 ans = 0
 d = ((-1, 0), (1, 0), (0, -1), (0, 1))
 N, M = map(int, input().split())
 graph = [[*map(int, input().split())] for _ in range(N)]
+m = max(sum(graph, []))
 visited = [[0]*M for _ in range(N)]
 
 for i in range(N):
     for j in range(M):
-        # (i, j)를 포함한 최대 값 구하기 <- 이후에 포함 x
         visited[i][j] = 1
         bt(1, i, j, graph[i][j])
 
