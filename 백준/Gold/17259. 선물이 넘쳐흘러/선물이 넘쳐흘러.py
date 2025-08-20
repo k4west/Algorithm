@@ -18,15 +18,12 @@ worker[2*B-3] = worker[2*B-1]
 
 # 선물 포장
 v = [0]*M   # 포장 또는 폐기 표시
-cnt = 0
 for m in range(M+3*B-3):  # 모든 선물이 다 지날 때 까지
     for cur in range(min(m+1, M)):      # 벨트 위에 올라온 선물만 확인
         pos = m-cur                     # 현재 선물의 위치
 
         if pos > 3*B-3:                 # 벨트 바깥 -> 폐기
-            if not v[cur]:
-                v[cur] = 1
-                cnt += 1
+            v[cur] = 1
             continue
 
         if v[cur] or not worker[pos]:   # 포장한 거 또는 현재 자리에 일할 사람이 없으면:
@@ -35,11 +32,7 @@ for m in range(M+3*B-3):  # 모든 선물이 다 지날 때 까지
         if worker[pos][0] <= m:         # 포장이 끝나면 바로 다른 선물을 포장할 수 있음
             t = worker[pos][1]
             v[cur] = 1
-            cnt += 1
             ans += 1
             worker[pos][0] = m + t      # 다음 가능 시작 시간 업데이트
-
-    if cnt == M:
-        break
 
 print(ans)     # 몇 개의 선물을 팬들에게 전달할 수 있을까?
