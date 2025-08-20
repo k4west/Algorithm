@@ -2,18 +2,16 @@ from collections import deque
 
 
 ans = 0
-D = ((-1, 0), (1, 0), (0, -1), (0, 1))
+D = ((-1, 0), (1, 0), (0, 1))
 B, N, M = map(int, input().split())
 
 # 직원마다 인접한 위치의 컨베이어 벨트를 1차원 리스트 관리
 worker = [[] for _ in range(3*B-2)]
-times = [0]*N   # 직원 별 포장 소요 시간
 last = 0
 conner = {B-2: B, B: B-2, 2*B-3: 2*B-1, 2*B-1: 2*B-3}
 
-for i in range(N):
+for _ in range(N):
     r, c, t = map(int, input().split())
-    times[i] = t
 
     for dr, dc in D:
         nr, nc = r+dr, c+dc
@@ -22,7 +20,7 @@ for i in range(N):
                 p = 3*B-nc-3
             else:
                 p = nr + nc
-            worker[p] = [0, i]   # 일 시작 가능 시간, 위치, 순번
+            worker[p] = [0, t]   # 일 시작 가능 시간, 위치, 순번
             if last < p:
                 last = p
 
@@ -46,12 +44,12 @@ for m in range(M+3*B-3):  # 모든 선물이 다 지날 때 까지
             present.append(cur)
             continue
 
-        s, i = worker[pos]
+        s, t = worker[pos]
         if s <= m:                      # 포장이 끝나면 바로 다른 선물을 포장할 수 있음
             ans += 1
-            worker[pos][0] = m + times[i]  # 다음 가능 시작 시간 업데이트
+            worker[pos][0] = m + t  # 다음 가능 시작 시간 업데이트
             if pos in conner:
-                worker[conner[pos]][0] = m + times[i]  # 두 군데 인접한 직원이면 일 시작 가능 시간 업데이트 같이 해줘야 함.
+                worker[conner[pos]][0] = m + t  # 두 군데 인접한 직원이면 일 시작 가능 시간 업데이트 같이 해줘야 함.
         else:                           # 일하는 중 -> 포장 x
             present.append(cur)
 
