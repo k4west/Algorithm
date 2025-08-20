@@ -1,6 +1,3 @@
-from collections import deque
-
-
 ans = 0
 D = ((-1, 0), (1, 0), (0, 1))
 B, N, M = map(int, input().split())
@@ -24,33 +21,35 @@ for _ in range(N):
             if last < p:
                 last = p
 
-present = deque([])
+present = []
+v = [0]*M
+c = 0
 for m in range(M+3*B-3):  # 모든 선물이 다 지날 때 까지
     # 선물 M개가 모두 시작 지점에 오르고 나면, 시작 지점에는 더 이상 새로운 선물이 놓이지 않는다.
     if m < M:
         present.append(m)  # 벨트에 올라온 시간
-    elif not present:
+    elif c == M:
         break
 
-    for _ in range(len(present)):   # 벨트 위에 올라온 선물만 확인
-        cur = present.popleft()     # 벨트 위에 더 오래 올려져 있던 선물부터
+    for cur in present:   # 벨트 위에 올라온 선물만 확인
         pos = m-cur                 # 현재 선물의 위치
 
         # 포장되지 않은 선물이 벨트의 끝 지점을 지나면 그 선물은 벨트에서 떨어져 폐기된다.
         if pos > last:              # 벨트 바깥 또는 더 이상 일할 사람이 없음
+            v[cur] = 1
             continue
 
-        if not worker[pos]:         # 현재 자리에 일할 사람이 없으면
-            present.append(cur)
+        if v[cur] or not worker[pos]:         # 처리가 끝났거나 현재 자리에 일할 사람이 없으면:
             continue
 
-        s, t = worker[pos]
-        if s <= m:                      # 포장이 끝나면 바로 다른 선물을 포장할 수 있음
+        if worker[pos][0] <= m:                      # 포장이 끝나면 바로 다른 선물을 포장할 수 있음
+            t = worker[pos][1]
+            v[cur] = 1
             ans += 1
+            c += 1
             worker[pos][0] = m + t  # 다음 가능 시작 시간 업데이트
             if pos in conner:
                 worker[conner[pos]][0] = m + t  # 두 군데 인접한 직원이면 일 시작 가능 시간 업데이트 같이 해줘야 함.
-        else:                           # 일하는 중 -> 포장 x
-            present.append(cur)
+
 
 print(ans)     # 몇 개의 선물을 팬들에게 전달할 수 있을까?
