@@ -3,10 +3,18 @@ def rotate(r, c, div):
     return c - diff_c + diff_r, 3 - r + diff_r + diff_c
 
 
+def seen(arr, idx):
+    return (arr[idx >> 3] >> (idx & 7)) & 1
+
+
+def mark(arr, idx):
+    arr[idx >> 3] |= (1 << (idx & 7))
+
+
 def bfs(r, c, div):
     t = 1
-    v = [[[0]*K for _ in range(K)] for _ in range(4)]
-    v[0][r][c] = 1
+    v = [bytearray(BYTES) for _ in range(4)]
+    mark(v[0], r*K + c)
     q, nq = [(r, c, r, c, div, 0)], []
     
     while q:
@@ -36,10 +44,10 @@ def bfs(r, c, div):
                     nr, nc = rotate(nr, nc, nxt_div)
                     idx = nr*K + nc
                     
-                    if v[nxt_offset][nr][nc]:
+                    if seen(v[nxt_offset], idx):
                         continue
                     
-                    v[nxt_offset][nr][nc] = 1
+                    mark(v[nxt_offset], idx)
                     nq.append((nr, nc, ny, nx, nxt_div, nxt_offset))
 
         q, nq = nq, []
@@ -50,6 +58,7 @@ def bfs(r, c, div):
 D = ((-1, 0), (0, -1), (1, 0), (0, 1))  # ↑ ← ↓ →
 k = int(input())
 K = 4*k
+BYTES = (K*K+7) >> 3
 MAZE = [list(input()) for _ in range(K)]
 
 si = sj = sdiv = 0
