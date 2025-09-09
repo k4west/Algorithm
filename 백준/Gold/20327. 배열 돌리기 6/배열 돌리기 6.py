@@ -11,32 +11,32 @@ for _ in range(R):
     l2 = 1 << l
     tmp = [row[:] for row in A]
     if k == 1:
-        # if not l:
-        #     continue
+        if not l:
+            continue
         for r in range(0, N2, l2):
             for c in range(0, N2, l2):
                 for dr in range(l2):
                     for dc in range(l2):
                         A[r+dr][c+dc] = tmp[r+l2-1-dr][c+dc]
     elif k == 2:
-        # if not l:
-        #     continue
+        if not l:
+            continue
         for r in range(0, N2, l2):
             for c in range(0, N2, l2):
                 for dr in range(l2):
                     for dc in range(l2):
                         A[r+dr][c+dc] = tmp[r+dr][c+l2-1-dc]
     elif k == 3:
-        # if not l:
-        #     continue
+        if not l:
+            continue
         for r in range(0, N2, l2):
             for c in range(0, N2, l2):
                 for dr in range(l2):
                     for dc in range(l2):
                         A[r+dr][c+dc] = tmp[r+l2-1-dc][c+dr]
     elif k == 4:
-        # if not l:
-        #     continue
+        if not l:
+            continue
         for r in range(0, N2, l2):
             for c in range(0, N2, l2):
                 for dr in range(l2):
@@ -70,9 +70,5 @@ for _ in range(R):
                 for dr in range(l2):
                     for dc in range(l2):
                         A[r+dr][c+dc] = tmp[c+dr][m-r+dc]
-    
-    # print(k, l, l2)
-    # print("\n".join(" ".join(map(lambda x: str(x).rjust(2), row)) for row in A))
-    # print("=======")
 
 print("\n".join(" ".join(map(str, row)) for row in A))
