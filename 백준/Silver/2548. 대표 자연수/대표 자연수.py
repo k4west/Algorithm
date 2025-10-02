@@ -1,0 +1,5 @@
+N = int(input())
+*li, = map(int, input().split())
+cnt = len(li)
+li.sort()
+print(li[cnt//2-(1 - (cnt & 1))])
