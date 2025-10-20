@@ -1,12 +1,17 @@
 #include <string>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
 vector<int> solution(vector<int> array) {
-    auto it = max_element(array.begin(), array.end());
-    int max_value = *it;
-    int index = distance(array.begin(), it);
-    return {max_value, index};
+    int max_v, max_idx;
+    max_v = 0; max_idx = 0;
+    for (int i = 0; i < array.size(); i++) {
+        int value = array[i];
+        if (max_v < value) {
+            max_v = value;
+            max_idx = i;
+        }
+    }
+    return {max_v, max_idx};
 }
