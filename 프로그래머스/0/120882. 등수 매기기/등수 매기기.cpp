@@ -5,18 +5,22 @@
 using namespace std;
 
 vector<int> solution(vector<vector<int>> score) {
-    vector<int> answer;
-    vector<int> summed;
-    vector<int> ordered;
-    
+    vector<vector<int>> sm;    
     size_t n = score.size();
-    summed.reserve(n);
-    ordered.reserve(n);
+    int i = 0, rank = 1;
+    sm.reserve(n);
     
-    for (vector<int>& s: score) summed.push_back(s[0]+s[1]);
-    ordered = summed;
-    sort(ordered.begin(), ordered.end(), greater<int>());
+    for (auto& s: score) {
+        sm.push_back({s[0]+s[1], i});
+        i++;
+    }
+    sort(sm.begin(), sm.end(), greater<vector<int>>());
     
-    for (int s: summed) answer.push_back(find(ordered.begin(), ordered.end(), s)-ordered.begin()+1);
+    vector<int> answer(n);
+    answer[sm[0][1]] = rank;
+    for (int j=1; j < n; j++) {
+        if (sm[j-1][0] > sm[j][0]) rank = j+1;
+        answer[sm[j][1]] = rank;
+    }
     return answer;
 }
