@@ -1,23 +1,21 @@
 #include <string>
 #include <vector>
-#include <set>
+#include <unordered_map>
+#include <algorithm>
 
 using namespace std;
 
 int solution(vector<int> array) {
-    int answer = 0, maxCnt = 0;
-    set<int> nums;
-    vector<int> cnt(1001, 0);
-    for (int& num: array) {
-        cnt[num]++;
-        nums.insert(num);
-    }
+    int answer = 0, maxCnt = 0, cnt=0;
+    unordered_map<int, int> cnts;
+    cnts.reserve(array.size());
     
-    for (int num: nums) {
-        if (maxCnt < cnt[num]) {
-            maxCnt = cnt[num];
+    for (int& num: array) {
+        cnt = ++cnts[num];
+        if (maxCnt < cnt) {
+            maxCnt = cnt;
             answer = num;
-        } else if (maxCnt == cnt[num]) answer = -1;
+        } else if (maxCnt == cnt) answer = -1;
     }
     return answer;
 }
